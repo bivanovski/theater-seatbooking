@@ -12,7 +12,6 @@ $show->setDirector($_POST['director']);
 $show->setSetDesigner($_POST['set_designer']);
 $show->setAgeGroup($_POST['age_group']);
 $show->setHallNumber($_POST['hall_number']);
-$show->setHallNumber($_POST['hall_number']);
 $show->setCostumeDesigner($_POST['costume_designer']);
 $show->setAssistantDirector($_POST['assistant_director']);
 $show->setStageManager($_POST['stage_manager']);
