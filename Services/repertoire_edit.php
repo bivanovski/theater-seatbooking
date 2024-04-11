@@ -3,7 +3,7 @@ require_once ('../Repertoires/Repertoire.php');
 
 use Repertoires\Repertoire as Repertoire;
 
-$show = new Repertoire();
+$repertoire = new Repertoire();
 
 $repertoire->setId($_POST['id']);
 $repertoire->setShow_id($_POST['show_id']);
