@@ -5,7 +5,6 @@ require_once ('../Repertoires/Repertoire.php');
 use Repertoires\Repertoire as Repertoire;
 
 $repertoire = new Repertoire();
-$repertoire->setId($_POST['id']);
 $repertoire->setShow_id($_POST['show_id']);
 $repertoire->setDatetime($_POST['date_time']);
 
