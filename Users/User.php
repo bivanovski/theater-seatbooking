@@ -126,13 +126,13 @@ class User
         }
         return "unknown";
     }
-    public function getByUsername($username)
+    public function getByEmail($email)
     {
         $connectionObj = new Connection();
         $connection = $connectionObj->getConnection();
 
-        $statement = $connection->prepare('SELECT * FROM users WHERE username = :username');
-        $statement->bindValue(':username', $username);
+        $statement = $connection->prepare('SELECT * FROM users WHERE email = :email');
+        $statement->bindValue(':email', $email);
         $statement->execute();
 
         $connectionObj->destroy();
