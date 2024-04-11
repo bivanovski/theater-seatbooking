@@ -1,6 +1,6 @@
 <?php
 
-require_once('Users/User.php');
+require_once ('../Users/User.php');
 
 use Users\User as User;
 
@@ -14,12 +14,24 @@ $user->setRoleId(2);
 
 session_start();
 
-$user->store();
+$response = [];
 
-$response = [
-    'success' => true,
-    'message' => 'User registered successfully'
-];
+try {
+    // Attempt to store the user
+    $user->store();
+
+    // If execution reaches here, no exception occurred, so registration was successful
+    $response = [
+        'success' => true,
+        'message' => 'User registered successfully'
+    ];
+} catch (PDOException $e) {
+    // Handle the case where there's a duplicate email entry or any other database error
+    $response = [
+        'success' => false,
+        'message' => 'Failed to register user. This email may already be in use or a database error occurred.'
+    ];
+}
 
 // Encode response to JSON and output
 header('Content-Type: application/json');
