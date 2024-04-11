@@ -2,7 +2,7 @@
 
 namespace Users;
 
-require_once(__DIR__ . '/../Database/Connection.php');
+require_once (__DIR__ . '/../Database/Connection.php');
 
 use Database\Connection as Connection;
 
@@ -75,24 +75,26 @@ class User
         $connectionObj = new Connection();
         $connection = $connectionObj->getConnection();
 
-        $statement = $connection->prepare('SELECT * FROM users WHERE username = :username');
-        $statement->bindParam(':username', $this->username, \PDO::PARAM_STR);
+        $statement = $connection->prepare('SELECT * FROM users WHERE email = :email');
+        $statement->bindParam(':email', $this->email, \PDO::PARAM_STR);
         $statement->execute();
 
         $user = $statement->fetch(\PDO::FETCH_ASSOC);
         $connectionObj->destroy();
+        echo password_verify($this->password, $user['password']);
 
         if (!empty($user) && password_verify($this->password, $user['password'])) {
             $this->id = $user['id'];
-            $this->username = $user['username'];
+            $this->email = $user['email'];
             $this->password = $user['password'];
-            $this->role_id = $user['role_id'];
+            //$this->role_id = $user['role_id'];
             return true;
         }
 
         return false;
     }
-    public function store() {
+    public function store()
+    {
         $connectionObj = new Connection();
         $connection = $connectionObj->getConnection();
 
@@ -136,7 +138,7 @@ class User
         $connectionObj->destroy();
 
         $user = $statement->fetch(\PDO::FETCH_ASSOC);
-        
+
         return $user;
     }
 
