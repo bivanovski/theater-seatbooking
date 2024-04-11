@@ -9,8 +9,10 @@ use Database\Connection as Connection;
 class User
 {
     protected $id;
-    protected $username;
+    protected $first_name;
+    protected $last_name;
     protected $password;
+    protected $email;
     protected $role_id;
 
     public function setId($id)
@@ -18,14 +20,22 @@ class User
         $this->id = $id;
     }
 
-    public function setUsername($username)
+    public function setFirstName($first_name)
     {
-        $this->username = $username;
+        $this->first_name = $first_name;
+    }
+    public function setLastName($last_name)
+    {
+        $this->last_name = $last_name;
     }
 
     public function setPassword($password)
     {
         $this->password = $password;
+    }
+    public function setEmail($email)
+    {
+        $this->email = $email;
     }
     public function setRoleId($role_id)
     {
@@ -37,14 +47,22 @@ class User
         return $this->id;
     }
 
-    public function getUsername()
+    public function getFirstName()
     {
-        return $this->username;
+        return $this->first_name;
+    }
+    public function getLastName()
+    {
+        return $this->last_name;
     }
 
     public function getPassword()
     {
         return $this->password;
+    }
+    public function getEmail()
+    {
+        return $this->email;
     }
     public function getRoleId()
     {
@@ -79,12 +97,14 @@ class User
         $connection = $connectionObj->getConnection();
 
         $statement = $connection->prepare('INSERT INTO 
-                            `users` (`username`, `password`) 
-                            VALUES (:username, :password)'
+                            `users` (`first_name`, `last_name`, `email`, `password`) 
+                            VALUES (:first_name, :last_name, :email, :password)'
         );
 
         $data = [
-            'username' => $this->username,
+            'first_name' => $this->first_name,
+            'last_name' => $this->last_name,
+            'email' => $this->email,
             'password' => password_hash($this->password, PASSWORD_DEFAULT)
         ];
 
