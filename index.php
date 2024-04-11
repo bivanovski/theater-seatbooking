@@ -1,26 +1,27 @@
 <?php
-session_start();
-require_once('Books/Book.php');
+// session_start(); // Commented out for Visual Studio
+// require_once('Books/Book.php');
 
-use Books\Book as Book;
+// use Books\Book as Book;
 
-require_once('Categories/Category.php');
+// require_once('Categories/Category.php');
 
-use Categories\Category as Category;
+// use Categories\Category as Category;
 
-if (isset($_SESSION['username']) && $_SESSION['role'] === "admin") {
-  return header('Location: login.php?errorMessage=Unauthorized');
-}
-$book = new Book();
-$books = $book->get();
-$category = new Category();
-$categories = $category->get();
+// if (isset($_SESSION['username']) && $_SESSION['role'] === "admin") {
+//   return header('Location: login.php?errorMessage=Unauthorized');
+// }
+// $book = new Book();
+// $books = $book->get();
+// $category = new Category();
+// $categories = $category->get();
 ?>
+
 <!DOCTYPE html>
 <html>
 
 <head>
-  <title>Library</title>
+  <title>Main Page</title>
   <meta charset="utf-8" />
   <meta name="keywords" content="" />
   <meta name="description" content="" />
