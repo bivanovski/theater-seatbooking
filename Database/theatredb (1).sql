@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 11, 2024 at 01:17 PM
+-- Generation Time: Apr 11, 2024 at 03:12 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -132,9 +132,19 @@ CREATE TABLE `users` (
   `first_name` varchar(20) NOT NULL,
   `last_name` varchar(20) NOT NULL,
   `email` varchar(50) NOT NULL,
-  `password` varchar(20) NOT NULL,
+  `password` varchar(150) NOT NULL,
   `role_id` int(11) NOT NULL DEFAULT 2
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `password`, `role_id`) VALUES
+(1, 'Bojan', 'Ivanovski', 'bojan@gmail.com', '$2y$10$49R2R159YbP6/', 2),
+(3, 'Bojana', 'Ivanovska', 'bojana@gmail.com', '$2y$10$uCXXTo0l1suzT', 2),
+(15, 'Marko', 'Atanasovski', 'marko@gmail.com', '$2y$10$a1eZHpzQPBYC8', 2),
+(16, 'Marko', 'Atanasovski', 'marko234@gmail.com', '$2y$10$9OHhx3ecrrU1dUhDQVJTbObI3U3oeCLvDCkGm5KxHYo6GGFL3uK92', 2);
 
 --
 -- Indexes for dumped tables
@@ -233,7 +243,7 @@ ALTER TABLE `shows`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- Constraints for dumped tables
