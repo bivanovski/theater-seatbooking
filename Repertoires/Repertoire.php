@@ -1,6 +1,6 @@
 <?php
 
-namespace Repertoire;
+namespace Repertoires;
 
 require_once (__DIR__ . '/../Database/Connection.php');
 
@@ -12,7 +12,7 @@ class Repertoire
 
     protected $show_id;
 
-    protected $datetime;
+    protected $date_time;
 
     public function getId()
     {
@@ -40,12 +40,12 @@ class Repertoire
 
     public function getDatetime()
     {
-        return $this->datetime;
+        return $this->date_time;
     }
 
-    public function setDatetime($datetime)
+    public function setDatetime($date_time)
     {
-        $this->datetime = $datetime;
+        $this->date_time = $date_time;
 
         return $this;
     }
@@ -56,14 +56,14 @@ class Repertoire
         $connection = $connectionObj->getConnection();
 
         $statement = $connection->prepare('INSERT INTO 
-                            `repertoire` ( `id`, `show_id`, `datetime`) 
-                            VALUES (:id, :show_id, :datetime)'
+                            `repertoire` ( `id`, `show_id`, `date_time`) 
+                            VALUES (:id, :show_id, :date_time)'
         );
 
         $data = [
             'id' => $this->id,
             'show_id' => $this->show_id,
-            'datetime' => $this->datetime
+            'date_time' => $this->date_time
         ];
 
         $res = $statement->execute($data);
@@ -77,11 +77,20 @@ class Repertoire
         $connectionObj = new Connection();
         $connection = $connectionObj->getConnection();
 
-        $statement = $connection->prepare('SELECT r.*, s.name AS show_name 
-                                       FROM `repertoire` AS r
-                                       INNER JOIN `shows` AS s ON r.show_id = s.id
-                                       WHERE r.`id` = :id');
+        $statement = $connection->prepare('SELECT r.*, s.* 
+        FROM `repertoire` AS r
+        INNER JOIN `shows` AS s ON r.show_id = s.id
+        WHERE r.`id` = :id');
+
         $statement->execute(['id' => $id]);
+
+        // Check for errors
+        $errorInfo = $statement->errorInfo();
+        if ($errorInfo[0] !== '00000') {
+            // Handle error (e.g., log it)
+            error_log("Database error: " . $errorInfo[2]);
+            return null;
+        }
 
         $result = $statement->fetch();
 
@@ -94,7 +103,7 @@ class Repertoire
         $repertoire = new Repertoire();
         $repertoire->setId($result['id'])
             ->setShow_id($result['show_id'])
-            ->setDatetime($result['datetime']);
+            ->setDatetime($result['date_time']);
 
         return $repertoire;
     }
@@ -104,12 +113,12 @@ class Repertoire
         $connectionObj = new Connection();
         $connection = $connectionObj->getConnection();
 
-        $statement = $connection->prepare('UPDATE `repertoire` SET `show_id` = :show_id, `datetime` = :datetime WHERE `id` = :id');
+        $statement = $connection->prepare('UPDATE `repertoire` SET `show_id` = :show_id, `date_time` = :date_time WHERE `id` = :id');
 
         $data = [
             'id' => $this->id,
             'show_id' => $this->show_id,
-            'datetime' => $this->datetime
+            'date_time' => $this->date_time
         ];
 
         $res = $statement->execute($data);
