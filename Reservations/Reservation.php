@@ -144,7 +144,7 @@ class Reservation
         $connectionObj = new Connection();
         $connection = $connectionObj->getConnection();
 
-        $statement = $connection->prepare('UPDATE `reservation` SET `id` = :id, `user_id` = :user_id, `row` = :row, `seat_num` = :seat_num, `repertoire_id` = :repertoire_id, `seat_type_id` = :seat_type_id;, `is_confirmed` = :is_confirmed WHERE `id` = :id');
+        $statement = $connection->prepare('UPDATE `reservations` SET `id` = :id, `user_id` = :user_id, `row` = :row, `seat_num` = :seat_num, `repertoire_id` = :repertoire_id, `seat_type_id` = :seat_type_id, `is_confirmed` = :is_confirmed WHERE `id` = :id');
 
         $data = [
             'id' => $this->id,
@@ -167,7 +167,7 @@ class Reservation
         $connectionObj = new Connection();
         $connection = $connectionObj->getConnection();
 
-        $statement = $connection->prepare('DELETE FROM `reservation` WHERE `id` = :id');
+        $statement = $connection->prepare('DELETE FROM `reservations` WHERE `id` = :id');
         $res = $statement->execute(['id' => $this->id]);
 
         $connectionObj->destroy();
@@ -273,16 +273,16 @@ class Reservation
         $statement->bindParam(':id', $reservationId, PDO::PARAM_INT);
         $statement->execute();
         $currentConfirmation = $statement->fetchColumn();
-    
+
         $newConfirmation = $currentConfirmation ? 0 : 1;
-  
+
         $updateStatement = $connection->prepare('UPDATE reservations SET is_confirmed = :is_confirmed WHERE id = :id');
         $updateStatement->bindParam(':is_confirmed', $newConfirmation, PDO::PARAM_INT);
         $updateStatement->bindParam(':id', $reservationId, PDO::PARAM_INT);
         $updateStatement->execute();
-    
+
         $connectionObj->destroy();
-    
+
         return $newConfirmation;
     }
 
@@ -299,6 +299,6 @@ class Reservation
 
         return ($numRows > 0);
     }
-    
+
 
 }

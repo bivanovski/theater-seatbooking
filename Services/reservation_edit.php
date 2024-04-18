@@ -26,12 +26,7 @@ if ($reservation->update()) {
     ];
 }
 
+header('Content-Type: application/json');
+echo json_encode($response);
 
-// protected $id;
-// protected $user_id;
-// protected $row;
-// protected $seat_num;
-// protected $repertoire_id;
-// protected $seat_type_id;
-// protected $is_confirmed;
 
