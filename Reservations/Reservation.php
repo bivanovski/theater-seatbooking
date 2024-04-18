@@ -99,5 +99,31 @@ class Reservation
         $this->is_confirmed = $is_confirmed;
 
     }
+    public function store()
+    {
+        $connectionObj = new Connection();
+        $connection = $connectionObj->getConnection();
+
+        $statement = $connection->prepare(
+            'INSERT INTO
+            `reservations` (`user_id`,`row`,`seat_num`,`repertoire_id`,`seat_type_id`)
+            VALUES (:user_id,:row,:seat_num,:repertoire_id,:seat_type_id)'
+        );
+
+        $data = [
+            'user_id' => $this->user_id,
+            'row' => $this->row,
+            'seat_num' => $this->seat_num,
+            'repertoire_id' => $this->repertoire_id,
+            'seat_type_id' => $this->seat_type_id,
+        ];
+
+        $res = $statement->execute($data);
+
+        $connectionObj->destroy();
+        return $res;
+    }
+
+    
 
 }
