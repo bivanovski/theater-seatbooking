@@ -15,28 +15,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
        
         $id = $_GET['id'];
         try {
-            $connectionObj = new Connection();
-            $connection = $connectionObj->getConnection();
-
-            $statement = $connection->prepare('SELECT r.*, s.*,
-                                                      g.genre AS genre_name
-                                              FROM `repertoire` AS r
-                                              INNER JOIN `shows` AS s ON r.show_id = s.id
-                                              INNER JOIN `genres` AS g ON s.genre_id = g.id
-                                              WHERE r.`id` = :id');
-            $statement->execute(['id' => $id]);
-
-            $result = $statement->fetch(PDO::FETCH_ASSOC);
-
-            $connectionObj->destroy();
+            $result = $repertoire->findById($id);
 
             if ($result) {
 
                 $response = [
                     'success' => true,
                     'data' => [
-                        'id' => $result['id'],
-                        'show_id' => $result['show_id'],
+                        'id' => $id,
                         'date_time' => $result['date_time'],
                         'show' => [
                             'id' => $result['id'],

@@ -5,7 +5,7 @@ namespace Repertoires;
 require_once (__DIR__ . '/../Database/Connection.php');
 
 use Database\Connection as Connection;
-
+use PDO;
 class Repertoire
 {
     protected $id;
@@ -75,37 +75,20 @@ class Repertoire
     public static function findById($id)
     {
         $connectionObj = new Connection();
-        $connection = $connectionObj->getConnection();
+            $connection = $connectionObj->getConnection();
 
-        $statement = $connection->prepare('SELECT r.*, s.* 
-        FROM `repertoire` AS r
-        INNER JOIN `shows` AS s ON r.show_id = s.id
-        WHERE r.`id` = :id');
+            $statement = $connection->prepare('SELECT r.*, s.*,
+                                                      g.genre AS genre_name
+                                              FROM `repertoire` AS r
+                                              INNER JOIN `shows` AS s ON r.show_id = s.id
+                                              INNER JOIN `genres` AS g ON s.genre_id = g.id
+                                              WHERE r.`id` = :id');
+            $statement->execute(['id' => $id]);
 
-        $statement->execute(['id' => $id]);
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
 
-        // Check for errors
-        $errorInfo = $statement->errorInfo();
-        if ($errorInfo[0] !== '00000') {
-            // Handle error (e.g., log it)
-            error_log("Database error: " . $errorInfo[2]);
-            return null;
-        }
-
-        $result = $statement->fetch();
-
-        $connectionObj->destroy();
-
-        if (!$result) {
-            return null;
-        }
-
-        $repertoire = new Repertoire();
-        $repertoire->setId($result['id'])
-            ->setShow_id($result['show_id'])
-            ->setDatetime($result['date_time']);
-
-        return $repertoire;
+            $connectionObj->destroy();
+            return $result;
     }
 
     public function update()
@@ -138,7 +121,34 @@ class Repertoire
         $connectionObj->destroy();
         return $res;
     }
-
+    public function getByShow($show_id)
+    {
+        $connectionObj = new Connection();
+        $connection = $connectionObj->getConnection();
+    
+        $statement = $connection->prepare('SELECT * FROM `repertoire` WHERE `show_id` = :show_id');
+        $statement->execute(['show_id' => $show_id]);
+    
+        $errorInfo = $statement->errorInfo();
+        if ($errorInfo[0] !== '00000') {
+            error_log("Database error: " . $errorInfo[2]);
+            return null;
+        }
+    
+        $repertoires = [];
+        while ($row = $statement->fetch()) {
+            $repertoire = new Repertoire();
+            $repertoire->setId($row['id'])
+                       ->setShow_id($row['show_id'])
+                       ->setDatetime($row['date_time']);
+            $repertoires[] = $repertoire;
+        }
+    
+        $connectionObj->destroy();
+    
+        return $repertoires;
+    }
+    
 
 }
 
