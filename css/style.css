@@ -1,0 +1,239 @@
+body {
+  /* background-color: var(--background); */
+  padding-top: 78.78px;
+  font-family: "Abel", sans-serif;
+  /* font-weight: 500; */
+  font-style: normal;
+}
+:root {
+  --text: #ffffff;
+  --background: #f4f0f0;
+  --primary: #f9af41;
+  --secondary: #792a2a;
+  --accent: #980b0b;
+}
+.bg-color {
+  background-color: var(--background);
+}
+.primary-color {
+  color: var(--primary);
+}
+.accent-color {
+  color: var(--accent);
+}
+.accent-bg {
+  background-color: var(--accent);
+}
+.secondary-bg {
+  background-color: var(--secondary);
+}
+.logo-menu {
+  max-width: 60px;
+}
+.custom-outline-btn {
+    color: #343A40;
+    border-color: var(--accent); 
+}
+
+.custom-outline-btn:hover {
+    background-color:var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+.show {
+  transition: 0.3s transform cubic-bezier(0.155, 1.105, 0.295, 1.12),
+    0.3s box-shadow,
+    0.3s -webkit-transform cubic-bezier(0.155, 1.105, 0.295, 1.12);
+  cursor: pointer;
+}
+
+.show a {
+  text-decoration: none;
+}
+
+.show:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.06);
+}
+
+.content {
+  padding-top: 78.78px;
+}
+#sidebar-wrapper {
+  /* background-color: white; */
+  color: var(--text);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  z-index: 1;
+  position: fixed;
+  width: 0;
+  height: 100%;
+  /* overflow-y: hidden; */
+  overflow-y: auto;
+
+  opacity: 0.9;
+  transition: all 0.5s;
+  display: flex;
+  align-items: center;
+}
+
+#page-content-wrapper {
+  width: 100%;
+  position: absolute;
+  /* padding: 15px; */
+  transition: all 0.5s;
+}
+
+#menu-toggle {
+  transition: all 0.3s;
+  font-size: 2em;
+  z-index: 100;
+}
+
+#wrapper.menuDisplayed #sidebar-wrapper {
+  width: 250px;
+}
+
+#wrapper.menuDisplayed #page-content-wrapper {
+  padding-left: 250px;
+}
+
+.sidebar-nav {
+  position: absolute;
+  top: 0;
+  margin: 0;
+  padding: 0;
+  width: 250px;
+  list-style: none;
+}
+
+.sidebar-nav li {
+  line-height: 40px;
+  width: 100%;
+  transition: all 0.3s;
+  padding: 20px;
+}
+
+.sidebar-nav li a {
+  display: block;
+  text-decoration: none;
+  color: var(--text);
+}
+
+.sidebar-nav li a:hover {
+  display: block;
+  text-decoration: none;
+  color: rgb(21, 21, 21);
+}
+.active {
+  color: var(--accent) !important;
+}
+.active-bg {
+  background: #e5e7f3;
+}
+
+.sidebar-nav li:hover {
+  color: var(--background);
+}
+.content {
+  padding-top: 104.68px;
+}
+#sidebar-wrapper {
+  /* background-color: white; */
+  color: var(--text);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  z-index: 1;
+  position: fixed;
+  width: 0;
+  height: 100%;
+  /* overflow-y: hidden; */
+  overflow-y: auto;
+
+  opacity: 0.9;
+  transition: all 0.5s;
+  display: flex;
+  align-items: center;
+}
+
+#page-content-wrapper {
+  width: 100%;
+  position: absolute;
+  /* padding: 15px; */
+  transition: all 0.5s;
+}
+
+#menu-toggle {
+  transition: all 0.3s;
+  font-size: 1.5em;
+  z-index: 100;
+}
+
+#wrapper.menuDisplayed #sidebar-wrapper {
+  width: 250px;
+}
+
+#wrapper.menuDisplayed #page-content-wrapper {
+  padding-left: 250px;
+}
+
+.sidebar-nav {
+  position: absolute;
+  top: 0;
+  margin: 0;
+  padding: 0;
+  width: 250px;
+  list-style: none;
+}
+
+.sidebar-nav li {
+  line-height: 40px;
+  width: 100%;
+  transition: all 0.3s;
+  padding: 20px;
+}
+
+.sidebar-nav li a {
+  display: block;
+  text-decoration: none;
+  color: var(--text);
+}
+
+.sidebar-nav li a:hover {
+  display: block;
+  text-decoration: none;
+  color: rgb(21, 21, 21);
+}
+.active {
+  color: var(--accent) !important;
+}
+.active-bg {
+  background: #e5e7f3;
+}
+
+.sidebar-nav li:hover {
+  color: var(--background);
+}
+
+@media (max-width: 768px) {
+  #wrapper.menuDisplayed #page-content-wrapper {
+    padding-left: 0px;
+  }
+  #categories-toggle {
+    position: absolute;
+    right: 10px;
+    z-index: 0;
+    transition: all 0.5s;
+  }
+  #menu-toggle {
+    position: absolute;
+    right: 10px !important;
+    z-index: 0;
+    transition: all 0.5s;
+  }
+  #page-content-wrapper .content {
+    margin-top: 20px;
+  }
+  .cards {
+    margin-top: 50px;
+    justify-content: center;
+  }
+}
