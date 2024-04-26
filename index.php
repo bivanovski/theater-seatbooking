@@ -23,25 +23,25 @@
 <head>
   <title>Main Page</title>
   <meta charset="utf-8" />
-  <meta name="keywords" content="" />
-  <meta name="description" content="" />
-  <meta name="author" content="" />
-  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
 
-  <!-- Latest compiled and minified Bootstrap 4.6 CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
-    integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous" />
-  <!-- CSS script -->
-  <link rel="stylesheet" href="style.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Outfit&family=Roboto&display=swap" rel="stylesheet" />
+    <!-- Latest compiled and minified Bootstrap 4.6 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <!-- CSS script -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Abel&display=swap" rel="stylesheet">
+    <!-- Latest Font-Awesome CDN -->
+    <script src="https://kit.fontawesome.com/83a2a6ffac.js" crossorigin="anonymous"></script>
 
-  <!-- Latest Font-Awesome CDN -->
-  <script src="https://kit.fontawesome.com/83a2a6ffac.js" crossorigin="anonymous"></script>
+
 </head>
-
-<!--/.Navbar-->
 
 <header class="fixed-top">
     <nav class="navbar text-dark bg-light shadow-sm ">
@@ -56,7 +56,6 @@
         </div>
     </nav>
 </header>
-
 
 <body>
   <div id="wrapper">
