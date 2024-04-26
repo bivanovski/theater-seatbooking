@@ -44,26 +44,19 @@
 <!--/.Navbar-->
 
 <header class="fixed-top">
-  <nav class="navbar bg-1 shadow ">
-    <a class="navbar-brand text-center text-uppercase font-weight-bold text-dark" href="index.php"><img
-        class="logo-menu w-75 d-block img-fluid mx-auto" src="./logo2.png" alt="Logo" />Library</a>
+    <nav class="navbar text-dark bg-light shadow-sm ">
+        <a class="navbar-brand text-uppercase text-dark" href=""><img class="logo-menu img-fluid" src="images/logo2.png"
+                alt="Logo" /><span class="ml-2 font-weight-bold">MNT ADMIN PANEL</span></a>
+        <div class="form-inline accent-color">
 
-    <div class="form-inline">
-      <?php
-      if (!isset($_SESSION['username'])) {
-        echo '<a class="btn text-light my-2 my-sm-0 mt-3 mr-3 green-bg" href="register.php" role="button">Register</a>
-    <a class="btn text-light my-2 my-sm-0 mt-3 accent-bg" href="login.php" role="button">Login</a>';
-      } else {
-        echo ' <p class="mr-2 my-2 my-sm-0 mt-3 accent-color">' . $_SESSION['username'] . ' <i class="fa-regular fa-user"></i> </p>';
+            <p class="mr-2 my-2 my-sm-0 mt-3 accent-color">admin<i class="fa-regular fa-user"></i> </p>
 
-        echo '<a class="btn text-light my-2 my-sm-0 mt-3 accent-bg" href="logout.php" role="button">Log out</a>';
-      }
-      ?>
 
-    </div>
-    <!-- </div> -->
-  </nav>
+            <a class="btn text-light my-2 my-sm-0 mt-3 accent-bg" href="logout.php" role="button">Log out</a>
+        </div>
+    </nav>
 </header>
+
 
 <body>
   <div id="wrapper">
