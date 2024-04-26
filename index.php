@@ -1,24 +1,6 @@
-<?php
-// session_start(); // Commented out for Visual Studio
-// require_once('Books/Book.php');
-
-// use Books\Book as Book;
-
-// require_once('Categories/Category.php');
-
-// use Categories\Category as Category;
-
-// if (isset($_SESSION['username']) && $_SESSION['role'] === "admin") {
-//   return header('Location: login.php?errorMessage=Unauthorized');
-// }
-// $book = new Book();
-// $books = $book->get();
-// $category = new Category();
-// $categories = $category->get();
-?>
-
 <!DOCTYPE html>
 <html>
+<body>
 
 <head>
   <title>Main Page</title>
@@ -33,7 +15,7 @@
         integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     <!-- CSS script -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/example.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Abel&display=swap" rel="stylesheet">
@@ -43,93 +25,79 @@
 
 </head>
 
-<header class="fixed-top">
-    <nav class="navbar text-dark bg-light shadow-sm ">
-        <a class="navbar-brand text-uppercase text-dark" href=""><img class="logo-menu img-fluid" src="images/logo2.png"
-                alt="Logo" /><span class="ml-2 font-weight-bold">MNT ADMIN PANEL</span></a>
-        <div class="form-inline accent-color">
-
-            <p class="mr-2 my-2 my-sm-0 mt-3 accent-color">admin<i class="fa-regular fa-user"></i> </p>
-
-
-            <a class="btn text-light my-2 my-sm-0 mt-3 accent-bg" href="logout.php" role="button">Log out</a>
+<header class="navbar">
+        <a class="navbar-brand text-uppercase text-dark" href="">
+            <img class="logo-menu" src="images/logo2.png" alt="Logo" />
+            <!-- <span class="ml-2 font-weight-bold">MNT ADMIN PANEL</span> -->
+        </a>
+        <div class="header-left">
+            <a class="active" href="#home">Main Page</a>
+            <a class="active" href="#contact">Premiers</a>
+            <a class="active" href="#about">Buy ticket</a>
         </div>
-    </nav>
+        <div class="header-right">
+            <button class="rightone">Register</button>
+            <button class="righttwo">Log in</button>
+            <!-- <p class="right">Register</p>
+            <a class="right" href="logout.php" role="button">Log in</a> -->
+        </div>
 </header>
 
-<body>
-  <div id="wrapper">
-    <div id="sidebar-wrapper">
-      <ul class="sidebar-nav">
-        <div class="row d-flex justify-content-center">
-          <div class="col-8 py-5">
-            <h6 class="mb-3 font-weight-bold">Categories: </h6>
-            <?php
-            foreach ($categories as $category) {
-              echo "<label class='checkbox-inline mr-4 mb-3'>
-      <input type='checkbox' class='category-checkbox' value={$category['id']}>{$category['name']}
-    </label>";
-            }
-            ?>
-          </div>
-        </div>
-      </ul>
-    </div>
-    <div id="page-content-wrapper" class="vh-100">
-      <div class="container-fluid py-4">
-
-        <div class="row  d-flex justify-content-center">
-          <div class="col-md-11 col">
-            <div class="row">
-
-              <div class="col justify-content-center">
-                <button class="btn accent-bg text-light mb-4" id="categories-toggle">Filter by Categories <i
-                    class="fa-solid fa-bars"></i></button>
-                <div class="row cards d-flex" id="books">
-
-
-                </div>
 
 
 
-              </div>
-            </div>
-          </div>
+<section class="theater-background">
+        <!-- Theater background image -->
+        <img src="https://images.ctfassets.net/6pezt69ih962/1O40LqsEvLqXzhEluBRbzH/df5c7bc9f6f151c28d9fc484bb13451b/DL_house.jpeg" alt="Theater Background" class="img-fluid" style="width: 100%; height: auto;">
+        <!-- <div class="theater-overlay">
+            <h1 class="text-center text-light">Discover the Best Movies and Performances</h1>
+        </div> -->
+    </section>
 
-
-        </div>
-
-
-      </div>
-
-
-      <!-- Footer  -->
-   <footer>
-      <div class="container-fluid dark-bg py-4">
-        <div class="row d-flex justify-content-center">
-          <div class="col-10 text-center" id="content">>
-
-          </div>
-        </div>
-      </div>
-      </footer>
-    </div>
+  <div class="filter">
+    <button class="filter_button">Filter</button>
   </div>
 
+  <div class="popular">
+    <p>Most popular</p>
+  </div>
 
-  <!-- jQuery library -->
+    <div class="row1">
+      <div id="show1">
+        <img class="duh" src="https://mnt.mk/media/k2/items/cache/fe77b047cf65bbf66915926fa3c00c93_L.jpg"/>
+        <button class="24april">24 April, 19:30</button>
+        <button class="age1">12+</button>
+      </div>
+      <div id="show2">
+        <img class="kec na desetka" src="https://mnt.mk/media/k2/items/cache/2940b97ab5721a9e279f736f864f4ce6_L.jpg"/>
+        <button class="20may">20 May, 18:00</button>
+        <button class="age2">18+</button>
+      </div>
+      <div id="show3">
+        <img class="nicija zemja" src="https://mnt.mk/media/k2/items/cache/e1479c60fc7d7f4f708d42f869f837c8_L.jpg"/>
+        <button class="26april">26 April, 19:00</button>
+        <button class="age3">12+</button>
+      </div>
+    </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js"></script>
+    <div class="row2">
+      <div id="show4">
+        <img class="agava" src="https://mnt.mk/media/k2/items/cache/5467774f5535dc0e0bd116e89a59b7ab_L.jpg"/>
+        <button class="2may">2 May 19:30</button>
+        <button class="age4">12+</button>
+      </div>
+      <div id="show5">
+        <img class="toronto express" src="https://mnt.mk/media/k2/items/cache/013018afcf84fd53ed1be7bac0415c88_L.jpg"/>
+        <button class="10may">10 May, 18:00</button>
+        <button class="age5">18+</button>
+      </div>
+      <div id="show6">
+        <img class="nema da bide kraj na svetot" src="https://mnt.mk/media/k2/items/cache/da388805d72915b428bc7670a13b37e3_L.jpg"/>
+        <button class="16april">16 April, 19:00</button>
+        <button class="age6">19+</button>
+      </div>
+    </div>
 
-  <!-- Latest Compiled Bootstrap 4.6 JavaScript -->
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
-    integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"
-    integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+"
-    crossorigin="anonymous"></script>
 
-  <script src="index.js"></script>
 </body>
-
 </html>
