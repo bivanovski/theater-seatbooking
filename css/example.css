@@ -1,0 +1,101 @@
+.navbar{
+    background-color: black;
+    height: 80px;
+    /* margin-bottom: 20px; */
+} 
+
+.logo-menu{
+    height: 100px;
+    margin-top: -20px;
+    margin-left: -10px;
+}
+
+.header-left{
+    margin-left: -600px;
+    margin-top: -15px;
+}
+
+.active{
+    padding-right: 60px;
+    color: white;
+    text-transform: uppercase;
+    font-style: initial;
+}
+
+.header-right{
+    margin-right: 20px;
+    margin-top: -15px;
+
+}
+
+.rightone{
+    color: black;
+    margin-right: 20px;
+    padding: 10px;
+    background-color: rgb(255, 255, 190);
+    border: none;
+    border-radius: 15px;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.righttwo{
+    color: black;
+    padding: 10px;
+    background-color: rgb(255, 255, 190);
+    border: none;
+    border-radius: 15px;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.filter{
+   margin-left: 1350px;
+   margin-top: 30px;
+}
+
+.filter_button{
+    padding: 10px;
+    border-radius: 16px;
+    font-weight: bold;
+    font-style: italic;
+    background-color: black;
+    color: white;
+}
+
+.popular{
+    margin-left: 80px;
+    font-weight: bold;
+    font-style: italic;
+    font-size: 30px;
+}
+
+.row1, .row2{
+    float: left;
+    display: flex;
+    clear: both;
+}
+
+.row1 div img, .row2 div img{
+    width: 400px;
+    height: 500px;
+}
+
+.row1 div, .row2 div{
+    margin-left: 50px;
+    margin-bottom: 30px;
+}
+
+.row1 div button, .row2 div button{
+    color: white;
+    background-color: black;
+    border-radius: 15px;
+    margin-top: 8px;
+}
+
+.row1 div :nth-child(3), .row2 div :nth-child(3){
+    margin-left: 240px;
+    color: black;
+    background-color: rgb(233, 225, 225);
+    border: none;
+}
