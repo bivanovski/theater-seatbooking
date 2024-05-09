@@ -15,7 +15,7 @@ function getShows() {
           var cardHtml = `
                 <div class="col-md-3 mb-5">
                     <a href="show_details.php?id=${show.id}" class="card-link">
-                        <div class="card text-dark shadow-sm show" data-show-id="${show.id}">
+                        <div class="card text-dark shadow-sm shows" data-show-id="${show.id}">
                             <img src="${show.image}" class="card-img-top" alt="${show.name}">
                             <div class="card-body">
                                 <h5 class="card-title accent-color">${show.name}</h5>

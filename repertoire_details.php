@@ -57,13 +57,15 @@
 
                             <div class="col-10 card p-4 shadow-sm">
                                 <div class="row">
-                                    <div class="col-8">
+                                    <div class="col-7">
                                         <h2 class="text-dark">Title Of The Show - <span class="accent-color">14/01/2023
                                                 18:00</span></h2>
                                         <div id="container" class="text-dark"></div>
                                     </div>
-                                    <div class="col-4">
+                                    <div class="col-5">
                                         <h2 class="text-dark">Reservations</h2>
+                                        <div id="accordion" class="accordion">
+                                        </div>
                                     </div>
 
                                 </div>
@@ -95,80 +97,155 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="js/admin.js"></script>
     <script>
-        $(document).ready(function () {
-            var repertoireId = <?php echo $_GET['id']; ?>;
-            function fetchReservedSeats() {
-                $.ajax({
-                    url: 'Services/reservation_get_by_repertoire.php',
-                    type: 'GET',
-                    data: { repertoire_id: repertoireId },
-                    dataType: 'json',
-                    success: function (response) {
-                        if (response.success && response.data.length > 0) {
-                            var reservedSeats = [];
+       $(document).ready(function () {
+    var repertoireId = <?php echo $_GET['id'];?>;
 
-                            $.each(response.data, function (index, reservation) {
-                                reservedSeats.push({
-                                    row: parseInt(reservation.row) - 1,
-                                    col: parseInt(reservation.seat_num) - 1
-                                });
-                            });
+    function fetchReservedSeats() {
+        $.ajax({
+            url: 'Services/reservation_get_by_repertoire.php',
+            type: 'GET',
+            data: { repertoire_id: repertoireId },
+            dataType: 'json',
+            success: function (response) {
+                if (response.success && response.data.length > 0) {
+                    var reservedSeats = [];
 
-                            initializeSeatchart(reservedSeats);
-                            
+                    $.each(response.data, function (index, reservation) {
+                        reservedSeats.push({
+                            row: parseInt(reservation.row) - 1,
+                            col: parseInt(reservation.seat_num) - 1
+                        });
+                    });
 
-                        } else {
-                            // alert('No reservations found.');
-                            initializeSeatchart();
-                        }
-                    },
-                    error: function (xhr, status, error) {
-                        console.error('AJAX error:', error);
-                    }
-                });
-            }
+                    initializeSeatchart(reservedSeats);
 
-            fetchReservedSeats();
-
-            function initializeSeatchart(reservedSeats=[]) {
-                var options = {
-                    map: {
-                        rows: 17,
-                        columns: 16,
-                        seatTypes: {
-                            default: {
-                                label: "General",
-                                cssClass: "economy",
-                                price: 15,
-                            },
-                            vip1: {
-                                label: "VIP 1",
-                                cssClass: "first-class",
-                                price: 25,
-                                seatRows: [14, 15, 16],
-                            },
-                            vip2: {
-                                label: "VIP 2",
-                                cssClass: "reduced",
-                                price: 10,
-                                seatRows: [12, 13],
-                            },
-                        },
-                        reservedSeats: reservedSeats,
-                        rowSpacers: [3, 7, 12],
-                        columnSpacers: [8]
-                    },
-                    cart: { visible: false }
-                };
-
-                var element = document.getElementById("container");
-                var sc = new Seatchart(element, options);
-                var frontDiv = document.querySelector(".sc-front");
-                frontDiv.textContent = "Stage";
-                var title = document.querySelector(".sc-cart-title");
-                title.style.display = "none";
+                } else {
+                    // alert('No reservations found.');
+                    initializeSeatchart();
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error('AJAX error:', error);
             }
         });
+    }
+
+    fetchReservedSeats();
+
+    function initializeSeatchart(reservedSeats = []) {
+        var options = {
+            map: {
+                rows: 17,
+                columns: 16,
+                seatTypes: {
+                    default: {
+                        label: "General",
+                        cssClass: "economy",
+                        price: 15,
+                    },
+                    vip1: {
+                        label: "VIP 1",
+                        cssClass: "first-class",
+                        price: 25,
+                        seatRows: [14, 15, 16],
+                    },
+                    vip2: {
+                        label: "VIP 2",
+                        cssClass: "reduced",
+                        price: 10,
+                        seatRows: [12, 13],
+                    },
+                },
+                reservedSeats: reservedSeats,
+                rowSpacers: [3, 7, 12],
+                columnSpacers: [8]
+            },
+            cart: { visible: false }
+        };
+
+        var element = document.getElementById("container");
+        var sc = new Seatchart(element, options);
+        var frontDiv = document.querySelector(".sc-front");
+        frontDiv.textContent = "Stage";
+        var title = document.querySelector(".sc-cart-title");
+        title.style.display = "none";
+    }
+
+    function fetchReservations() {
+        $.ajax({
+            url: 'Services/reservation_get_by_rep_groupedBy_user.php', // Replace 'path_to_your_php_script.php' with the actual path to your PHP script
+            type: 'GET',
+            data: { repertoire_id: repertoireId },
+            dataType: 'json',
+            success: function (response) {
+                if (response.success && response.data.length > 0) {
+                    fillAccordion(response.data);
+                } else {
+                    console.log('No reservations found.');
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error('AJAX error:', error);
+            }
+        });
+    }
+
+    function fillAccordion(data) {
+        var accordion = $('#accordion');
+        accordion.empty();
+        data.forEach(function (userReservation) {
+            var userAccordionItem = $('<div class="card text-dark">');
+            var header = $('<div class="card-header d-flex justify-content-between" id="heading' + userReservation.user_id + '">');
+            var nameContainer = $('<div class="d-flex align-items-center">');
+            var name = $('<h6 class="mb-0 me-auto">');
+            var toggle = $('<div class="custom-control custom-switch">');
+            var switchInput = $('<input type="checkbox" class="custom-control-input" id="customSwitch' + userReservation.user_id + '">');
+            var switchLabel = $('<label class="custom-control-label" for="customSwitch' + userReservation.user_id + '">Toggle</label>');
+            var button = $('<button class="btn btn-link" data-toggle="collapse" data-target="#collapse' + userReservation.user_id + '" aria-expanded="false" aria-controls="collapse' + userReservation.user_id + '">');
+
+            name.text(userReservation.first_name + ' ' + userReservation.last_name);
+           
+            button.append(name.clone());
+            header.append(button);
+            header.append(nameContainer);
+            toggle.append(switchInput);
+            toggle.append(switchLabel);
+            nameContainer.append(toggle);
+            
+            
+
+            var collapse = $('<div id="collapse' + userReservation.user_id + '" class="collapse" aria-labelledby="heading' + userReservation.user_id + '" data-parent="#accordion">');
+            var body = $('<div class="card-body">');
+
+            var reservationList = $('<ol>');
+            userReservation.reservations.forEach(function (reservation) {
+                var listItem = $('<li>');
+                listItem.text('Row: ' + reservation.row + ', Seat: ' + reservation.seat_num);
+                reservationList.append(listItem);
+            });
+
+            body.append(reservationList);
+           collapse.append(body);
+            userAccordionItem.append(header);
+            userAccordionItem.append(collapse);
+
+            accordion.append(userAccordionItem);
+
+            
+            switchInput.click(function () {
+                if (switchInput.is(':checked')) {
+                    
+                    console.log('Reservation confirmed for user ' + userReservation.user_id);
+                } else {
+                   
+                    console.log('Reservation confirmation cancelled for user ' + userReservation.user_id);
+                }
+            });
+        });
+    }
+
+    fetchReservations();
+});
     </script>
 </body>
 
