@@ -1,6 +1,5 @@
 .sc-main-container {
   display: flex;
-  
   font-size: 16px;
   padding: 25px;
   align-items: flex-start;
@@ -133,6 +132,7 @@
 .sc-legend {
   list-style-type: none;
   margin: 0;
+  margin-top:20px;
   padding: 0;
 }
 
@@ -297,4 +297,19 @@
     transparent 3px,
     transparent 6px
   );
+}
+/* Adjustments for smaller devices */
+@media (max-width: 768px) {
+  .sc-main-container {
+    flex-direction: column;
+  }
+  
+  .sc-right-container {
+    margin-left: 0;
+  }
+  
+  .sc-map-inner-container {
+    align-items: center;
+    justify-content: center;
+  }
 }

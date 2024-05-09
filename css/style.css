@@ -11,6 +11,8 @@ body {
   --primary: #f9af41;
   --secondary: #792a2a;
   --accent: #980b0b;
+  --green: #35c28f;
+  --red: #f46a69;
 }
 .bg-color {
   background-color: var(--background);
@@ -20,6 +22,9 @@ body {
 }
 .accent-color {
   color: var(--accent);
+}
+.accent-color:hover {
+  color: var(--secondary);
 }
 .accent-bg {
   background-color: var(--accent);
@@ -34,7 +39,20 @@ body {
     color: #343A40;
     border-color: var(--accent); 
 }
+.switch-color:checked + .custom-control-label::before {
+  color: #fff;
+  border-color: var(--green) !important;
+  background: var(--green) !important;
+}
+.switch-color:not(:checked) + .custom-control-label::before {
+  color: #fff!important;
+  border-color: var(--red) !important;
+  background: var(--red) !important;
+}
+.custom-control-label::after {
+  background-color: #fff!important;
 
+}
 .custom-outline-btn:hover {
     background-color:var(--accent);
     border-color: var(--accent);
