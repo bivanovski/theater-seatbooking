@@ -58,9 +58,11 @@
                             <div class="col-10 card shadow-sm">
                                 <div class="row py-2 justify-content-center mt-5">
                                     <div class="col-12 col-lg-7">
-
-                                        <h2 class="text-dark">Title Of The Show - <span class="accent-color">14/01/2023
-                                                18:00</span></h2>
+                                         <h2 class="text-dark">
+                                            Title Of The Show - <span class="accent-color">14/01/2023 18:00</span>
+                                            <i class="fa-regular fa-pen-to-square fa-xs ml-2 cursor-pointer text-warning" id="editRepertoireBtn" aria-hidden="true"></i>
+                                            <i class="fa-regular fa-trash-can fa-xs ml-2 cursor-pointer text-danger" id="deleteRepertoireBtn" aria-hidden="true"></i>
+                                        </h2>
                                         <div id="container" class="text-dark "></div>
                                     </div>
                                     <div class="col-12 col-lg-5  ">
