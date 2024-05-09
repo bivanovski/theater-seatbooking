@@ -60,7 +60,6 @@ function getShow(showId) {
         $("#stage_manager").val(response.data.stage_manager);
         $("#set_designer").val(response.data.set_designer);
         $("#image").val(response.data.image);
-        
       } else {
         // Handle error
         console.error("Failed to load show details:", response.message);
@@ -69,7 +68,7 @@ function getShow(showId) {
     error: function (xhr, status, error) {
       // Handle error
       console.error("Error loading show details:", error);
-    }
+    },
   });
 }
 
@@ -215,7 +214,6 @@ function getRepertoire(id) {
         $("#stage_manager").val(response.data.stage_manager);
         $("#set_designer").val(response.data.set_designer);
         $("#image").val(response.data.image);
-        
       } else {
         // Handle error
         console.error("Failed to load show details:", response.message);
@@ -224,7 +222,7 @@ function getRepertoire(id) {
     error: function (xhr, status, error) {
       // Handle error
       console.error("Error loading show details:", error);
-    }
+    },
   });
   function addRepertoire(showId, dateTime) {
     $.ajax({
@@ -282,4 +280,3 @@ function getRepertoire(id) {
   }
   
 }
-
