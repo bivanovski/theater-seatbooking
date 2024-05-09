@@ -278,11 +278,15 @@ class Reservation
             users.last_name,
             reservations.row,
             reservations.seat_num,
-            reservations.is_confirmed
+            reservations.is_confirmed,
+            seat_types.type,
+            seat_types.price
         FROM 
             reservations
         INNER JOIN 
             users ON reservations.user_id = users.id
+        JOIN 
+            seat_types ON reservations.seat_type_id=seat_types.id
         WHERE 
             reservations.repertoire_id = :repertoire_id
         ORDER BY 
@@ -309,7 +313,9 @@ class Reservation
             $groupedReservations[$userId]['reservations'][] = [
                 'row' => $reservation['row'],
                 'seat_num' => $reservation['seat_num'],
-                'is_confirmed' => $reservation['is_confirmed']
+                'is_confirmed' => $reservation['is_confirmed'],
+                'seat_type'=>$reservation['type'],
+                'price'=>$reservation['price'],
             ];
         }
 
@@ -317,27 +323,33 @@ class Reservation
 
         return array_values($groupedReservations);
     }
-    public function toggleConfirmation($reservationId)
-    {
-        $connectionObj = new Connection();
-        $connection = $connectionObj->getConnection();
+    public function toggleConfirmationForUser($userId, $repertoireId, $is_confirmed)
+{
+    $connectionObj = new Connection();
+    $connection = $connectionObj->getConnection();
 
-        $statement = $connection->prepare('SELECT is_confirmed FROM reservations WHERE id = :id');
-        $statement->bindParam(':id', $reservationId, PDO::PARAM_INT);
-        $statement->execute();
-        $currentConfirmation = $statement->fetchColumn();
+    $updateStatement = $connection->prepare('UPDATE reservations SET is_confirmed = :is_confirmed WHERE user_id = :userId AND repertoire_id = :repertoireId');
+    $newConfirmation = $is_confirmed ? 1 : 0;
+    $updateStatement->bindParam(':is_confirmed', $newConfirmation, PDO::PARAM_INT);
+    $updateStatement->bindParam(':userId', $userId, PDO::PARAM_INT);
+    $updateStatement->bindParam(':repertoireId', $repertoireId, PDO::PARAM_INT);
 
-        $newConfirmation = $currentConfirmation ? 0 : 1;
-
-        $updateStatement = $connection->prepare('UPDATE reservations SET is_confirmed = :is_confirmed WHERE id = :id');
-        $updateStatement->bindParam(':is_confirmed', $newConfirmation, PDO::PARAM_INT);
-        $updateStatement->bindParam(':id', $reservationId, PDO::PARAM_INT);
+    try {
         $updateStatement->execute();
-
-        $connectionObj->destroy();
-
-        return $newConfirmation;
+        $rowCount = $updateStatement->rowCount();
+        if ($rowCount > 0) {
+            // Update successful
+            return true;
+        } else {
+            // No rows affected, possibly no matching records found
+            return false;
+        }
+    } catch (PDOException $e) {
+        // Log the error message for debugging
+        $this->logger->log('Error: ' . $e->getMessage());
+        return false;
     }
+}
 
     public static function checkReservationExists($reservationId)
     {
