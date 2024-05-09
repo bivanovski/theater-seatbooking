@@ -133,13 +133,14 @@ function loadShowDetails(showId) {
 </div>
 </div>
 
-                    </div>
+</div>
                 
-                    <div class="row">
+<div class="row">
 <div class="col-10">
 <h4 class="text-dark">Repertoires:</h4>
-<button type="button" class="btn btn-primary btn-sm mb-3"><i
-                                    class="fa-solid fa-plus mr-1 "></i>Add New Repertoire</button>
+<button type="button" class="btn btn-primary btn-sm mb-3" data-toggle="modal" data-target="#RepertoireModal">
+<i class="fa-solid fa-plus mr-1"></i>Add New Repertoire</button>
+
 <div id="repertoire-container"></div>
 </div>
 </div>
@@ -225,5 +226,60 @@ function getRepertoire(id) {
       console.error("Error loading show details:", error);
     }
   });
+  function addRepertoire(showId, dateTime) {
+    $.ajax({
+      url: "Services/repertoire_add.php",
+      method: "POST",
+      data: { 
+        show_id: showId,
+        date_time: dateTime
+      },
+      dataType: "json",
+      success: function (response) {
+        if (response.success) {
+          // Handle success
+          console.log("Repertoire added successfully");
+        } else {
+          // Handle failure
+          console.error("Failed to add repertoire:", response.message);
+        }
+      },
+      error: function (xhr, status, error) {
+        // Handle error
+        console.error("Error adding repertoire:", error);
+      }
+    });
+
+    function editRepertoire(id, showId, dateTime) {
+      $.ajax({
+          url: "Services/repertoire_update.php",
+          method: "POST",
+          data: {
+              id: id,
+              show_id: showId,
+              date_time: dateTime
+          },
+          dataType: "json",
+          success: function (response) {
+              if (response.success) {
+                  // Repertoire updated successfully
+                  console.log(response.message);
+                  // Optionally, you can perform additional actions here, such as updating the UI
+              } else {
+                  // Failed to update repertoire
+                  console.error(response.message);
+                  // Optionally, you can display an error message or take other actions
+              }
+          },
+          error: function (xhr, status, error) {
+              // Handle error
+              console.error("Error updating repertoire:", error);
+              // Optionally, you can display an error message or take other actions
+          }
+      });
+  }
+  
+  }
+  
 }
 
