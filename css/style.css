@@ -40,18 +40,18 @@ body {
     border-color: var(--accent);
     color: #fff;
 }
-.show {
+.shows {
   transition: 0.3s transform cubic-bezier(0.155, 1.105, 0.295, 1.12),
     0.3s box-shadow,
     0.3s -webkit-transform cubic-bezier(0.155, 1.105, 0.295, 1.12);
   cursor: pointer;
 }
 
-.show a {
+.shows a {
   text-decoration: none;
 }
 
-.show:hover {
+.shows:hover {
   transform: scale(1.05);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.06);
 }

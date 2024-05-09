@@ -264,6 +264,59 @@ class Reservation
 
         return $reservations;
     }
+
+    public function getReservationsByRepertoireIdGroupedByUser($repertoireId)
+    {
+        $connectionObj = new Connection();
+        $connection = $connectionObj->getConnection();
+
+        $statement = $connection->prepare('
+        SELECT 
+            reservations.user_id,
+            users.email,
+            users.first_name,
+            users.last_name,
+            reservations.row,
+            reservations.seat_num,
+            reservations.is_confirmed
+        FROM 
+            reservations
+        INNER JOIN 
+            users ON reservations.user_id = users.id
+        WHERE 
+            reservations.repertoire_id = :repertoire_id
+        ORDER BY 
+            users.first_name, users.last_name
+    ');
+        $statement->execute(['repertoire_id' => $repertoireId]);
+
+        $reservations = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        $groupedReservations = [];
+
+        foreach ($reservations as $reservation) {
+            $userId = $reservation['user_id'];
+            if (!isset($groupedReservations[$userId])) {
+                $groupedReservations[$userId] = [
+                    'user_id' => $userId,
+                    'email' => $reservation['email'],
+                    'first_name' => $reservation['first_name'],
+                    'last_name' => $reservation['last_name'],
+                    'reservations' => []
+                ];
+            }
+
+            $groupedReservations[$userId]['reservations'][] = [
+                'row' => $reservation['row'],
+                'seat_num' => $reservation['seat_num'],
+                'is_confirmed' => $reservation['is_confirmed']
+            ];
+        }
+
+        $connectionObj->destroy();
+
+        return array_values($groupedReservations);
+    }
     public function toggleConfirmation($reservationId)
     {
         $connectionObj = new Connection();
