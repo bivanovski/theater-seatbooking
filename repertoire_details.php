@@ -60,8 +60,8 @@
                                     <div class="col-12 col-lg-7">
                                          <h2 class="text-dark">
                                             Title Of The Show - <span class="accent-color">14/01/2023 18:00</span>
-                                            <a class="btn" href="repertoire_edit.php?id=<?php echo $_GET['id']; ?>"><i class="fa-regular fa-pen-to-square fa-xs ml-2 cursor-pointer text-warning" id="editRepertoireBtn" aria-hidden="true"></i></a>
-                                            <i class="fa-regular fa-trash-can fa-xs ml-2 cursor-pointer text-danger" id="deleteRepertoireBtn" aria-hidden="true"></i>
+                                            <a class="btn text-warning p-0 mr-1" href="repertoire_edit.php?id=<?php echo $_GET['id']; ?>"><i class="fa-regular fa-pen-to-square fa-lg" id="editRepertoireBtn" aria-hidden="true"></i></a>
+                                            <button class="btn accent-color p-0 delete-repertoire-btn"><i class="fa-regular fa-trash-can fa-lg"></i></button>
                                         </h2>
                                         <div id="container" class="text-dark "></div>
                                     </div>
@@ -131,6 +131,70 @@
                     }
                 });
             }
+
+            $(document).ready(function () {
+    // Parse the URL to get the value of the 'id' parameter
+    const urlParams = new URLSearchParams(window.location.search);
+    const showId = urlParams.get('id');
+
+    // Check if showId has a value
+    if (showId) {
+        // Event listener for the delete button
+        $(document).on('click', '.delete-repertoire-btn', function () {
+            // Confirm deletion with user
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'This repertoire will be deleted! Are you sure?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Send AJAX request to delete the repertoire
+                    $.ajax({
+                        url: 'Services/repertoire_delete.php',
+                        method: 'POST',
+                        data: { show_id: showId },
+                        dataType: 'json',
+                        success: function (response) {
+                            if (response.success) {
+                                // Repertoire deleted successfully
+                                Swal.fire(
+                                    'Deleted!',
+                                    response.message,
+                                    'success'
+                                ).then(() => {
+                                    window.location.href = 'shows.php';
+                                });
+                            } else {
+                                // Error deleting repertoire
+                                Swal.fire(
+                                    'Error!',
+                                    response.message,
+                                    'error'
+                                );
+                            }
+                        },
+                        error: function (xhr, status, error) {
+                            // AJAX error
+                            console.error(xhr.responseText);
+                            Swal.fire(
+                                'Error!',
+                                'Failed to delete show. Please try again later.',
+                                'error'
+                            );
+                        }
+                    });
+                }
+            });
+        });
+    } else {
+        console.error('showId is not defined');
+    }
+});
+
 
             fetchReservedSeats();
 
