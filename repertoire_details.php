@@ -60,7 +60,7 @@
                                     <div class="col-12 col-lg-7">
                                          <h2 class="text-dark">
                                             Title Of The Show - <span class="accent-color">14/01/2023 18:00</span>
-                                            <i class="fa-regular fa-pen-to-square fa-xs ml-2 cursor-pointer text-warning" id="editRepertoireBtn" aria-hidden="true"></i>
+                                            <a class="btn" href="repertoire_edit.php?id=<?php echo $_GET['id']; ?>"><i class="fa-regular fa-pen-to-square fa-xs ml-2 cursor-pointer text-warning" id="editRepertoireBtn" aria-hidden="true"></i></a>
                                             <i class="fa-regular fa-trash-can fa-xs ml-2 cursor-pointer text-danger" id="deleteRepertoireBtn" aria-hidden="true"></i>
                                         </h2>
                                         <div id="container" class="text-dark "></div>
@@ -102,7 +102,6 @@
     <script>
         $(document).ready(function () {
             var repertoireId = <?php echo $_GET['id']; ?>;
-
             function fetchReservedSeats() {
                 $.ajax({
                     url: 'Services/reservation_get_by_repertoire.php',
@@ -173,6 +172,8 @@
                 var title = document.querySelector(".sc-cart-title");
 
             }
+
+          
 
             function fetchReservations() {
                 $.ajax({
