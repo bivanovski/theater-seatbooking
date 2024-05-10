@@ -194,36 +194,7 @@ function loadRepertoires(showId) {
     },
   });
 }
-function getRepertoire(id) {
-  $.ajax({
-    url: "Services/repertoire_get.php",
-    method: "GET",
-    data: { id: id },
-    dataType: "json",
-    success: function (response) {
-      if (response.success) {
-        $("#show_id").val(response.data.id);
-        $("#name").val(response.data.name);
-        $("#hall_number").val(response.data.hall_number);
-        $("#description").val(response.data.description);
-        $("#genre_id").val(response.data.genre_id);
-        $("#age_group").val(response.data.age_group);
-        $("#director").val(response.data.director);
-        $("#assistant_director").val(response.data.assistant_director);
-        $("#costume_designer").val(response.data.costume_designer);
-        $("#stage_manager").val(response.data.stage_manager);
-        $("#set_designer").val(response.data.set_designer);
-        $("#image").val(response.data.image);
-      } else {
-        // Handle error
-        console.error("Failed to load show details:", response.message);
-      }
-    },
-    error: function (xhr, status, error) {
-      // Handle error
-      console.error("Error loading show details:", error);
-    },
-  });
+
   function addRepertoire(showId, dateTime) {
     $.ajax({
       url: "Services/repertoire_add.php",
@@ -278,5 +249,4 @@ function getRepertoire(id) {
   }
   
   }
-  
-}
+
