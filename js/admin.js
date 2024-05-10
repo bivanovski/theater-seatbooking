@@ -15,7 +15,7 @@ function getShows() {
           var cardHtml = `
                 <div class="col-md-3 mb-5">
                     <a href="show_details.php?id=${show.id}" class="card-link">
-                        <div class="card text-dark shadow-sm show" data-show-id="${show.id}">
+                        <div class="card text-dark shadow-sm shows" data-show-id="${show.id}">
                             <img src="${show.image}" class="card-img-top" alt="${show.name}">
                             <div class="card-body">
                                 <h5 class="card-title accent-color">${show.name}</h5>
@@ -60,7 +60,6 @@ function getShow(showId) {
         $("#stage_manager").val(response.data.stage_manager);
         $("#set_designer").val(response.data.set_designer);
         $("#image").val(response.data.image);
-        
       } else {
         // Handle error
         console.error("Failed to load show details:", response.message);
@@ -69,7 +68,7 @@ function getShow(showId) {
     error: function (xhr, status, error) {
       // Handle error
       console.error("Error loading show details:", error);
-    }
+    },
   });
 }
 
@@ -133,13 +132,14 @@ function loadShowDetails(showId) {
 </div>
 </div>
 
-                    </div>
+</div>
                 
-                    <div class="row">
+<div class="row">
 <div class="col-10">
 <h4 class="text-dark">Repertoires:</h4>
-<button type="button" class="btn btn-primary btn-sm mb-3"><i
-                                    class="fa-solid fa-plus mr-1 "></i>Add New Repertoire</button>
+<button type="button" class="btn btn-primary btn-sm mb-3" data-toggle="modal" data-target="#RepertoireModal">
+<i class="fa-solid fa-plus mr-1"></i>Add New Repertoire</button>
+
 <div id="repertoire-container"></div>
 </div>
 </div>
@@ -214,7 +214,6 @@ function getRepertoire(id) {
         $("#stage_manager").val(response.data.stage_manager);
         $("#set_designer").val(response.data.set_designer);
         $("#image").val(response.data.image);
-        
       } else {
         // Handle error
         console.error("Failed to load show details:", response.message);
@@ -223,7 +222,61 @@ function getRepertoire(id) {
     error: function (xhr, status, error) {
       // Handle error
       console.error("Error loading show details:", error);
-    }
+    },
   });
-}
+  function addRepertoire(showId, dateTime) {
+    $.ajax({
+      url: "Services/repertoire_add.php",
+      method: "POST",
+      data: { 
+        show_id: showId,
+        date_time: dateTime
+      },
+      dataType: "json",
+      success: function (response) {
+        if (response.success) {
+          // Handle success
+          console.log("Repertoire added successfully");
+        } else {
+          // Handle failure
+          console.error("Failed to add repertoire:", response.message);
+        }
+      },
+      error: function (xhr, status, error) {
+        // Handle error
+        console.error("Error adding repertoire:", error);
+      }
+    });
 
+    function editRepertoire(id, showId, dateTime) {
+      $.ajax({
+          url: "Services/repertoire_update.php",
+          method: "POST",
+          data: {
+              id: id,
+              show_id: showId,
+              date_time: dateTime
+          },
+          dataType: "json",
+          success: function (response) {
+              if (response.success) {
+                  // Repertoire updated successfully
+                  console.log(response.message);
+                  // Optionally, you can perform additional actions here, such as updating the UI
+              } else {
+                  // Failed to update repertoire
+                  console.error(response.message);
+                  // Optionally, you can display an error message or take other actions
+              }
+          },
+          error: function (xhr, status, error) {
+              // Handle error
+              console.error("Error updating repertoire:", error);
+              // Optionally, you can display an error message or take other actions
+          }
+      });
+  }
+  
+  }
+  
+}

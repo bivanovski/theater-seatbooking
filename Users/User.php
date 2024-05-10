@@ -86,8 +86,9 @@ class User
         if (!empty($user) && password_verify($this->password, $user['password'])) {
             $this->id = $user['id'];
             $this->email = $user['email'];
-            $this->password = $user['password'];
-            //$this->role_id = $user['role_id'];
+            $this->first_name = $user['first_name'];
+            $this->last_name = $user['last_name'];
+            $this->role_id = $user['role_id'];
             return true;
         }
 

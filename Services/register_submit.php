@@ -21,6 +21,8 @@ try {
     $user->store();
 
     // If execution reaches here, no exception occurred, so registration was successful
+    $_SESSION['firstname'] = $user->getFirstName();
+    $_SESSION['lastname'] = $user->getLastName();
     $response = [
         'success' => true,
         'message' => 'User registered successfully'

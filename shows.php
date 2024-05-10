@@ -1,3 +1,9 @@
+<?php 
+// session_start();
+// if (!isset($_SESSION['firstname']) || !isset($_SESSION['lastname']) || $_SESSION['role'] !== "admin") {
+//     return header('Location: login.php?errorMessage=Unauthorized');
+// }
+?>
 <!DOCTYPE html>
 <html>
 
