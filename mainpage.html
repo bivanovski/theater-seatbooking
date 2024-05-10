@@ -31,7 +31,7 @@
 <body>
 
     <header>
-        <nav class="navbar navbar-expand-lg navbar-dark custom-navbar">
+        <nav class="navbar navbar-expand-lg navbar-dark custom-navbar fixed-top shadow-sm">
             <a class="navbar-brand" href="#">
                 <img src="images/logo2.png" alt="Logo" width="70" height="70" class="d-inline-block align-top">
                 <!-- <span class="ml-2 font-weight-bold">MNT ADMIN PANEL</span> -->
@@ -52,12 +52,12 @@
                     /* Style for the nav bars */
                     .navbar-nav .nav-link {
                         font-size: 18px; 
-                        font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+                        
                     }
                 </style>
                 <div class="my-2 my-lg-0">
-                    <button class="btn btn-danger mr-2" style="font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif">Register</button>
-                    <button class="btn btn-danger" style="font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif">Log in</button>
+                    <button class="btn btn-danger mr-2" >Register</button>
+                    <button class="btn btn-danger">Log in</button>
                     <!-- <p class="right">Register</p>
                     <a class="right" href="logout.php" role="button">Log in</a> -->
                 </div>
@@ -68,11 +68,12 @@
         </nav>
     </header>
 
-    <section class="theater-background">
+    <section class="theater-background vh-50
+    " >
         <img src="https://images.ctfassets.net/6pezt69ih962/1O40LqsEvLqXzhEluBRbzH/df5c7bc9f6f151c28d9fc484bb13451b/DL_house.jpeg"
-            alt="Theater Background" class="img-fluid" style="width: 100%; height: auto;">
+            alt="Theater Background" class="img-fluid w-100" style="height:75vh;">
     </section>
-
+   
     <div class="container">
         <div class="text-center my-3">
             <button class="btn btn-primary">Filter</button>
@@ -145,9 +146,20 @@
             </div>
         </div>
     </div>
-
-    <!-- Bootstrap JS and dependencies -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr
+<footer class="footer bg-dark p-4 d-flex justify-content-center m-0 shadow-sm">
+    <div class="d-flex flex-column text-center">
+    <p class=" m-0">Makedonski Naroden Teatar</p>
+    <p class="text-muted m-0">CodeCrew</p>
+</div>
+</footer>
+<!-- Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"
+    integrity="sha384-YTWKK4GLUxHsrBGR2WYLkPVwGCthftGp2PJTzgaBQVEJ3pB2STXaFCtS3/M/RQVJ"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.6.2/js/bootstrap.min.js"
+    integrity="sha384-xrRv1LuuU9rtO7pkkOKdPkN0gnV3RY7fQbDHtZ3m8/0DaAgnmE+0OiL7i6yY+Jwb"
+    crossorigin="anonymous"></script>
+</body>
