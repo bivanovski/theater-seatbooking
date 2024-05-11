@@ -126,16 +126,18 @@
                                 processData: false,
                                 contentType: false,
                                 success: function (response) {
+                                    
                                     if (response.success) {
                                         if (response.data.role === 'admin') {
                                             window.location.href = 'shows.php';
                                         } else {
-                                            window.location.href = 'mainpage.html';
+                                            window.location.href = 'mainpage.php';
                                         }
                                     } else {
+                                        
                                         Swal.fire({
-                                            title: 'Error!',
-                                            text: 'Failed to login. Please try again.',
+                                            title: 'Please try again!',
+                                            text: 'Incorrect email or password.',
                                             icon: 'error',
                                             confirmButtonText: 'OK'
                                         });
@@ -143,6 +145,7 @@
 
                                 },
                                 error: function (xhr, status, error) {
+                               
                                     Swal.fire({
                                         title: 'Error!',
                                         text: 'Failed to login. Please try again.',

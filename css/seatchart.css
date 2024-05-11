@@ -7,22 +7,22 @@
   font-weight: 500;
   font-style: normal;
 }
-.economy {
+.general {
     color: white;
     background-color: #43aa8b;
-
+    cursor: pointer;
 }
 
-.first-class {
+.vip1 {
     color: white;
     background-color: #277da1;
-
+    cursor: pointer;
 }
 
-.reduced {
+.vip2 {
     color: white;
     background-color: #f8961e;
-
+    cursor: pointer;
 }
 .sc-right-container {
   margin-left: 75px;
@@ -208,13 +208,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #e53c4a;
+  background-color: #980b0b;
   height: 22px;
   width: 22px;
 }
 
 .sc-cart-btn-delete:hover {
-  background-color: #db3240;
+  background-color: #c22727;
 }
 
 .sc-cart-btn-delete:active {
@@ -248,12 +248,12 @@
 
 .sc-cart-btn-submit {
   width: 100%;
-  background-color: #e53c4a;
+  background-color: #980b0b;
   color: white;
 }
 
 .sc-cart-btn-submit:hover {
-  background-color: #db3240;
+  background-color: #c22727;
 }
 
 .sc-cart-btn-submit:active {
