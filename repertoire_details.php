@@ -58,11 +58,11 @@
                             <div class="col-10 card shadow-sm">
                                 <div class="row py-2 justify-content-center mt-5">
                                     <div class="col-12 col-lg-7">
-                                         <h2 class="text-dark">
-                                            Title Of The Show - <span class="accent-color">14/01/2023 18:00</span>
-                                            <a class="btn text-warning p-0 mr-1" href="repertoire_edit.php?id=<?php echo $_GET['id']; ?>"><i class="fa-regular fa-pen-to-square fa-lg" id="editRepertoireBtn" aria-hidden="true"></i></a>
-                                            <button class="btn accent-color p-0 delete-repertoire-btn"><i class="fa-regular fa-trash-can fa-lg"></i></button>
-                                        </h2>
+                                    <h2 class="text-dark" id="show_title">
+                                    Title Of The Show - <span class="accent-color" id="show_details_placeholder"></span>
+                                    <a class="btn text-warning p-0 mr-1" href="repertoire_edit.php?id=<?php echo $_GET['id']; ?>"><i class="fa-regular fa-pen-to-square fa-lg" id="editRepertoireBtn" aria-hidden="true"></i></a>
+                                    <button class="btn accent-color p-0 delete-repertoire-btn"><i class="fa-regular fa-trash-can fa-lg"></i></butto>
+                                    </h2>
                                         <div id="container" class="text-dark "></div>
                                     </div>
                                     <div class="col-12 col-lg-5  ">
@@ -197,6 +197,47 @@
 
 
             fetchReservedSeats();
+
+
+function getRepertoire(id) {
+    $.ajax({
+        url: "Services/repertoire_get.php",
+        method: "GET",
+        data: { id: id },
+        dataType: "json",
+        success: function (response) {
+            if (response.success) {
+                var date_time = response.data.date_time;
+                var showName = response.data.show.name;
+
+                // Update the title with the correct data
+                $("#show_title").html(`
+                    ${showName} - <span class="accent-color">${date_time}</span>
+                    <a class="btn text-warning p-0 mr-1" href="repertoire_edit.php?id=${id}"><i class="fa-regular fa-pen-to-square fa-lg" id="editRepertoireBtn" aria-hidden="true"></i></a>
+                    <button class="btn accent-color p-0 delete-repertoire-btn"><i class="fa-regular fa-trash-can fa-lg"></i></button>
+                `);
+
+                // Update other input fields if needed
+                $("#show_details_placeholder").text(date_time);
+                // You can update other fields here if needed
+            } else {
+                // Handle error
+                console.error("Failed to load show details:", response.message);
+            }
+        },
+        error: function (xhr, status, error) {
+            // Handle error
+            console.error("Error loading show details:", error);
+        },
+    });
+}
+
+// Call the getRepertoire function when the document is ready or wherever appropriate
+$(document).ready(function() {
+    // Call getRepertoire with the initial show ID
+    var initialShowId = <?php echo $_GET['id']; ?>;
+    getRepertoire(initialShowId);
+});
 
             function initializeSeatchart(reservedSeats = []) {
                 var options = {
