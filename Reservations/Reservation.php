@@ -233,11 +233,15 @@ class Reservation
             reservations.repertoire_id,
             repertoire.date_time AS repertoire_date_time,
             GROUP_CONCAT(reservations.id) AS reservation_ids,
-            COUNT(*) AS total_reservations
+            COUNT(*) AS total_reservations,
+            shows.name
         FROM 
             reservations
         INNER JOIN 
             repertoire ON reservations.repertoire_id = repertoire.id
+        JOIN 
+            shows ON repertoire.show_id=shows.id
+            
         WHERE 
             reservations.user_id = :user_id
         GROUP BY 
@@ -252,7 +256,8 @@ class Reservation
 
         foreach ($reservations as &$repertoire) {
             $repertoireStatement = $connection->prepare('
-            SELECT * FROM reservations WHERE user_id = :user_id AND repertoire_id = :repertoire_id
+            SELECT * FROM reservations JOIN 
+            seat_types ON seat_types.id=reservations.seat_type_id WHERE user_id = :user_id AND repertoire_id = :repertoire_id 
         ');
             $repertoireStatement->bindParam(':user_id', $userId, PDO::PARAM_INT);
             $repertoireStatement->bindParam(':repertoire_id', $repertoire['repertoire_id'], PDO::PARAM_INT);
@@ -314,8 +319,8 @@ class Reservation
                 'row' => $reservation['row'],
                 'seat_num' => $reservation['seat_num'],
                 'is_confirmed' => $reservation['is_confirmed'],
-                'seat_type'=>$reservation['type'],
-                'price'=>$reservation['price'],
+                'seat_type' => $reservation['type'],
+                'price' => $reservation['price'],
             ];
         }
 
@@ -324,32 +329,32 @@ class Reservation
         return array_values($groupedReservations);
     }
     public function toggleConfirmationForUser($userId, $repertoireId, $is_confirmed)
-{
-    $connectionObj = new Connection();
-    $connection = $connectionObj->getConnection();
+    {
+        $connectionObj = new Connection();
+        $connection = $connectionObj->getConnection();
 
-    $updateStatement = $connection->prepare('UPDATE reservations SET is_confirmed = :is_confirmed WHERE user_id = :userId AND repertoire_id = :repertoireId');
-    $newConfirmation = $is_confirmed ? 1 : 0;
-    $updateStatement->bindParam(':is_confirmed', $newConfirmation, PDO::PARAM_INT);
-    $updateStatement->bindParam(':userId', $userId, PDO::PARAM_INT);
-    $updateStatement->bindParam(':repertoireId', $repertoireId, PDO::PARAM_INT);
+        $updateStatement = $connection->prepare('UPDATE reservations SET is_confirmed = :is_confirmed WHERE user_id = :userId AND repertoire_id = :repertoireId');
+        $newConfirmation = $is_confirmed ? 1 : 0;
+        $updateStatement->bindParam(':is_confirmed', $newConfirmation, PDO::PARAM_INT);
+        $updateStatement->bindParam(':userId', $userId, PDO::PARAM_INT);
+        $updateStatement->bindParam(':repertoireId', $repertoireId, PDO::PARAM_INT);
 
-    try {
-        $updateStatement->execute();
-        $rowCount = $updateStatement->rowCount();
-        if ($rowCount > 0) {
-            // Update successful
-            return true;
-        } else {
-            // No rows affected, possibly no matching records found
+        try {
+            $updateStatement->execute();
+            $rowCount = $updateStatement->rowCount();
+            if ($rowCount > 0) {
+                // Update successful
+                return true;
+            } else {
+                // No rows affected, possibly no matching records found
+                return false;
+            }
+        } catch (PDOException $e) {
+            // Log the error message for debugging
+            $this->logger->log('Error: ' . $e->getMessage());
             return false;
         }
-    } catch (PDOException $e) {
-        // Log the error message for debugging
-        $this->logger->log('Error: ' . $e->getMessage());
-        return false;
     }
-}
 
     public static function checkReservationExists($reservationId)
     {

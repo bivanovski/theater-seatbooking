@@ -12,7 +12,12 @@ body{
     margin-top: -20px;
     margin-left: -10px;
 }
+.nav-btn{
+    background-color: #FFE0B3!important;
+    color: black;
+    border-color: transparent;
 
+}
 .header-left{
     margin-left: -600px;
     margin-top: -15px;

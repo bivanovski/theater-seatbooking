@@ -1,8 +1,8 @@
 <?php 
-// session_start();
-// if (!isset($_SESSION['firstname']) || !isset($_SESSION['lastname']) || $_SESSION['role'] !== "admin") {
-//     return header('Location: login.php?errorMessage=Unauthorized');
-// }
+session_start();
+if (!isset($_SESSION['firstname']) || !isset($_SESSION['lastname']) || $_SESSION['role'] !== "admin") {
+    return header('Location: login.php?errorMessage=Unauthorized');
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -36,7 +36,7 @@
                 alt="Logo" /><span class="ml-2 font-weight-bold">MNT ADMIN PANEL</span></a>
         <div class="form-inline accent-color">
 
-            <p class="mr-2 my-2 my-sm-0 mt-3 accent-color">admin<i class="fa-regular fa-user"></i> </p>
+            <p class="mr-2 my-2 my-sm-0 mt-3 accent-color"><?php echo $_SESSION['firstname']?><i class="fa-regular fa-user"></i> </p>
 
 
             <a class="btn text-light my-2 my-sm-0 mt-3 accent-bg" href="logout.php" role="button">Log out</a>

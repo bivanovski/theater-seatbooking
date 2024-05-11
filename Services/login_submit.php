@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 require_once ('../Users/User.php');
 
 use Users\User as User;
@@ -10,11 +12,9 @@ $user->setEmail($_POST['email']);
 $user->setPassword($_POST['password']);
 
 
-
 $isAuthenticated = $user->authenticate();
 
 if ($isAuthenticated) {
-   session_start();
    $_SESSION['email'] = $user->getEmail();
    $_SESSION['firstname'] = $user->getFirstName();
    $_SESSION['lastname'] = $user->getLastName();

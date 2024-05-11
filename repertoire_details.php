@@ -206,18 +206,18 @@
                         seatTypes: {
                             default: {
                                 label: "General",
-                                cssClass: "economy",
+                                cssClass: "general",
                                 price: 15,
                             },
                             vip1: {
                                 label: "VIP 1",
-                                cssClass: "first-class",
+                                cssClass: "vip1",
                                 price: 25,
                                 seatRows: [14, 15, 16],
                             },
                             vip2: {
                                 label: "VIP 2",
-                                cssClass: "reduced",
+                                cssClass: "vip2",
                                 price: 10,
                                 seatRows: [12, 13],
                             },
