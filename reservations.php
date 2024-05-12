@@ -1,3 +1,9 @@
+<?php
+session_start();
+if (!isset($_SESSION['firstname']) || !isset($_SESSION['lastname'])) {
+    return header('Location: login.php');
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,57 +24,34 @@
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Abel&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/83a2a6ffac.js" crossorigin="anonymous"></script>
-    <style>
-        /* Custom CSS */
-        .custom-navbar {
-            background-color: #333;
-            /* Change the color to your desired color */
-        }
-
-        .custom-navbar .navbar-brand,
-        .custom-navbar .navbar-nav .nav-link {
-            color: #fff;
-            /* Change the text color to contrast with the background */
-        }
-    </style>
 </head>
 
 <body>
-
     <header>
-        <nav class="navbar navbar-expand-lg navbar-dark custom-navbar fixed-top shadow-sm">
+        <nav class="navbar navbar-expand navbar-dark custom-navbar fixed-top shadow-sm">
             <a class="navbar-brand" href="#">
                 <img src="images/logo2.png" alt="Logo" width="70" height="70" class="d-inline-block align-top">
-                <!-- <span class="ml-2 font-weight-bold">MNT ADMIN PANEL</span> -->
             </a>
+
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#home">Main Page</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#contact">Premiers</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#about">Buy ticket</a>
-                    </li>
-                </ul>
-                <style>
-                    /* Style for the nav bars */
-                    .navbar-nav .nav-link {
-                        font-size: 18px;
+                <?php if (isset($_SESSION['firstname'])): ?>
+                    <a class="mr-2 my-2 my-sm-0 mt-3 text-light text-decoration-none" href="reservations.php"><i
+                            class="fa-regular fa-calendar-check mr-2"></i>My Reservations</a>
+                <?php endif; ?>
 
-                    }
-                </style>
-                <div class="my-2 my-lg-0">
-                    <a class="btn nav-btn mr-2" href="register.php">Register</a>
-                    <a class="btn nav-btn" href="login.php">Log in</a>
-                    <!-- <p class="right">Register</p>
-                    <a class="right" href="logout.php" role="button">Log in</a> -->
+                <div class="ml-auto">
+                    <?php if (!isset($_SESSION['firstname'])): ?>
+                        <a class="btn nav-btn mr-2" href="register.php">Register</a>
+                        <a class="btn nav-btn" href="login.php">Log in</a>
+                    <?php else: ?>
+                        <div class="d-flex justify-content-center align-items-center">
+                            <p class="mr-2 my-2 my-sm-0 mt-3 text-light">
+                                <?php echo $_SESSION['firstname']; ?><i class="fa-regular fa-user ml-1"></i>
+                            </p>
+                            <a class="btn nav-btn" href="logout.php" role="button">Log out</a>
+                        </div>
+                    <?php endif; ?>
                 </div>
-                <style>
-
-                </style>
             </div>
         </nav>
     </header>
@@ -76,7 +59,8 @@
     <div class="container-fluid">
 
         <div class="row d-flex justify-content-center ">
-            <div class="col-10  shadow-sm p-5">
+            <div class="col-10 
+             shadow-sm p-5">
                 <div class="row d-flex justify-content-center mb-2">
                     <h2>My Reservations<i class="fa-solid fa-ticket ml-2 accent-color"></i></h2>
                 </div>
@@ -107,7 +91,7 @@
     <script>
 
         $(document).ready(function () {
-            var user_id = 3;
+            var user_id = <?php echo $_SESSION['id']; ?>;
 
             fetchUserReservations();
 
@@ -118,7 +102,11 @@
                     dataType: 'json',
                     success: function (response) {
                         if (response.success) {
-                            fillAccordion(response.data);
+                            if (response.data.length > 0) {
+                                fillAccordion(response.data);
+                            } else {
+                                $('#accordionExample').html('<div class="text-center" role="alert"><p class="text-muted">You have no reservations yet.</p><a  href="mainpage.php" class="btn btn-outline-danger custom-outline-btn mr-2">Reserve Now</a></div>');
+                            }
                         } else {
                             console.error('Error fetching reservations:', response.message);
                         }
@@ -141,7 +129,7 @@
                     var button = $('<button class="btn btn-link accent-color text-decoration-none" type="button" data-toggle="collapse" data-target="#' + collapseId + '" aria-expanded="true" aria-controls="' + collapseId + '">');
                     button.text(reservation.name + ' - ' + reservation.repertoire_date_time + ' Total: ' + reservation.total_reservations);
 
-                    
+
                     var confirmedIndicator = $('<span class="badge badge-' + (reservation.reservations[0].is_confirmed === '1' ? 'success' : 'danger') + ' ml-2">' + (reservation.reservations[0].is_confirmed === '1' ? 'Confirmed' : 'Not Confirmed') + '</span>');
 
 
@@ -151,7 +139,7 @@
 
                     var collapse = $('<div id="' + collapseId + '" class="collapse" aria-labelledby="' + cardId + '" data-parent="#accordionExample">');
 
-                  
+
                     var cardBody = $('<div class="card-body">');
 
                     var reservationList = $('<ul class="list-group">');

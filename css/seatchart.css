@@ -248,16 +248,16 @@
 
 .sc-cart-btn-submit {
   width: 100%;
-  background-color: #980b0b;
+  background-color: #101010;
   color: white;
 }
 
 .sc-cart-btn-submit:hover {
-  background-color: #c22727;
+  background-color: #980b0b;
 }
 
 .sc-cart-btn-submit:active {
-  background-color: #cc2331;
+  background-color: #980b0b;
 }
 
 /* Ticket css */

@@ -15,6 +15,7 @@
     <!-- CSS script -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/example.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Abel&display=swap" rel="stylesheet">
@@ -24,18 +25,25 @@
 
 </head>
 
-<header class="fixed-top">
-    <nav class="navbar text-dark bg-light shadow-sm ">
-        <a class="navbar-brand text-uppercase text-dark" href=""><img class="logo-menu img-fluid" src="images/logo2.png"
-                alt="Logo" /><span class="ml-2 ">МАКЕДОНСКИ НАРОДЕН ТЕАТАР</span></a>
-        <div class="form-inline accent-color">
-            <a class="btn text-light my-2 my-sm-0 mt-3 accent-bg" href="register.php" role="button">Register</a>
+<header>
+    <nav class="navbar navbar-expand navbar-dark custom-navbar fixed-top shadow-sm">
+        <a class="navbar-brand" href="#">
+            <img src="images/logo2.png" alt="Logo" width="70" height="70" class="d-inline-block align-top">
+        </a>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <div class="ml-auto">
+
+                <a class="btn nav-btn mr-2" href="register.php">Register</a>
+
+            </div>
         </div>
     </nav>
 </header>
 
 
-<body class="text-white bg-color">
+
+<body class="text-white">
     <div id="wrapper">
 
         <div id="page-content-wrapper" class="">
@@ -43,7 +51,7 @@
                 <div class="row justify-content-center mt-5 mb-5">
                     <div class="col-lg-4 col-12">
                         <img class="img-fluid w-25 mx-auto d-block mb-3" src="images/logo2.png" alt="">
-                        <div class="card p-4 shadow-sm">
+                        <div class="p-4 shadow-sm">
                             <?php
 
                             $errorMessage = $_GET['errorMessage'] ?? '';
@@ -72,7 +80,7 @@
                                     </div>
                                 </div>
 
-                                <button class="btn accent-bg text-light btn-block">Login</button>
+                                <button class="btn black-bg text-light btn-block">Login</button>
                                 <p class="mt-3">Not a member? <a href="register.php" class="text-dark"
                                         src=""><u>Register
                                             now</u></a></p>
@@ -126,7 +134,7 @@
                                 processData: false,
                                 contentType: false,
                                 success: function (response) {
-                                    
+
                                     if (response.success) {
                                         if (response.data.role === 'admin') {
                                             window.location.href = 'shows.php';
@@ -134,7 +142,7 @@
                                             window.location.href = 'mainpage.php';
                                         }
                                     } else {
-                                        
+
                                         Swal.fire({
                                             title: 'Please try again!',
                                             text: 'Incorrect email or password.',
@@ -145,7 +153,7 @@
 
                                 },
                                 error: function (xhr, status, error) {
-                               
+
                                     Swal.fire({
                                         title: 'Error!',
                                         text: 'Failed to login. Please try again.',

@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 if (!isset($_SESSION['firstname']) || !isset($_SESSION['lastname']) || $_SESSION['role'] !== "admin") {
     return header('Location: login.php?errorMessage=Unauthorized');
@@ -32,11 +32,14 @@ if (!isset($_SESSION['firstname']) || !isset($_SESSION['lastname']) || $_SESSION
 
 <header class="fixed-top">
     <nav class="navbar text-dark bg-light shadow-sm ">
-        <a class="navbar-brand text-uppercase text-dark" href=""><img class="logo-menu img-fluid" src="images/logo2.png"
-                alt="Logo" /><span class="ml-2 font-weight-bold">MNT ADMIN PANEL</span></a>
+        <div class="align-items-center d-flex"> <a class="navbar-brand text-uppercase text-dark" href=""><img src="images/logo2.png" alt="Logo" width="70" height="70" class="d-inline-block align-top"></a>
+        <span class="ml-2 font-weight-bold">MNT ADMIN PANEL</span></div>
+       
         <div class="form-inline accent-color">
 
-            <p class="mr-2 my-2 my-sm-0 mt-3 accent-color"><?php echo $_SESSION['firstname']?><i class="fa-regular fa-user"></i> </p>
+            <p class="mr-2 my-2 my-sm-0 mt-3 accent-color">
+                <?php echo $_SESSION['firstname'] ?><i class="fa-regular fa-user"></i>
+            </p>
 
 
             <a class="btn text-light my-2 my-sm-0 mt-3 accent-bg" href="logout.php" role="button">Log out</a>
@@ -48,38 +51,23 @@ if (!isset($_SESSION['firstname']) || !isset($_SESSION['lastname']) || $_SESSION
 <body class="text-white bg-color">
     <div id="wrapper">
 
-        <div id="sidebar-wrapper" class="text-white secondary-bg">
-            <ul class="sidebar-nav">
-                <li class="active-bg"><a href="shows.php" class="active">Books<i
-                            class="fa-solid fa-book-open ml-1"></i></a></li>
-                <li><a href="authors.php">Authors<i class="fa-solid fa-users ml-1"></i></a></li>
-                <li><a href="categories.php">Categories<i class="fa-solid fa-list ml-1"></i></a></li>
-                <li><a href="comments.php">Comments<i class="fa-regular fa-comments ml-1"></i></a></li>
-            </ul>
-        </div>
-
-
-
         <div id="page-content-wrapper" class="">
             <div class="container-fluid">
-             
-                    
-                        <!-- <a href="#" class="btn" id="menu-toggle" ><i class="fa-solid fa-bars"></i></a> -->
 
-                        <div class="row py-5 justify-content-center mt-5">
+                <div class="row py-5 justify-content-center mt-5">
 
-                            <div class="col-10" style="padding: 0px!important;">
-                                <div class="row">
-                                <a class="btn btn-primary btn-sm mb-3" href="show_create.php"><i
-                                    class="fa-solid fa-plus mr-1 "></i>Add New Show</a>
-                                </div>
-                                <div class="row justify-content-start" id="showCards">
-                                </div>
-                            </div>
+                    <div class="col-10" style="padding: 0px!important;">
+                        <div class="row">
+                            <a class="btn btn-sm accent-bg text-light mb-3" href="show_create.php"><i class="fa-solid fa-plus mr-1 "></i>Add
+                                New Show</a>
                         </div>
+                        <div class="row justify-content-start" id="showCards">
+                        </div>
+                    </div>
+                </div>
 
-                    
-                
+
+
             </div>
         </div>
 

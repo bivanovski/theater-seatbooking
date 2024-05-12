@@ -18,12 +18,14 @@ if ($isAuthenticated) {
    $_SESSION['email'] = $user->getEmail();
    $_SESSION['firstname'] = $user->getFirstName();
    $_SESSION['lastname'] = $user->getLastName();
+   $_SESSION['id'] = $user->getId();
    $_SESSION['role'] = $user->checkRole();
 
    $response = [
       'success' => true,
       'message' => 'User authenticated successfully',
       'data' => [
+         'id' => $_SESSION['id'],
          'email' => $_SESSION['email'],
          'firstname' => $_SESSION['firstname'],
          'lastname' => $_SESSION['lastname'],
