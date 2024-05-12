@@ -270,10 +270,12 @@ class Show
 
         $statement = $connection->prepare($query);
 
+        // Bind parameters
         foreach ($params as $index => $param) {
             $statement->bindValue($index + 1, $param, \PDO::PARAM_STR);
         }
 
+        // Execute the query
         $statement->execute();
 
         $connectionObj->destroy();
@@ -282,15 +284,16 @@ class Show
 
         return $shows;
     }
+
     public function delete()
     {
         $connectionObj = new Connection();
         $connection = $connectionObj->getConnection();
-         //TODO: add later cascading deleting in repertoire
+        //TODO: add later cascading deleting in repertoire
         $deleteShow = $connection->prepare('DELETE FROM shows WHERE id = :id');
         $deleteShow->bindValue(':id', $this->id);
         $success = $deleteShow->execute();
-    
+
         $connectionObj->destroy();
         return $success;
     }
