@@ -1,3 +1,9 @@
+<?php
+session_start();
+if (!isset($_SESSION['firstname']) || !isset($_SESSION['lastname']) || $_SESSION['role'] !== "admin") {
+    return header('Location: login.php?errorMessage=Unauthorized');
+}
+?>
 <!DOCTYPE html>
 <html>
 
@@ -23,15 +29,23 @@
 </head>
 <header class="fixed-top">
     <nav class="navbar text-dark bg-light shadow-sm ">
-        <a class="navbar-brand text-uppercase text-dark" href=""><img class="logo-menu img-fluid" src="images/logo2.png"
-                alt="Logo" /><span class="ml-2 font-weight-bold">MNT ADMIN PANEL</span></a>
+        <div class="align-items-center d-flex"> <a class="navbar-brand text-uppercase text-dark" href=""><img
+                    src="images/logo2.png" alt="Logo" width="70" height="70" class="d-inline-block align-top"></a>
+            <span class="ml-2 font-weight-bold">MNT ADMIN PANEL</span>
+        </div>
+
         <div class="form-inline accent-color">
 
-            <p class="mr-2 my-2 my-sm-0 mt-3 accent-color">admin<i class="fa-regular fa-user"></i> </p>
+            <p class="mr-2 my-2 my-sm-0 mt-3 accent-color">
+                <?php echo $_SESSION['firstname'] ?><i class="fa-regular fa-user"></i>
+            </p>
+
+
             <a class="btn text-light my-2 my-sm-0 mt-3 accent-bg" href="logout.php" role="button">Log out</a>
         </div>
     </nav>
 </header>
+
 <body class="text-white bg-color">
     <div id="wrapper">
 
@@ -44,7 +58,7 @@
                 <li><a href="comments.php">Comments<i class="fa-regular fa-comments ml-1"></i></a></li>
             </ul>
         </div>
-        
+
 
         <div id="page-content-wrapper" class="">
             <div class="container-fluid">
@@ -54,20 +68,19 @@
                         <div class="row py-2 justify-content-center mt-5">
 
                             <div class="col-10 card p-4 shadow-sm" id="show-details-container">
-                                <!-- Show details will be loaded dynamically here -->
                             </div>
                         </div>
 
                     </div>
                 </div>
-                
+
                 <!-- Modal -->
                 <div class="modal fade" id="RepertoireModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                     aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Add New Repertoire</h5>
+                                <h5 class="modal-title text-dark" id="exampleModalLabel">Add New Repertoire</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -88,7 +101,8 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="button" id="saveRepertoireChanges" class="btn btn-primary">Save changes</button>
+                                <button type="button" id="saveRepertoireChanges"
+                                    class="btn accent-bg text-light">Add</button>
                             </div>
                         </div>
                     </div>
@@ -116,14 +130,14 @@
         $(document).ready(function () {
             var showId = <?php echo $_GET['id']; ?>;
             $.ajax({
-    url: "Services/show_details.php",
-    method: "GET",
-    data: { show_id: showId },
-    dataType: "json",
-    success: function (response) {
-      if (response.success) {
-        var showData = response.data;
-        $("#show-details-container").html(`
+                url: "Services/show_details.php",
+                method: "GET",
+                data: { show_id: showId },
+                dataType: "json",
+                success: function (response) {
+                    if (response.success) {
+                        var showData = response.data;
+                        $("#show-details-container").html(`
                     
                     <div class="row mb-3">
 <div class="col-md-3">
@@ -180,7 +194,7 @@
     <div class="col-10">
         <h4 class="text-dark">Repertoires:</h4>
         <div class="mb-3">
-            <button type="button" class="btn btn-primary btn-sm mr-2" data-toggle="modal" data-target="#RepertoireModal">
+            <button type="button" class="btn accent-bg text-light  btn-sm mr-2" data-toggle="modal" data-target="#RepertoireModal">
                 <i class="fa-solid fa-plus mr-1"></i>Add New Repertoire
             </button>
         </div>
@@ -189,56 +203,56 @@
 </div>
 
                 `);
-      } else {
-        $("#show-details-container").html(
-          `<p class="text-danger">${response.message}</p>`
-        );
-      }
-    },
-    error: function (xhr, status, error) {
-      console.error(xhr.responseText);
-      $("#show-details-container").html(
-        `<p class="text-danger">Failed to load show details. Please try again later.</p>`
-      );
-    },
-  });
+                    } else {
+                        $("#show-details-container").html(
+                            `<p class="text-danger">${response.message}</p>`
+                        );
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error(xhr.responseText);
+                    $("#show-details-container").html(
+                        `<p class="text-danger">Failed to load show details. Please try again later.</p>`
+                    );
+                },
+            });
             loadRepertoires(showId);
 
             // Event listener for "Save changes" button in the modal
-$("#saveRepertoireChanges").click(function () {
-    // Get the values of the date and time inputs
-    var date = $("#repertoire-date").val();
-    var time = $("#repertoire-time").val();
-    // Combine date and time to form a datetime string
-    var dateTime = date + " " + time;
-    // Call the addRepertoire function with showId and dateTime
-    $.ajax({
-        url: "Services/repertoire_add.php",
-        method: "POST",
-        data: { 
-            show_id: showId,
-            date_time: dateTime
-        },
-        dataType: "json",
-        success: function (response) {
-            if (response.success) {
-                // Handle success
-                console.log("Repertoire added successfully");
-                // Reload the page
-                location.reload();
-            } else {
-                // Handle failure
-                console.error("Failed to add repertoire:", response.message);
-            }
-        },
-        error: function (xhr, status, error) {
-            // Handle error
-            console.error("Error adding repertoire:", error);
-        }
-    });
-    // Close the modal
-    $("#RepertoireModal").modal("hide");
-});
+            $("#saveRepertoireChanges").click(function () {
+                // Get the values of the date and time inputs
+                var date = $("#repertoire-date").val();
+                var time = $("#repertoire-time").val();
+                // Combine date and time to form a datetime string
+                var dateTime = date + " " + time;
+                // Call the addRepertoire function with showId and dateTime
+                $.ajax({
+                    url: "Services/repertoire_add.php",
+                    method: "POST",
+                    data: {
+                        show_id: showId,
+                        date_time: dateTime
+                    },
+                    dataType: "json",
+                    success: function (response) {
+                        if (response.success) {
+                            // Handle success
+                            console.log("Repertoire added successfully");
+                            // Reload the page
+                            location.reload();
+                        } else {
+                            // Handle failure
+                            console.error("Failed to add repertoire:", response.message);
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        // Handle error
+                        console.error("Error adding repertoire:", error);
+                    }
+                });
+                // Close the modal
+                $("#RepertoireModal").modal("hide");
+            });
 
             // Click event handler for the "Add New Repertoire" button
             $(document).on("click", "#RepertoireModalButton", function () {
@@ -251,7 +265,7 @@ $("#saveRepertoireChanges").click(function () {
                 window.location.href = "repertoire_details.php?id=" + repertoireId;
             });
 
-            
+
             $(document).on('click', '.delete-show-btn', function () {
                 console.log("cl")
                 Swal.fire({

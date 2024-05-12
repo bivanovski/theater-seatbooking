@@ -1,3 +1,9 @@
+<?php
+session_start();
+if (!isset($_SESSION['firstname']) || !isset($_SESSION['lastname']) || $_SESSION['role'] !== "admin") {
+    return header('Location: login.php?errorMessage=Unauthorized');
+}
+?>
 <!DOCTYPE html>
 <html>
 
@@ -26,48 +32,56 @@
     <div id="wrapper">
 
         <!-- Header -->
-        <header class="fixed-top">
-            <nav class="navbar text-dark bg-light shadow-sm">
-                <a class="navbar-brand text-uppercase text-dark" href=""><img class="logo-menu img-fluid"
-                        src="images/logo2.png" alt="Logo" /><span class="ml-2 font-weight-bold">MNT ADMIN PANEL</span></a>
+        <<header class="fixed-top">
+            <nav class="navbar text-dark bg-light shadow-sm ">
+                <div class="align-items-center d-flex"> <a class="navbar-brand text-uppercase text-dark" href=""><img
+                            src="images/logo2.png" alt="Logo" width="70" height="70"
+                            class="d-inline-block align-top"></a>
+                    <span class="ml-2 font-weight-bold">MNT ADMIN PANEL</span>
+                </div>
+
                 <div class="form-inline accent-color">
-                    <p class="mr-2 my-2 my-sm-0 mt-3 accent-color">admin<i class="fa-regular fa-user"></i> </p>
-                    <a class="btn text-light my-2 my-sm-0 mt-3 accent-bg" href="logout.php" role="button">Log
-                        out</a>
+
+                    <p class="mr-2 my-2 my-sm-0 mt-3 accent-color">
+                        <?php echo $_SESSION['firstname'] ?><i class="fa-regular fa-user"></i>
+                    </p>
+
+
+                    <a class="btn text-light my-2 my-sm-0 mt-3 accent-bg" href="logout.php" role="button">Log out</a>
                 </div>
             </nav>
-        </header>
+            </header>
 
-        <!-- Main Content -->
-        <div id="page-content-wrapper" class="">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="row py-2 justify-content-center mt-5">
-                            <div class="col-10 card p-4 shadow-sm">
-                                <h2 class="text-dark mb-3">Edit Repertoire</h2>
-                                <form class="needs-validation text-dark" novalidate>
-                                    <div class="form-row">
-                                        <div class="col-md-6 mb-3">
-                                            <label for="validationCustom01">*Date and Time</label>
-                                            <input type="datetime-local" class="form-control" id="date_time"
-                                                required name="date_time">
-                                            <div class="invalid-feedback">
-                                                This field is required.
+            <!-- Main Content -->
+            <div id="page-content-wrapper" class="">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="row py-2 justify-content-center mt-5">
+                                <div class="col-10 card p-4 shadow-sm">
+                                    <h2 class="text-dark mb-3">Edit Repertoire</h2>
+                                    <form class="needs-validation text-dark" novalidate>
+                                        <div class="form-row">
+                                            <div class="col-md-6 mb-3">
+                                                <label for="validationCustom01">*Date and Time</label>
+                                                <input type="datetime-local" class="form-control" id="date_time"
+                                                    required name="date_time">
+                                                <div class="invalid-feedback">
+                                                    This field is required.
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <input type="text" class="form-control" id="id" name="id"
-                                        value="<?php echo isset($_GET['id']) ? $_GET['id'] : ''; ?>" hidden>
+                                        <input type="text" class="form-control" id="id" name="id"
+                                            value="<?php echo isset($_GET['id']) ? $_GET['id'] : ''; ?>" hidden>
                                         <input type="text" class="form-control" id="show_id" name="show_id" hidden>
-                                    <button class="btn accent-bg text-light" type="submit">Edit Repertoire</button>
-                                </form>
+                                        <button class="btn accent-bg text-light" type="submit">Edit Repertoire</button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
     </div>
 
     <!-- jQuery library -->
@@ -83,36 +97,36 @@
 
     <script src="js/admin.js"></script>
     <script>
-        
+
         $(document).ready(function () {
             var repertoireId = <?php echo isset($_GET['id']) ? $_GET['id'] : 'null'; ?>;
             getRepertoire(repertoireId);
         });
 
         function getRepertoire(id) {
-  $.ajax({
-    url: "Services/repertoire_get.php",
-    method: "GET",
-    data: { id: id },
-    dataType: "json",
-    success: function (response) {
-      if (response.success) {
-        console.log(response)
-        $("#date_time").val(response.data.date_time);
-        $("#name").val(response.data.show.name);
-        $("#show_id").val(response.data.show.id);
-      } else {
-        // Handle error
-        console.error("Failed to load show details:", response.message);
-      }
-    },
-    error: function (xhr, status, error) {
-      // Handle error
-      console.error("Error loading show details:", error);
-    },
-  });
+            $.ajax({
+                url: "Services/repertoire_get.php",
+                method: "GET",
+                data: { id: id },
+                dataType: "json",
+                success: function (response) {
+                    if (response.success) {
+                        console.log(response)
+                        $("#date_time").val(response.data.date_time);
+                        $("#name").val(response.data.show.name);
+                        $("#show_id").val(response.data.show.id);
+                    } else {
+                        // Handle error
+                        console.error("Failed to load show details:", response.message);
+                    }
+                },
+                error: function (xhr, status, error) {
+                    // Handle error
+                    console.error("Error loading show details:", error);
+                },
+            });
 
-}
+        }
         (function () {
             'use strict';
             window.addEventListener('load', function () {

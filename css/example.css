@@ -1,109 +1,140 @@
-.navbar{
-    background-color: black;
-    height: 80px;
-    /* margin-bottom: 20px; */
-} 
-body{
-    font-family: "Abel", sans-serif;
-    margin-top: 80px;
+.navbar {
+  background-color: #101010;
+  height: 80px;
 }
-.logo-menu{
-    height: 100px;
-    margin-top: -20px;
-    margin-left: -10px;
+:root {
+  --text: #ffffff;
+  --background: #f4f0f0;
+  --primary: #f9af41;
+  --secondary: #792a2a;
+  --accent: #980b0b;
+  --green: #35c28f;
+  --red: #f46a69;
+  --black: #101010;
 }
-.nav-btn{
-    background-color: #FFE0B3!important;
-    color: black;
-    border-color: transparent;
-
+body {
+  font-family: "Abel", sans-serif;
+  margin-top: 80px;
 }
-.header-left{
-    margin-left: -600px;
-    margin-top: -15px;
+.linear-bg {
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) -8.89%,
+    rgba(0, 0, 0, 0) 43.19%,
+    rgba(0, 0, 0, 0.82) 67.67%,
+    #000000 91.11%
+  );
 }
-
-.active{
-    padding-right: 60px;
-    color: white;
-    text-transform: uppercase;
-    font-style: initial;
+.black-bg {
+  background-color: var(--black);
 }
-
-.header-right{
-    margin-right: 20px;
-    margin-top: -15px;
-
+input[type="checkbox"]:checked {
+  accent-color: var(--black);;
 }
 
-.rightone{
-    color: black;
-    margin-right: 20px;
-    padding: 10px;
-    background-color: rgb(255, 255, 190);
-    border: none;
-    border-radius: 15px;
-    font-weight: bold;
-    font-style: italic;
+.logo-menu {
+  height: 100px;
+  margin-top: -20px;
+  margin-left: -10px;
+}
+.accent-color {
+  color: var(--accent);
+}
+.nav-btn {
+  background-color: #ffe0b3 !important;
+  color: black;
+  border-color: transparent;
+}
+.header-left {
+  margin-left: -600px;
+  margin-top: -15px;
 }
 
-.righttwo{
-    color: black;
-    padding: 10px;
-    background-color: rgb(255, 255, 190);
-    border: none;
-    border-radius: 15px;
-    font-weight: bold;
-    font-style: italic;
+.active {
+  padding-right: 60px;
+  color: white;
+  text-transform: uppercase;
+  font-style: initial;
 }
 
-.filter{
-   margin-left: 1350px;
-   margin-top: 30px;
+.header-right {
+  margin-right: 20px;
+  margin-top: -15px;
 }
 
-.filter_button{
-    padding: 10px;
-    border-radius: 16px;
-    font-weight: bold;
-    font-style: italic;
-    background-color: black;
-    color: white;
+.rightone {
+  color: black;
+  margin-right: 20px;
+  padding: 10px;
+  background-color: rgb(255, 255, 190);
+  border: none;
+  border-radius: 15px;
+  font-weight: bold;
+  font-style: italic;
 }
 
-.popular{
-    margin-left: 80px;
-    font-weight: bold;
-    font-style: italic;
-    font-size: 30px;
+.righttwo {
+  color: black;
+  padding: 10px;
+  background-color: rgb(255, 255, 190);
+  border: none;
+  border-radius: 15px;
+  font-weight: bold;
+  font-style: italic;
 }
 
-.row1, .row2{
-    float: left;
-    display: flex;
-    clear: both;
+.filter {
+  margin-left: 1350px;
+  margin-top: 30px;
 }
 
-.row1 div img, .row2 div img{
-    width: 400px;
-    height: 500px;
+.filter_button {
+  padding: 10px;
+  border-radius: 16px;
+  font-weight: bold;
+  font-style: italic;
+  background-color: black;
+  color: white;
 }
 
-.row1 div, .row2 div{
-    margin-left: 50px;
-    margin-bottom: 30px;
+.popular {
+  margin-left: 80px;
+  font-weight: bold;
+  font-style: italic;
+  font-size: 30px;
 }
 
-.row1 div button, .row2 div button{
-    color: white;
-    background-color: black;
-    border-radius: 15px;
-    margin-top: 8px;
+.row1,
+.row2 {
+  float: left;
+  display: flex;
+  clear: both;
 }
 
-.row1 div :nth-child(3), .row2 div :nth-child(3){
-    margin-left: 240px;
-    color: black;
-    background-color: rgb(233, 225, 225);
-    border: none;
+.row1 div img,
+.row2 div img {
+  width: 400px;
+  height: 500px;
+}
+
+.row1 div,
+.row2 div {
+  margin-left: 50px;
+  margin-bottom: 30px;
+}
+
+.row1 div button,
+.row2 div button {
+  color: white;
+  background-color: black;
+  border-radius: 15px;
+  margin-top: 8px;
+}
+
+.row1 div :nth-child(3),
+.row2 div :nth-child(3) {
+  margin-left: 240px;
+  color: black;
+  background-color: rgb(233, 225, 225);
+  border: none;
 }

@@ -1,3 +1,9 @@
+<?php
+session_start();
+if (!isset($_SESSION['firstname']) || !isset($_SESSION['lastname']) || $_SESSION['role'] !== "admin") {
+    return header('Location: login.php?errorMessage=Unauthorized');
+}
+?>
 <!DOCTYPE html>
 <html>
 
@@ -26,11 +32,16 @@
 
 <header class="fixed-top">
     <nav class="navbar text-dark bg-light shadow-sm ">
-        <a class="navbar-brand text-uppercase text-dark" href=""><img class="logo-menu img-fluid" src="images/logo2.png"
-                alt="Logo" /><span class="ml-2 font-weight-bold">MNT ADMIN PANEL</span></a>
+        <div class="align-items-center d-flex"> <a class="navbar-brand text-uppercase text-dark" href=""><img
+                    src="images/logo2.png" alt="Logo" width="70" height="70" class="d-inline-block align-top"></a>
+            <span class="ml-2 font-weight-bold">MNT ADMIN PANEL</span>
+        </div>
+
         <div class="form-inline accent-color">
 
-            <p class="mr-2 my-2 my-sm-0 mt-3 accent-color">admin<i class="fa-regular fa-user"></i> </p>
+            <p class="mr-2 my-2 my-sm-0 mt-3 accent-color">
+                <?php echo $_SESSION['firstname'] ?><i class="fa-regular fa-user"></i>
+            </p>
 
 
             <a class="btn text-light my-2 my-sm-0 mt-3 accent-bg" href="logout.php" role="button">Log out</a>
