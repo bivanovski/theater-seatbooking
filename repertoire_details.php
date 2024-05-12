@@ -1,3 +1,9 @@
+<?php
+session_start();
+if (!isset($_SESSION['firstname']) || !isset($_SESSION['lastname']) || $_SESSION['role'] !== "admin") {
+    return header('Location: login.php?errorMessage=Unauthorized');
+}
+?>
 <!DOCTYPE html>
 <html>
 
@@ -25,11 +31,18 @@
 
 <header class="fixed-top">
     <nav class="navbar text-dark bg-light shadow-sm ">
-        <a class="navbar-brand text-uppercase text-dark" href=""><img class="logo-menu img-fluid" src="images/logo2.png"
-                alt="Logo" /><span class="ml-2 font-weight-bold">MNT ADMIN PANEL</span></a>
+        <div class="align-items-center d-flex"> <a class="navbar-brand text-uppercase text-dark" href=""><img
+                    src="images/logo2.png" alt="Logo" width="70" height="70" class="d-inline-block align-top"></a>
+            <span class="ml-2 font-weight-bold">MNT ADMIN PANEL</span>
+        </div>
+
         <div class="form-inline accent-color">
 
-            <p class="mr-2 my-2 my-sm-0 mt-3 accent-color">admin<i class="fa-regular fa-user"></i> </p>
+            <p class="mr-2 my-2 my-sm-0 mt-3 accent-color">
+                <?php echo $_SESSION['firstname'] ?><i class="fa-regular fa-user"></i>
+            </p>
+
+
             <a class="btn text-light my-2 my-sm-0 mt-3 accent-bg" href="logout.php" role="button">Log out</a>
         </div>
     </nav>
@@ -58,10 +71,15 @@
                             <div class="col-10 card shadow-sm">
                                 <div class="row py-2 justify-content-center mt-5">
                                     <div class="col-12 col-lg-7">
-                                         <h2 class="text-dark">
-                                            Title Of The Show - <span class="accent-color">14/01/2023 18:00</span>
-                                            <a class="btn" href="repertoire_edit.php?id=<?php echo $_GET['id']; ?>"><i class="fa-regular fa-pen-to-square fa-xs ml-2 cursor-pointer text-warning" id="editRepertoireBtn" aria-hidden="true"></i></a>
-                                            <i class="fa-regular fa-trash-can fa-xs ml-2 cursor-pointer text-danger" id="deleteRepertoireBtn" aria-hidden="true"></i>
+                                        <h2 class="text-dark px-5" id="show_title">
+                                            Title Of The Show - <span class="accent-color"
+                                                id="show_details_placeholder"></span>
+                                            <a class="btn text-warning p-0 mr-1"
+                                                href="repertoire_edit.php?id=<?php echo $_GET['id']; ?>"><i
+                                                    class="fa-regular fa-pen-to-square fa-lg" id="editRepertoireBtn"
+                                                    aria-hidden="true"></i></a>
+                                            <button class="btn accent-color p-0 delete-repertoire-btn"><i
+                                                    class="fa-regular fa-trash-can fa-lg"></i></butto>
                                         </h2>
                                         <div id="container" class="text-dark "></div>
                                     </div>
@@ -132,7 +150,108 @@
                 });
             }
 
+            $(document).ready(function () {
+                // Parse the URL to get the value of the 'id' parameter
+                const urlParams = new URLSearchParams(window.location.search);
+                const showId = urlParams.get('id');
+
+                // Check if showId has a value
+                if (showId) {
+                    // Event listener for the delete button
+                    $(document).on('click', '.delete-repertoire-btn', function () {
+                        // Confirm deletion with user
+                        Swal.fire({
+                            title: 'Are you sure?',
+                            text: 'This repertoire will be deleted! Are you sure?',
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Yes, delete it!'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                // Send AJAX request to delete the repertoire
+                                $.ajax({
+                                    url: 'Services/repertoire_delete.php',
+                                    method: 'POST',
+                                    data: { show_id: showId },
+                                    dataType: 'json',
+                                    success: function (response) {
+                                        if (response.success) {
+                                            // Repertoire deleted successfully
+                                            Swal.fire(
+                                                'Deleted!',
+                                                response.message,
+                                                'success'
+                                            ).then(() => {
+                                                window.location.href = 'shows.php';
+                                            });
+                                        } else {
+                                            // Error deleting repertoire
+                                            Swal.fire(
+                                                'Error!',
+                                                response.message,
+                                                'error'
+                                            );
+                                        }
+                                    },
+                                    error: function (xhr, status, error) {
+                                        // AJAX error
+                                        console.error(xhr.responseText);
+                                        Swal.fire(
+                                            'Error!',
+                                            'Failed to delete show. Please try again later.',
+                                            'error'
+                                        );
+                                    }
+                                });
+                            }
+                        });
+                    });
+                } else {
+                    console.error('showId is not defined');
+                }
+            });
+
+
             fetchReservedSeats();
+
+
+            function getRepertoire(id) {
+                $.ajax({
+                    url: "Services/repertoire_get.php",
+                    method: "GET",
+                    data: { id: id },
+                    dataType: "json",
+                    success: function (response) {
+                        if (response.success) {
+                            var date_time = response.data.date_time;
+                            var showName = response.data.show.name;
+
+                            $("#show_title").html(`
+                    ${showName} - <span class="accent-color">${date_time}</span>
+                    <a class="btn text-warning p-0 mr-1" href="repertoire_edit.php?id=${id}"><i class="fa-regular fa-pen-to-square fa-lg" id="editRepertoireBtn" aria-hidden="true"></i></a>
+                    <button class="btn accent-color p-0 delete-repertoire-btn"><i class="fa-regular fa-trash-can fa-lg"></i></button>
+                `);
+
+                            $("#show_details_placeholder").text(date_time);
+                        } else {
+                            // Handle error
+                            console.error("Failed to load show details:", response.message);
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        // Handle error
+                        console.error("Error loading show details:", error);
+                    },
+                });
+            }
+
+            $(document).ready(function () {
+
+                var initialShowId = <?php echo $_GET['id']; ?>;
+                getRepertoire(initialShowId);
+            });
 
             function initializeSeatchart(reservedSeats = []) {
                 var options = {
@@ -142,19 +261,19 @@
                         seatTypes: {
                             default: {
                                 label: "General",
-                                cssClass: "economy",
-                                price: 15,
+                                cssClass: "general",
+                                price: 10,
                             },
                             vip1: {
                                 label: "VIP 1",
-                                cssClass: "first-class",
+                                cssClass: "vip1",
                                 price: 25,
                                 seatRows: [14, 15, 16],
                             },
                             vip2: {
                                 label: "VIP 2",
-                                cssClass: "reduced",
-                                price: 10,
+                                cssClass: "vip2",
+                                price: 15,
                                 seatRows: [12, 13],
                             },
                         },
@@ -173,7 +292,7 @@
 
             }
 
-          
+
 
             function fetchReservations() {
                 $.ajax({

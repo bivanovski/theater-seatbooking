@@ -74,15 +74,14 @@ class User
     {
         $connectionObj = new Connection();
         $connection = $connectionObj->getConnection();
-
+    
         $statement = $connection->prepare('SELECT * FROM users WHERE email = :email');
         $statement->bindParam(':email', $this->email, \PDO::PARAM_STR);
         $statement->execute();
-
+    
         $user = $statement->fetch(\PDO::FETCH_ASSOC);
         $connectionObj->destroy();
-        echo password_verify($this->password, $user['password']);
-
+    
         if (!empty($user) && password_verify($this->password, $user['password'])) {
             $this->id = $user['id'];
             $this->email = $user['email'];
@@ -91,7 +90,7 @@ class User
             $this->role_id = $user['role_id'];
             return true;
         }
-
+    
         return false;
     }
     public function store()
