@@ -18,7 +18,26 @@ session_start();
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Abel&display=swap" rel="stylesheet">
 
+    <style>
+    .navbar-brand {
+        display: flex;
+        align-items: center; /
+    }
 
+    .navbar-brand img {
+        margin-right: 15px; 
+    }
+
+    .MNT-text {
+        font-family: 'Georgia', sans-serif;
+        font-size: 34px; 
+        color: white;
+        font-weight: bold;
+       
+    }
+</style>
+
+    
 </head>
 
 <body>
@@ -27,7 +46,7 @@ session_start();
         <nav class="navbar navbar-expand navbar-dark custom-navbar fixed-top shadow-sm">
             <a class="navbar-brand" href="#">
                 <img src="images/logo2.png" alt="Logo" width="70" height="70" class="d-inline-block align-top">
-
+                 <span class="MNT-text">MAKEDONSKI NARODEN TEATAR</span>
             </a>
 
 
@@ -62,7 +81,7 @@ session_start();
 
     <div class="container-fluid linear-bg">
 
-
+    
 
         <div class="row justify-content-center mt-5">
 
@@ -70,10 +89,36 @@ session_start();
                 <div class="row d-flex justify-content-between mb-3">
                     <h2>Most popular</h2>
 
+    <style>
+    
+    .dropdown button {
+        background-color: #b80725;
+        color: white;
+        border: none;
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+    }
+
+    
+    .dropdown button i {
+        margin-right: 0.5rem;
+    }
+
+    
+    .dropdown-menu {
+        background-color: white;
+        color: black;
+        border: 1px solid #ccc;
+        border-radius: 0.25rem;
+        padding: 0.5rem;
+    }
+    </style>
                     <div class="dropdown">
                         <button class="btn btn-sm black-bg text-light dropdown-toggle" data-toggle="dropdown">
                             <i class="fa-solid fa-arrow-up-wide-short mr-2"></i>Filter
                         </button>
+                        
+                        
                         <div class="dropdown-menu">
                             <h6 class="dropdown-header">Genres</h6>
                             <ul class="list-unstyled">

@@ -16,54 +16,57 @@
     <link href="https://fonts.googleapis.com/css2?family=Abel&display=swap" rel="stylesheet">
 
     <style>
-        /* Custom CSS */
-        .custom-navbar {
-            background-color: #333; /* Change the color to your desired color */
+        body{
+            background-color: #c79da4;
         }
+    .navbar-brand {
+        display: flex;
+        align-items: center; /
+    }
 
-        .custom-navbar .navbar-brand,
-        .custom-navbar .navbar-nav .nav-link {
-            color: #fff; /* Change the text color to contrast with the background */
-        }
-    </style>
+    .navbar-brand img {
+        margin-right: 15px; 
+    }
+
+    .MNT-text {
+        font-family: 'Georgia', sans-serif;
+        font-size: 34px; 
+        color: white;
+        font-weight: bold;
+       
+    }
+</style>
 </head>
 
 <body>
 
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-dark custom-navbar">
+<header>
+        <nav class="navbar navbar-expand navbar-dark custom-navbar fixed-top shadow-sm">
             <a class="navbar-brand" href="#">
                 <img src="images/logo2.png" alt="Logo" width="70" height="70" class="d-inline-block align-top">
-                <!-- <span class="ml-2 font-weight-bold">MNT ADMIN PANEL</span> -->
+                 <span class="MNT-text">MAKEDONSKI NARODEN TEATAR</span>
             </a>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#home">Main Page</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#contact">Premiers</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#about">Buy ticket</a>
-                    </li>
-                </ul>
-                <style>
-                    /* Style for the nav bars */
-                    .navbar-nav .nav-link {
-                        font-size: 18px; 
-                        font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
-                    }
-                </style>
-                <div class="my-2 my-lg-0">
-                    <button class="btn btn-danger mr-2" style="font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif">Register</button>
-                    <button class="btn btn-danger" style="font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif">Log in</button>
-                    <!-- <p class="right">Register</p>
-                    <a class="right" href="logout.php" role="button">Log in</a> -->
-                </div>
-                <style>
 
-                </style>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <?php if (isset($_SESSION['firstname'])): ?>
+                    <a class="mr-2 my-2 my-sm-0 mt-3 text-light text-decoration-none" href="reservations.php"><i
+                            class="fa-regular fa-calendar-check mr-2"></i>My Reservations</a>
+                <?php endif; ?>
+
+                <div class="ml-auto">
+                    <?php if (!isset($_SESSION['firstname'])): ?>
+                        <a class="btn nav-btn mr-2" href="register.php">Register</a>
+                        <a class="btn nav-btn" href="login.php">Log in</a>
+                    <?php else: ?>
+                        <div class="d-flex justify-content-center align-items-center">
+                            <p class="mr-2 my-2 my-sm-0 mt-3 text-light">
+                                <?php echo $_SESSION['firstname']; ?><i class="fa-regular fa-user ml-1"></i>
+                            </p>
+                            <a class="btn nav-btn" href="logout.php" role="button">Log out</a>
+                        </div>
+                    <?php endif; ?>
+                </div>
             </div>
         </nav>
     </header>
@@ -72,19 +75,22 @@
             alt="Theater Background" class="img-fluid" style="width: 100%; height: auto;">
     </section>
 
+    
     <div class="container mt-5">
-        <div class="row">
-            <div class="col-md-12">
-                <h1 style="font-family: 'Arial', sans-serif; color: #333;">Agava by Baghi</h1>
-                <p style="font-size: 18px; color: #666;"><strong>Drama</strong> | Duration: 120 min | Age group: 12+</p>
-                <h3 style="text-decoration: underline; color: orange;">About the show</h3>
-                <p style="font-family:Arial, Helvetica, sans-serif; font-style:italic; font-size: 16px; color: #444;">"Agava by Baghi" is a captivating spectacle that transports audiences into a realm of mesmerizing beauty and enchantment. With its breathtaking visuals, innovative storytelling, and dynamic performances, this production immerses viewers in a world where imagination knows no bounds.</p>
-                <p style="font-family:Arial, Helvetica, sans-serif; font-style:italic; font-size: 16px; color: #444;">From the moment the curtains rise, audiences are drawn into a spellbinding journey filled with wonder and excitement. Through a seamless fusion of music, dance, and theatricality, "Agava by Baghi" unfolds a narrative that unfolds like a vibrant tapestry, weaving together the threads of fantasy and reality.</p>
-                <p style="font-family:Arial, Helvetica, sans-serif; font-style:italic; font-size: 16px; color: #444;">As the characters traverse through landscapes both magical and mysterious, each scene unfolds with a sense of awe and wonder, leaving spectators on the edge of their seats. With every movement, every note, and every word spoken, the performers breathe life into the story, igniting the imagination and stirring the soul.</p>
-                <button type="button" class="btn btn-primary">Reserve</button>
-            </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h1 style="font-family: 'Arial', sans-serif; color: #333; font-weight: bold; text-transform: uppercase; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);">Agava by Baghi</h1>
+            <p style="font-size: 18px; color: #666; font-weight: bold;">Drama | Duration: 120 min | Age group: 12+</p>
+            <h3 style="text-decoration: underline; color: black; font-weight: bold;">About the show</h3>
+            <p style="font-family:Arial, Helvetica, sans-serif; font-size: 18px; color: #444; line-height: 1.6; letter-spacing: 0.5px;">"Agava by Baghi" is a captivating spectacle that transports audiences into a realm of mesmerizing beauty and enchantment. With its breathtaking visuals, innovative storytelling, and dynamic performances, this production immerses viewers in a world where imagination knows no bounds.</p>
+            <p style="font-family:Arial, Helvetica, sans-serif; font-size: 18px; color: #444; line-height: 1.6; letter-spacing: 0.5px;">From the moment the curtains rise, audiences are drawn into a spellbinding journey filled with wonder and excitement. Through a seamless fusion of music, dance, and theatricality, "Agava by Baghi" unfolds a narrative that unfolds like a vibrant tapestry, weaving together the threads of fantasy and reality.</p>
+            <p style="font-family:Arial, Helvetica, sans-serif; font-size: 18px; color: #444; line-height: 1.6; letter-spacing: 0.5px;">As the characters traverse through landscapes both magical and mysterious, each scene unfolds with a sense of awe and wonder, leaving spectators on the edge of their seats. With every movement, every note, and every word spoken, the performers breathe life into the story, igniting the imagination and stirring the soul.</p>
+            
         </div>
     </div>
+</div>
+
+
     
 </body>
 </html>

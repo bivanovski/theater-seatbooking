@@ -19,15 +19,39 @@ session_start();
     <link rel="stylesheet" href="css/example.css">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Abel&display=swap" rel="stylesheet">
+
+    <style>
+        body{
+            background-color: #c79da4;
+        }
+    .navbar-brand {
+        display: flex;
+        align-items: center; /
+    }
+
+    .navbar-brand img {
+        margin-right: 15px; 
+    }
+
+    .MNT-text {
+        font-family: 'Georgia', sans-serif;
+        font-size: 34px; 
+        color: white;
+        font-weight: bold;
+       
+    }
+</style>
 </head>
 
 <body>
 
-    <header>
+<header>
         <nav class="navbar navbar-expand navbar-dark custom-navbar fixed-top shadow-sm">
             <a class="navbar-brand" href="#">
                 <img src="images/logo2.png" alt="Logo" width="70" height="70" class="d-inline-block align-top">
+                 <span class="MNT-text">MAKEDONSKI NARODEN TEATAR</span>
             </a>
+
 
             <div class="collapse navbar-collapse" id="navbarNav">
                 <?php if (isset($_SESSION['firstname'])): ?>
@@ -53,8 +77,8 @@ session_start();
     </header>
 
     <section class="premiers-background">
-        <img src="https://s3-alpha-sig.figma.com/img/1a4f/7161/62141ee12b01e609022ca20dd3f7f430?Expires=1716163200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=o7Iftzt13crUZ49r5uYso3ks7NpbzVayg0WbhAlkVvWMBiJ-jvfc28NP-J9W0XB2l~PiurYD8h0iqnOximU5bobrKhloAsav~FLCkaARyMeXn4xQTrGLTOgQj-HVfDjYWAgjJ-uxouu1g374nSySd-4PKtjh5yGGM0I0pMtIuSX80nj0gKs4IZW2pRfm9vh2P642TUEWjzD~TUttQREuBqNOwj5B5Osg1jTQYEjrbhHQ9xVIHvU2x8uHjH80B2yJc-eOtUvpCwOlZ~Bdh72Sw4uNMOcmayLGNnnlap9WJesmvSy~V0m3WW1YZ8YGzL47LuX4GWDLNU~ZQR~SlQQvHg__"
-            alt="Theater Background" class="img-fluid w-100 shadow-sm" style="height:75vh;">
+        <img src="https://novamakedonija.com.mk/wp-content/uploads/2022/12/mnt.jpg"
+            alt="Theater Background" class="img-fluid" style="width: 100%; height: auto;">
     </section>
     <div class="container-fluid">
 
