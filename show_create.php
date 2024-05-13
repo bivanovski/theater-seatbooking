@@ -52,24 +52,11 @@ if (!isset($_SESSION['firstname']) || !isset($_SESSION['lastname']) || $_SESSION
 
 <body class="text-white bg-color">
     <div id="wrapper">
-
-        <div id="sidebar-wrapper" class="text-white secondary-bg">
-            <ul class="sidebar-nav">
-                <li class="active-bg"><a href="shows.php" class="active">Books<i
-                            class="fa-solid fa-book-open ml-1"></i></a></li>
-                <li><a href="authors.php">Authors<i class="fa-solid fa-users ml-1"></i></a></li>
-                <li><a href="categories.php">Categories<i class="fa-solid fa-list ml-1"></i></a></li>
-                <li><a href="comments.php">Comments<i class="fa-regular fa-comments ml-1"></i></a></li>
-            </ul>
-        </div>
-
-
-
         <div id="page-content-wrapper" class="">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <!-- <a href="#" class="btn" id="menu-toggle" ><i class="fa-solid fa-bars"></i></a> -->
+
 
                         <div class="row py-2 justify-content-center mt-5">
 
@@ -110,10 +97,6 @@ if (!isset($_SESSION['firstname']) || !isset($_SESSION['lastname']) || $_SESSION
                                             <select class="custom-select" id="validationCustom04" required
                                                 name="genre_id">
                                                 <option selected disabled value="">Choose...</option>
-                                                <option value="1">Comedy</option>
-                                                <option value="2">Romantic</option>
-
-
                                             </select>
                                             <div class="invalid-feedback">
                                                 Please select a valid genre.
@@ -121,8 +104,13 @@ if (!isset($_SESSION['firstname']) || !isset($_SESSION['lastname']) || $_SESSION
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label for="validationCustom05">*Age Group</label>
-                                            <input type="text" class="form-control" id="validationCustom05" required
+                                            <select class="custom-select" id="validationCustom05" required
                                                 name="age_group">
+                                                <option selected disabled value="">Choose...</option>
+                                                <option value="18+">18+</option>
+                                                <option value="16+">16+</option>
+                                                <option value="12+">12+</option>
+                                            </select>
                                             <div class="invalid-feedback">
                                                 This field is required.
                                             </div>
@@ -199,7 +187,6 @@ if (!isset($_SESSION['firstname']) || !isset($_SESSION['lastname']) || $_SESSION
 
     <script src="js/admin.js"></script>
     <script>
-
         function isValidImageUrl(url) {
             return new Promise((resolve, reject) => {
                 const img = new Image();
@@ -215,6 +202,34 @@ if (!isset($_SESSION['firstname']) || !isset($_SESSION['lastname']) || $_SESSION
                 img.src = url;
             });
         }
+
+        function populateGenres() {
+            $.ajax({
+                url: "Services/genre_get.php",
+                type: "GET",
+                dataType: "json",
+                success: function (response) {
+                    if (response.data.length > 0) {
+                        var genreSelect = $("#validationCustom04");
+                        genreSelect.empty(); 
+
+                        $.each(response.data, function (index, genre) {
+                            genreSelect.append(`<option value="${genre.id}">${genre.genre}</option>`);
+                        });
+                    } else {
+                        console.error("No genres found");
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error("Error fetching genres:", error);
+                }
+            });
+        }
+
+        $(document).ready(function () {
+            populateGenres();
+        });
+
         (function () {
             'use strict';
             window.addEventListener('load', function () {
@@ -264,9 +279,8 @@ if (!isset($_SESSION['firstname']) || !isset($_SESSION['lastname']) || $_SESSION
                 });
             }, false);
         })();
-
-
     </script>
+
 </body>
 
 </html>
