@@ -139,7 +139,7 @@
                                         if (response.data.role === 'admin') {
                                             window.location.href = 'shows.php';
                                         } else {
-                                            window.location.href = 'mainpage.php';
+                                            window.location.href = 'index.php';
                                         }
                                     } else {
 

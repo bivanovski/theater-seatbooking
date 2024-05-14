@@ -105,7 +105,7 @@ if (!isset($_SESSION['firstname']) || !isset($_SESSION['lastname'])) {
                             if (response.data.length > 0) {
                                 fillAccordion(response.data);
                             } else {
-                                $('#accordionExample').html('<div class="text-center" role="alert"><p class="text-muted">You have no reservations yet.</p><a  href="mainpage.php" class="btn btn-outline-danger custom-outline-btn mr-2">Reserve Now</a></div>');
+                                $('#accordionExample').html('<div class="text-center" role="alert"><p class="text-muted">You have no reservations yet.</p><a  href="index.php" class="btn btn-outline-danger custom-outline-btn mr-2">Reserve Now</a></div>');
                             }
                         } else {
                             console.error('Error fetching reservations:', response.message);
