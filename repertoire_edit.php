@@ -156,7 +156,8 @@ if (!isset($_SESSION['firstname']) || !isset($_SESSION['lastname']) || $_SESSION
                                         title: 'Success!',
                                         text: 'Repertoire edited successfully!',
                                         icon: 'success',
-                                        confirmButtonText: 'OK'
+                                        confirmButtonText: 'OK',
+                                        confirmButtonColor: "#101010"
                                     }).then((result) => {
                                         if (result.isConfirmed) {
                                             window.location.href = `repertoire_details.php?id=<?php echo isset($_GET['id']) ? $_GET['id'] : ''; ?>`;
@@ -168,7 +169,8 @@ if (!isset($_SESSION['firstname']) || !isset($_SESSION['lastname']) || $_SESSION
                                         title: 'Error!',
                                         text: 'Failed to update repertoire. Please try again.',
                                         icon: 'error',
-                                        confirmButtonText: 'OK'
+                                        confirmButtonText: 'OK',
+                                        confirmButtonColor: "#101010"
                                     });
                                 }
                             });

@@ -108,7 +108,13 @@ session_start();
             <div class="row justify-content-start" id="showCards"></div>
         </div>
     </div>
+
 </div>
+<footer class="footer black-bg p-4 shadow-sm">
+    <div class="container">
+        <p class="text-center text-light" style="margin: 0px!important;">&copy; 2024 Code Crew. All rights reserved.</p>
+    </div>
+</footer>
 
 
     <!-- jQuery library -->
@@ -160,14 +166,14 @@ session_start();
                                 $.each(response.data, function (index, show) {
                                     var cardHtml = `
                                 <div class="col-md-4 mb-5">
-                                    <a href="show_details.php?id=${show.id}" class="card-link">
-                                        <div class="card text-dark shadow-sm shows" data-show-id="${show.id}">
+                                    <a href="show.php?id=${show.id}" class="card-link">
+                                        <div class="card text-dark shadow-sm  show-card" data-show-id="${show.id}">
                                             <img src="${show.image}" class="card-img-top" alt="${show.name}">
                                             <div class="card-body">
                                                 <h5 class="card-title accent-color">${show.name}</h5>
                                                 <div class="d-flex justify-content-between">
                                                     <p class="card-text">Genre: ${show.genre}</p>
-                                                    <p class="card-text primary-color">${show.age_group}</p>
+                                                    <p class="card-text primary-color age-label-card" >${show.age_group}</p>
                                                 </div>
                                             </div>
                                         </div>
