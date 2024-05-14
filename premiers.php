@@ -17,7 +17,7 @@
 
     <style>
         body{
-            background-color: #c79da4;
+            background-color: white;
         }
     .navbar-brand {
         display: flex;
