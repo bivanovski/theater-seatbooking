@@ -44,7 +44,7 @@
         <nav class="navbar navbar-expand navbar-dark custom-navbar fixed-top shadow-sm">
             <a class="navbar-brand" href="#">
                 <img src="images/logo2.png" alt="Logo" width="70" height="70" class="d-inline-block align-top">
-                 <span class="MNT-text">MAKEDONSKI NARODEN TEATAR</span>
+                 <span class="MNT-text">MNT</span>
             </a>
 
 

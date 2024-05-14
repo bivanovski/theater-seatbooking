@@ -1,5 +1,5 @@
 <?php
-session_start();
+session_start(); 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -46,7 +46,7 @@ session_start();
         <nav class="navbar navbar-expand navbar-dark custom-navbar fixed-top shadow-sm">
             <a class="navbar-brand" href="#">
                 <img src="images/logo2.png" alt="Logo" width="70" height="70" class="d-inline-block align-top">
-                 <span class="MNT-text">MAKEDONSKI NARODEN TEATAR</span>
+                 <span class="MNT-text">MNT</span>
             </a>
 
 
@@ -89,7 +89,6 @@ session_start();
                 <div class="row d-flex justify-content-between mb-3">
                     <h2>Most popular</h2>
 
-
     <style>
     
     .dropdown button {
@@ -114,29 +113,35 @@ session_start();
         padding: 0.5rem;
     }
     </style>
-
                     <div class="dropdown">
-                        <button class="btn btn-sm black-bg text-light dropdown-toggle" data-toggle="dropdown"> <i
-                                class="fa-solid fa-arrow-up-wide-short mr-2"></i>Filter
+                        <button class="btn btn-sm black-bg text-light dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa-solid fa-arrow-up-wide-short mr-2"></i>Filter
                         </button>
                         
                         
                         <div class="dropdown-menu">
                             <h6 class="dropdown-header">Genres</h6>
-                            <ul class="list-unstyled" id="genreList">
+                            <ul class="list-unstyled">
+                                <li class="ml-2"><input type="checkbox" id="action" class="mr-2 custom-checkbox"><label
+                                        for="action" class="custom-label">Action</label></li>
+                                <li class="ml-2"><input type="checkbox" id="comedy" class="mr-2"><label
+                                        for="comedy">Comedy</label></li>
+                                <li class="ml-2"><input type="checkbox" id="drama" class="mr-2"><label
+                                        for="drama">Drama</label></li>
                             </ul>
                             <div class="dropdown-divider"></div>
                             <h6 class="dropdown-header">Age Groups</h6>
                             <ul class="list-unstyled">
-                                <li class="ml-2"><input type="checkbox" id="age18" class="mr-2 custom-checkbox"
-                                        value="18+"><label for="age18">18+</label></li>
-                                <li class="ml-2"><input type="checkbox" id="age16" class="mr-2 custom-checkbox"
-                                        value="16+"><label for="age16">16+</label></li>
-                                <li class="ml-2"><input type="checkbox" id="age12" class="mr-2 custom-checkbox"
-                                        value="12+"><label for="age12">12+</label></li>
+                                <li class="ml-2"><input type="checkbox" id="age18" class="mr-2"><label
+                                        for="age18">18+</label></li>
+                                <li class="ml-2"><input type="checkbox" id="age16" class="mr-2"><label
+                                        for="age16">16+</label></li>
+                                <li class="ml-2"><input type="checkbox" id="age12" class="mr-2"><label
+                                        for="age12">12+</label></li>
                             </ul>
                         </div>
                     </div>
+
 
                 </div>
                 <div class="row justify-content-start" id="showCards">
@@ -156,98 +161,50 @@ session_start();
             crossorigin="anonymous"></script>
         <script>
             $(document).ready(function () {
-
+                $(".custom-checkbox").click(function (e) {
+                    e.stopPropagation();
+                });
+                getShows();
                 function getShows() {
-
-                    var selectedGenres = $("input[type=checkbox][id^=genre]:checked").map(function () {
-                        return parseInt($(this).val());
-                    }).get();
-
-                    var selectedAgeGroups = $("input[type=checkbox][id^=age]:checked").map(function () {
-                        return $(this).val();
-                    }).get();
-
-                    console.log(selectedAgeGroups)
-                    console.log(selectedGenres)
-                    var requestData = {};
-                    if (selectedGenres.length > 0) {
-                        requestData.genres = selectedGenres.join(',');
-                    }
-                    if (selectedAgeGroups.length > 0) {
-                        requestData.age_groups = selectedAgeGroups.join(',');
-                    }
                     $.ajax({
                         url: "Services/show_get.php",
                         type: "GET",
                         dataType: "json",
-                        data: requestData,
                         success: function (response) {
                             if (response.success) {
                                 $("#showCards").empty();
-
-                                if (response.data.length === 0) {
-                                    $("#showCards").append('<p class="text-center text-light">No shows according to this filter.</p>');
-                                } else {
-                                    $.each(response.data, function (index, show) {
-                                        var cardHtml = `
-                                <div class="col-md-4 mb-5">
-                                    <a href="show_details.php?id=${show.id}" class="card-link">
-                                        <div class="card text-dark shadow-sm shows" data-show-id="${show.id}">
-                                            <img src="${show.image}" class="card-img-top" alt="${show.name}">
-                                            <div class="card-body">
-                                                <h5 class="card-title accent-color">${show.name}</h5>
-                                                <div class="d-flex justify-content-between">
-                                                    <p class="card-text">Genre: ${show.genre}</p>
-                                                    <p class="card-text primary-color">${show.age_group}</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>`;
-                                        $("#showCards").append(cardHtml);
-                                    });
-                                }
+                                console.log(response)
+                                $.each(response.data, function (index, show) {
+                                    var cardHtml = `
+                                    <div class="col-md-4 mb-5">
+                    <a href="show_details.php?id=${show.id}" class="card-link">
+                        <div class="card text-dark shadow-sm shows" data-show-id="${show.id}">
+                            <img src="${show.image}" class="card-img-top" alt="${show.name}">
+                            <div class="card-body">
+                                <h5 class="card-title accent-color">${show.name}</h5>
+                                <div class="d-flex justify-content-between">
+                                    <p class="card-text">Genre: ${show.genre}</p>
+                                    <p class="card-text primary-color">${show.age_group}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                            
+                              `;
+                                    $("#showCards").append(cardHtml);
+                                });
                             } else {
                                 console.error("Failed to fetch shows");
                             }
                         },
                         error: function (xhr, status, error) {
                             console.error("Error fetching shows:", error);
-                        }
-                    });
-                }
-
-                function populateGenres() {
-                    $.ajax({
-                        url: "Services/genre_get.php",
-                        type: "GET",
-                        dataType: "json",
-                        success: function (response) {
-                            if (response.data.length > 0) {
-                                var genreList = $("#genreList");
-                                genreList.empty();
-                                response.data.forEach(function (genre) {
-                                    genreList.append(`<li class="ml-2">
-                                <input type="checkbox" id="genre_${genre.genre}" class="mr-2 custom-checkbox" value=${genre.id}>
-                                <label for="genre_${genre.genre}" class="custom-label">${genre.genre}</label>
-                            </li>`);
-                                });
-                            } else {
-                                console.error("No genres found");
-                            }
-                            getShows();
                         },
-                        error: function (xhr, status, error) {
-                            console.error("Error fetching genres:", error);
-                        }
                     });
                 }
-                populateGenres();
-
-
-
-                $(document).on("change", ".custom-checkbox", getShows);
             });
+
         </script>
 
 </body>
