@@ -20,27 +20,7 @@ session_start();
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Abel&display=swap" rel="stylesheet">
 
-    <style>
-        body{
-            background-color: #c79da4;
-        }
-    .navbar-brand {
-        display: flex;
-        align-items: center; /
-    }
 
-    .navbar-brand img {
-        margin-right: 15px; 
-    }
-
-    .MNT-text {
-        font-family: 'Georgia', sans-serif;
-        font-size: 34px; 
-        color: white;
-        font-weight: bold;
-       
-    }
-</style>
 </head>
 
 <body>
@@ -78,7 +58,7 @@ session_start();
 
     <section class="premiers-background">
         <img src="https://novamakedonija.com.mk/wp-content/uploads/2022/12/mnt.jpg"
-            alt="Theater Background" class="img-fluid" style="width: 100%; height: auto;">
+            alt="Theater Background" class="img-fluid" style="width: 100%; height: 75vh;">
     </section>
     <div class="container-fluid">
 

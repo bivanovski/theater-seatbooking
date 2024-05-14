@@ -138,7 +138,7 @@
                                 processData: false,
                                 contentType: false,
                                 success: function (response) {
-                                    window.location.href = 'mainpage.php'; 
+                                    window.location.href = 'index.php'; 
                                 },
                                 error: function (xhr, status, error) {
                                     Swal.fire({
