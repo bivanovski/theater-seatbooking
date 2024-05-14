@@ -167,7 +167,9 @@ if (!isset($_SESSION['firstname']) || !isset($_SESSION['lastname']) || $_SESSION
                             showCancelButton: true,
                             confirmButtonColor: '#3085d6',
                             cancelButtonColor: '#d33',
-                            confirmButtonText: 'Yes, delete it!'
+                            confirmButtonText: 'Yes, delete it!',
+                            confirmButtonColor: "#101010"
+
                         }).then((result) => {
                             if (result.isConfirmed) {
                                 // Send AJAX request to delete the repertoire
@@ -179,30 +181,34 @@ if (!isset($_SESSION['firstname']) || !isset($_SESSION['lastname']) || $_SESSION
                                     success: function (response) {
                                         if (response.success) {
                                             // Repertoire deleted successfully
-                                            Swal.fire(
-                                                'Deleted!',
-                                                response.message,
-                                                'success'
-                                            ).then(() => {
+                                            Swal.fire({
+                                                title: 'Deleted!',
+                                                text: response.message,
+                                                icon: 'success',
+                                                confirmButtonColor: "#101010"
+
+                                            }).then(() => {
                                                 window.location.href = 'shows.php';
                                             });
                                         } else {
                                             // Error deleting repertoire
-                                            Swal.fire(
-                                                'Error!',
-                                                response.message,
-                                                'error'
-                                            );
+                                            Swal.fire({
+                                                title: 'Error!',
+                                                text: response.message,
+                                                icon: 'error',
+                                                confirmButtonColor: "#101010"
+                                        });
                                         }
                                     },
                                     error: function (xhr, status, error) {
                                         // AJAX error
                                         console.error(xhr.responseText);
-                                        Swal.fire(
-                                            'Error!',
-                                            'Failed to delete show. Please try again later.',
-                                            'error'
-                                        );
+                                        Swal.fire({
+                                            title: 'Error!',
+                                            text: "Failed to delete show. Please try again.",
+                                            icon: 'error',
+                                            confirmButtonColor: "#101010"
+                                    });
                                     }
                                 });
                             }
@@ -402,7 +408,8 @@ if (!isset($_SESSION['firstname']) || !isset($_SESSION['lastname']) || $_SESSION
                                         Swal.fire({
                                             icon: 'success',
                                             title: 'Reservation confirmed!',
-                                            text: 'Reservation confirmed for user ' + userId
+                                            text: 'Reservation confirmed for user ' + userId,
+                                            confirmButtonColor: "#101010"
                                         }).then((result) => {
                                             if (result.isConfirmed) {
 
@@ -413,7 +420,8 @@ if (!isset($_SESSION['firstname']) || !isset($_SESSION['lastname']) || $_SESSION
                                         Swal.fire({
                                             icon: 'success',
                                             title: 'Reservation confirmation cancelled!',
-                                            text: 'Reservation confirmation cancelled for user ' + userId
+                                            text: 'Reservation confirmation cancelled for user ' + userId,
+                                            confirmButtonColor: "#101010"
                                         }).then((result) => {
                                             if (result.isConfirmed) {
 
@@ -425,7 +433,8 @@ if (!isset($_SESSION['firstname']) || !isset($_SESSION['lastname']) || $_SESSION
                                     Swal.fire({
                                         icon: 'error',
                                         title: 'Error!',
-                                        text: response.message
+                                        text: response.message,
+                                        confirmButtonColor: "#101010"
                                     });
                                 }
                             },
@@ -434,7 +443,8 @@ if (!isset($_SESSION['firstname']) || !isset($_SESSION['lastname']) || $_SESSION
                                 Swal.fire({
                                     icon: 'error',
                                     title: 'AJAX Error!',
-                                    text: 'An error occurred while processing your request.'
+                                    text: 'An error occurred while processing your request.',
+                                    confirmButtonColor: "#101010"
                                 });
                             }
                         });

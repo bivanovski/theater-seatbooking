@@ -25,11 +25,11 @@ session_start();
 
 <body>
 
-<header>
+    <header>
         <nav class="navbar navbar-expand navbar-dark custom-navbar fixed-top shadow-sm">
             <a class="navbar-brand" href="#">
                 <img src="images/logo2.png" alt="Logo" width="70" height="70" class="d-inline-block align-top">
-                 <span class="MNT-text">MNT</span>
+                <span class="MNT-text">MNT</span>
             </a>
 
 
@@ -56,44 +56,43 @@ session_start();
         </nav>
     </header>
 
-    <section class="premiers-background">
-        <img src="https://novamakedonija.com.mk/wp-content/uploads/2022/12/mnt.jpg"
-            alt="Theater Background" class="img-fluid" style="width: 100%; height: 75vh;">
-    </section>
     <div class="container-fluid">
 
         <div class="row d-flex justify-content-center p-5">
             <div class="col-10 shadow-sm p-3">
                 <div class="row d-flex justify-content-center p-3">
                     <h2 id="show_title">
-                        Title Of The Show - <span class="accent-color" id="show_details_placeholder">14/01/2023
-                            18:00</span>
+                        Title Of The Show - <span class="accent-color" id="show_details_placeholder">Date Time</span>
                     </h2>
                 </div>
-                <div class="row">
-                    <div class="col-12 d-flex justify-content-center">
-                        <div class="p-3">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-3 p-4">
+                        <!-- <img id="show_image" src="" alt="" class="img-fluid mb-3"> -->
+                        <h3 class="text-dark">
+                            Reserve a Ticket
+                        </h3>
+                        <p>Attention! The tickets you reserved must be paid for at least 30 minutes before the start
+                            of the show or else your reservation will not be valid.</p>
+                        <p>You can only reserve up to 4 tickets for a single repertoire.</p>
 
-                            <h3 class="text-dark">
-                                Reserve a Ticket
-                            </h3>
-                            <p>Attention! The tickets you reserved must be paid for at least 30 minutes before the start
-                                of the show or else your reservation will not be valid.</p>
-                            <p>You can only reserve up to 4 tickets for a single repertoire.</p>
-
-
-                        </div>
-
-                        <div id="container" class="text-dark "></div>
                     </div>
 
+
+                    <div id="container" class="text-dark col-9 d-flex justify-content-center"></div>
                 </div>
+
             </div>
-
         </div>
-    </div>
-    </div>
 
+    </div>
+    </div>
+    </div>
+    <footer class="footer black-bg p-4 shadow-sm mt-5">
+        <div class="container">
+            <p class="text-center text-light" style="margin: 0px!important;">&copy; 2024 Code Crew. All rights reserved.
+            </p>
+        </div>
+    </footer>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/seatchart@0.1.0/dist/seatchart.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -138,14 +137,24 @@ session_start();
                     dataType: "json",
                     success: function (response) {
                         if (response.success) {
-                            var date_time = response.data.date_time;
-                            var showName = response.data.show.name;
 
+                            var dateTime = new Date(response.data.date_time);
+
+                            var formattedDateTime = dateTime.toLocaleString("en-GB", {
+                                year: "numeric",
+                                month: "2-digit",
+                                day: "2-digit",
+                                hour: "2-digit",
+                                minute: "2-digit",
+                            });
+
+                            var showName = response.data.show.name;
+                            $("#show_image").attr("src", response.data.show.image);
                             $("#show_title").html(`
-                    ${showName} - <span class="accent-color">${date_time}</span>
+                    ${showName} - <span class="accent-color" id="show_details_placeholder">${formattedDateTime}</span>
                 `);
 
-                            $("#show_details_placeholder").text(date_time);
+
                         } else {
                             // Handle error
                             console.error("Failed to load show details:", response.message);
@@ -227,6 +236,7 @@ session_start();
                             title: "Error!",
                             text: "You need to be logged in to make a reservation.",
                             icon: "error",
+                            confirmButtonColor: "#101010"
                         }).then(function () {
                             window.location.href = "login.php";
                         });
@@ -235,7 +245,8 @@ session_start();
                             Swal.fire({
                                 title: "Error!",
                                 text: "You can only select maximum 4 seats!",
-                                icon: "error"
+                                icon: "error",
+                                confirmButtonColor: "#101010"
                             });
                         } else {
                             console.log("res", userReservationsCount)
@@ -272,7 +283,8 @@ session_start();
                                                     Swal.fire({
                                                         title: "Success!",
                                                         text: "Your seats have been reserved.",
-                                                        icon: "success"
+                                                        icon: "success",
+                                                        confirmButtonColor: "#101010"
                                                     }).then(function () {
                                                         window.location.href = "reservations.php";
                                                     });
@@ -282,7 +294,8 @@ session_start();
                                                 Swal.fire({
                                                     title: "Error!",
                                                     text: response.message,
-                                                    icon: "error"
+                                                    icon: "error",
+                                                    confirmButtonColor: "#101010"
                                                 });
                                             }
 
@@ -297,7 +310,8 @@ session_start();
                                 Swal.fire({
                                     title: "Error!",
                                     text: "You exceed the maximum number of reservations!",
-                                    icon: "error"
+                                    icon: "error",
+                                    confirmButtonColor: "#101010"
                                 });
                             }
                         }
@@ -308,7 +322,8 @@ session_start();
                         Swal.fire({
                             title: "Error!",
                             text: "You can only select up to 4 seats.",
-                            icon: "error"
+                            icon: "error",
+                            confirmButtonColor: "#101010"
                         });
                         e.seat.state = "available";
 

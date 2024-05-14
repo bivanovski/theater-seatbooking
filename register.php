@@ -29,6 +29,7 @@
     <nav class="navbar navbar-expand navbar-dark custom-navbar fixed-top shadow-sm">
         <a class="navbar-brand" href="#">
             <img src="images/logo2.png" alt="Logo" width="70" height="70" class="d-inline-block align-top">
+            <span class="MNT-text">MNT</span>
         </a>
 
         <div class="collapse navbar-collapse" id="navbarNav">
@@ -43,51 +44,49 @@
 
 
 <body class="text-white">
-    <div id="wrapper">
-
-        <div id="page-content-wrapper" class="">
+   
             <div class="container-fluid text-dark">
                 <div class="row justify-content-center mt-5 mb-5">
                     <div class="col-4">
-                    <img class="img-fluid w-25 mx-auto d-block mb-3" src="images/logo2.png" alt="">
+                        <img class="img-fluid w-25 mx-auto d-block mb-3" src="images/logo2.png" alt="">
                         <div class="p-4 shadow-sm">
-                            
+
                             <form action="" class="needs-validation" method="POST" novalidate>
                                 <div class="form-group input-control">
                                     <label for="username">First Name</label>
                                     <input type="text" class="form-control" required id="firstname" name="firstname"
                                         placeholder="First Name">
-                                        <div class="invalid-feedback">
-                                                This field is required.
-                                            </div>
+                                    <div class="invalid-feedback">
+                                        This field is required.
+                                    </div>
                                 </div>
                                 <div class="form-group input-control">
                                     <label for="username">Last Name</label>
                                     <input type="text" class="form-control" required id="lastname" name="lastname"
                                         placeholder="Last Name">
-                                        <div class="invalid-feedback">
-                                                This field is required.
-                                            </div>
+                                    <div class="invalid-feedback">
+                                        This field is required.
+                                    </div>
                                 </div>
                                 <div class="form-group input-control">
                                     <label for="username">Email</label>
                                     <input type="email" class="form-control" required id="email" name="email"
                                         placeholder="Email">
-                                        <div class="invalid-feedback">
-                                                Enter a valid email address.
-                                            </div>
+                                    <div class="invalid-feedback">
+                                        Enter a valid email address.
+                                    </div>
                                 </div>
                                 <div class="form-group input-control">
                                     <label for="name">Password</label>
                                     <input type="password" class="form-control" required id="password" name="password"
                                         placeholder="Password">
-                                        <div class="invalid-feedback">
-                                                This field is required.
-                                            </div>
+                                    <div class="invalid-feedback">
+                                        This field is required.
+                                    </div>
                                 </div>
 
                                 <button class="btn black-bg text-light btn-block">Register</button>
-                               
+
                             </form>
                         </div>
                     </div>
@@ -96,11 +95,12 @@
 
 
             </div>
+            <footer class="footer black-bg p-4 shadow-sm mt-5">
+        <div class="container">
+            <p class="text-center text-light" style="margin: 0px!important;">&copy; 2024 Code Crew. All rights reserved.
+            </p>
         </div>
-
-
-
-    </div>
+    </footer>
     <!-- jQuery library -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js"></script>
 
@@ -138,14 +138,15 @@
                                 processData: false,
                                 contentType: false,
                                 success: function (response) {
-                                    window.location.href = 'index.php'; 
+                                    window.location.href = 'index.php';
                                 },
                                 error: function (xhr, status, error) {
                                     Swal.fire({
                                         title: 'Error!',
                                         text: 'Failed to register. Please try again.',
                                         icon: 'error',
-                                        confirmButtonText: 'OK'
+                                        confirmButtonText: 'OK',
+                                        confirmButtonColor: "#101010"
                                     });
                                 }
                             });

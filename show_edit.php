@@ -247,7 +247,8 @@ if (!isset($_SESSION['firstname']) || !isset($_SESSION['lastname']) || $_SESSION
                                         title: 'Success!',
                                         text: 'Show edited successfully!',
                                         icon: 'success',
-                                        confirmButtonText: 'OK'
+                                        confirmButtonText: 'OK',
+                                        confirmButtonColor: "#101010"
                                     }).then((result) => {
                                         if (result.isConfirmed) {
                                             window.location.href = `show_details.php?id=${<?php echo $_GET['id']; ?>}`;
@@ -259,7 +260,8 @@ if (!isset($_SESSION['firstname']) || !isset($_SESSION['lastname']) || $_SESSION
                                         title: 'Error!',
                                         text: 'Failed to update show. Please try again.',
                                         icon: 'error',
-                                        confirmButtonText: 'OK'
+                                        confirmButtonText: 'OK',
+                                        confirmButtonColor: "#101010"
                                     });
                                 }
                             });

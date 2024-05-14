@@ -1,10 +1,13 @@
+<?php 
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premiere</title>
+    <title>Show details</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
         integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
@@ -12,30 +15,12 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/example.css">
-    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Abel&display=swap" rel="stylesheet">
-
-    <style>
-        body{
-            background-color: #c79da4;
-        }
-    .navbar-brand {
-        display: flex;
-        align-items: center; /
-    }
-
-    .navbar-brand img {
-        margin-right: 15px; 
-    }
-
-    .MNT-text {
-        font-family: 'Georgia', sans-serif;
-        font-size: 34px; 
-        color: white;
-        font-weight: bold;
-       
-    }
-</style>
+    <!-- Latest Font-Awesome CDN -->
+    <script src="https://kit.fontawesome.com/83a2a6ffac.js" crossorigin="anonymous"></script>
+    </style>
 </head>
 
 <body>
@@ -70,40 +55,164 @@
             </div>
         </nav>
     </header>
-    <section class="premiers-background">
-        <img src="https://novamakedonija.com.mk/wp-content/uploads/2022/12/mnt.jpg"
-            alt="Theater Background" class="img-fluid" style="width: 100%; height: auto;">
-    </section>
+    <section class="theater-background vh-50">
+        <div class="container-fluid" id="show-details-container">
+           
 
-    
-    <div class="container mt-5">
-    <div class="row">
-        <div class="col-md-12">
-            <h1 style="font-family: 'Arial', sans-serif; color: #333; font-weight: bold; text-transform: uppercase; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);">Agava by Baghi</h1>
-            <p style="font-size: 18px; color: #666; font-weight: bold;">Drama | Duration: 120 min | Age group: 12+</p>
-            <h3 style="text-decoration: underline; color: black; font-weight: bold;">About the show</h3>
-            <p style="font-family:Arial, Helvetica, sans-serif; font-size: 18px; color: #444; line-height: 1.6; letter-spacing: 0.5px;">"Agava by Baghi" is a captivating spectacle that transports audiences into a realm of mesmerizing beauty and enchantment. With its breathtaking visuals, innovative storytelling, and dynamic performances, this production immerses viewers in a world where imagination knows no bounds.</p>
-            <p style="font-family:Arial, Helvetica, sans-serif; font-size: 18px; color: #444; line-height: 1.6; letter-spacing: 0.5px;">From the moment the curtains rise, audiences are drawn into a spellbinding journey filled with wonder and excitement. Through a seamless fusion of music, dance, and theatricality, "Agava by Baghi" unfolds a narrative that unfolds like a vibrant tapestry, weaving together the threads of fantasy and reality.</p>
-            <p style="font-family:Arial, Helvetica, sans-serif; font-size: 18px; color: #444; line-height: 1.6; letter-spacing: 0.5px;">As the characters traverse through landscapes both magical and mysterious, each scene unfolds with a sense of awe and wonder, leaving spectators on the edge of their seats. With every movement, every note, and every word spoken, the performers breathe life into the story, igniting the imagination and stirring the soul.</p>
-            
         </div>
+    </section>
+    <footer class="footer black-bg p-4 shadow-sm mt-5">
+        <div class="container">
+            <p class="text-center text-light" style="margin: 0px!important;">&copy; 2024 Code Crew. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+    <!-- jQuery library -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js"></script>
+
+    <!-- Latest Compiled Bootstrap 4.6 JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"
+        integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+"
+        crossorigin="anonymous"></script>
+    <script>
+
+        $(document).ready(function () {
+            
+            var showId = <?php echo $_GET['id']; ?>;
+
+            $.ajax({
+                url: "Services/show_details.php",
+                method: "GET",
+                data: { show_id: showId },
+                dataType: "json",
+                success: function (response) {
+                    if (response.success) {
+                        var showData = response.data;
+                        $("#show-details-container").html(`
+                    
+                        <div class="row d-flex justify-content-center">
+                <div class="col-10 shadow-sm mt-5">
+                    <div class="row p-5">
+                        <div class="col-lg-6">
+                            <img src="${showData.image}"
+                                alt="Theater Background" class="img-fluid w-100 shadow-sm">
+
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="d-flex justify-content-between mt-3">
+                                <h1 class="accent-color">${showData.name}</h1>
+                                <span class="age-label ">${showData.age_group}</span>
+                            </div>
+
+                            <p style="font-size: 20px;" class="text-muted">${showData.genre}</p>
+                            <h3 class="">About the show</h3>
+                            <p class="text-justify">${showData.description}</p>
+                            <h4 class="accent-color">Reserve Now</h4>
+                            <div id="repertoire-container"></div>
     </div>
-</div>
-<div class="container mt-5">
-       
-        <button class ="custom-button">
+                            
+
+                        </div>
+                 
+                    <h4 class="p-3 px-5 font-weight-bold">Poduction Crew</h4>
+                    <div class="row px-5">
+
+                        <div class="col-md-6">
+
+                            <div class="crew-member">
+                                <h5 class="text-dark mb-0">Director:</h5>
+                                <p class="accent-color">${showData.director}</p>
+                            </div>
+                            <div class="crew-member">
+                                <h5 class="text-dark mb-0">Assistant Director:</h5>
+                                <p class="accent-color">${showData.assistant_director}</p>
+                            </div>
+                            <div class="crew-member">
+                                <h5 class="text-dark mb-0">Costume Designer:</h5>
+                                <p class="accent-color">${showData.costum_designer}</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="crew-member">
+                                <h5 class="text-dark mb-0">Set Designer:</h5>
+                                <p class="accent-color">${showData.set_designer}</p>
+                            </div>
+                            <div class="crew-member">
+                                <h5 class="text-dark mb-0">Stage Manager:</h5>
+                                <p class="accent-color">${showData.stage_manager}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>`);
+                    } else {
+                        $("#show-details-container").html(
+                            `<p class="text-danger">${response.message}</p>`
+                        );
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error(xhr.responseText);
+                    $("#show-details-container").html(
+                        `<p class="text-danger">Failed to load show details. Please try again later.</p>`
+                    );
+                },
+            });
+
+
+            loadRepertoires(showId)
+            function loadRepertoires(showId) {
+                $.ajax({
+                    url: "Services/repertoire_get_by_show.php" ,
+                    method: "GET",
+                    data: { show_id: showId },
+                    dataType: "json",
+                    success: function (response) {
+                        if (response.success) {
+                            if(response.data.length >0){
+                            var repertoires = response.data;
+                            var repertoireHtml = "";
+                            repertoires.forEach(function (repertoire) {
+                                var dateTime = new Date(repertoire.date_time);
+                                var formattedDateTime = dateTime.toLocaleString("en-GB", {
+                                    year: "numeric",
+                                    month: "2-digit",
+                                    day: "2-digit",
+                                    hour: "2-digit",
+                                    minute: "2-digit",
+                                });
+                                repertoireHtml += `<a href="reserve.php?id=${repertoire.id}" class="btn mb-2 custom-repertoire-btn mr-2">${formattedDateTime}</a>`;
+                            });
+                            $("#repertoire-container").html(repertoireHtml);
+                        }
+                        else{
+                            $("#repertoire-container").html(`<p class="text-muted">No repertoires for this show. Check later.</p>`);
+                        }
+                        } else {
+                            $("#repertoire-container").html(
+                                `<p class="text-danger">${response.message}</p>`
+                            );
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(xhr.responseText);
+                        $("#repertoire-container").html(
+                            `<p class="text-danger">Failed to load repertoires. Please try again later.</p>`
+                        );
+                    },
+                });
+            }
+
+        });
         
-                    </buttton>
-                    <div class="container">
-  
-  <button type="button" class="btn btn-info" > 16 April, 19:00</button>
-  
-
-   
-    </div>
+    </script>
 
 
-    
 </body>
-</html>
 
+</html>

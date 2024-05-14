@@ -49,17 +49,6 @@ if (!isset($_SESSION['firstname']) || !isset($_SESSION['lastname']) || $_SESSION
 <body class="text-white bg-color">
     <div id="wrapper">
 
-        <div id="sidebar-wrapper" class="text-white secondary-bg">
-            <ul class="sidebar-nav">
-                <li class="active-bg"><a href="shows.php" class="active">Books<i
-                            class="fa-solid fa-book-open ml-1"></i></a></li>
-                <li><a href="authors.php">Authors<i class="fa-solid fa-users ml-1"></i></a></li>
-                <li><a href="categories.php">Categories<i class="fa-solid fa-list ml-1"></i></a></li>
-                <li><a href="comments.php">Comments<i class="fa-regular fa-comments ml-1"></i></a></li>
-            </ul>
-        </div>
-
-
         <div id="page-content-wrapper" class="">
             <div class="container-fluid">
                 <div class="row">
@@ -273,9 +262,9 @@ if (!isset($_SESSION['firstname']) || !isset($_SESSION['lastname']) || $_SESSION
                     text: 'All repertoires of this show will also be deleted!',
                     icon: 'warning',
                     showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, delete it!'
+                    confirmButtonText: 'Yes, delete it!',
+                    confirmButtonColor: "#101010"
                 }).then((result) => {
                     if (result.isConfirmed) {
                         $.ajax({
@@ -285,28 +274,31 @@ if (!isset($_SESSION['firstname']) || !isset($_SESSION['lastname']) || $_SESSION
                             dataType: 'json',
                             success: function (response) {
                                 if (response.success) {
-                                    Swal.fire(
-                                        'Deleted!',
-                                        response.message,
-                                        'success'
-                                    ).then(() => {
+                                    Swal.fire({
+                                        title: 'Deleted!',
+                                        text: response.message,
+                                        icon: 'success',
+                                        confirmButtonColor: "#101010"
+                                    }).then(() => {
                                         window.location.href = 'shows.php';
                                     });
                                 } else {
-                                    Swal.fire(
-                                        'Error!',
-                                        response.message,
-                                        'error'
-                                    );
+                                    Swal.fire({
+                                        title: 'Error!',
+                                        text: response.message,
+                                        icon: 'error',
+                                        confirmButtonColor: "#101010"
+                                });
                                 }
                             },
                             error: function (xhr, status, error) {
                                 console.error(xhr.responseText);
-                                Swal.fire(
-                                    'Error!',
-                                    'Failed to delete show. Please try again later.',
-                                    'error'
-                                );
+                                Swal.fire({
+                                    title: 'Error!',
+                                    text: 'Failed to delete show. Please try again later.',
+                                    icon: 'error',
+                                    confirmButtonColor: "#101010"
+                            });
                             }
                         });
                     }

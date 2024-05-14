@@ -76,6 +76,12 @@ if (!isset($_SESSION['firstname']) || !isset($_SESSION['lastname'])) {
             </div>
         </div>
     </div>
+    <footer class="footer black-bg p-4 footer-pos shadow-sm mt-5">
+        <div class="container">
+            <p class="text-center text-light" style="margin: 0px!important;">&copy; 2024 Code Crew. All rights reserved.
+            </p>
+        </div>
+    </footer>
     <!-- jQuery library -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js"></script>
 

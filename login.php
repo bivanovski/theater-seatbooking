@@ -29,6 +29,7 @@
     <nav class="navbar navbar-expand navbar-dark custom-navbar fixed-top shadow-sm">
         <a class="navbar-brand" href="#">
             <img src="images/logo2.png" alt="Logo" width="70" height="70" class="d-inline-block align-top">
+            <span class="MNT-text">MNT</span>
         </a>
 
         <div class="collapse navbar-collapse" id="navbarNav">
@@ -44,9 +45,7 @@
 
 
 <body class="text-white">
-    <div id="wrapper">
-
-        <div id="page-content-wrapper" class="">
+    
             <div class="container-fluid text-dark">
                 <div class="row justify-content-center mt-5 mb-5">
                     <div class="col-lg-4 col-12">
@@ -92,11 +91,13 @@
 
 
             </div>
+            <footer class="footer black-bg p-4 shadow-sm footer-pos">
+        <div class="container">
+            <p class="text-center text-light" style="margin: 0px!important;">&copy; 2024 Code Crew. All rights reserved.
+            </p>
         </div>
-
-
-
-    </div>
+    </footer>
+   
     <!-- jQuery library -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js"></script>
 
@@ -147,7 +148,8 @@
                                             title: 'Please try again!',
                                             text: 'Incorrect email or password.',
                                             icon: 'error',
-                                            confirmButtonText: 'OK'
+                                            confirmButtonText: 'OK',
+                                            confirmButtonColor: "#101010"
                                         });
                                     }
 
@@ -158,7 +160,8 @@
                                         title: 'Error!',
                                         text: 'Failed to login. Please try again.',
                                         icon: 'error',
-                                        confirmButtonText: 'OK'
+                                        confirmButtonText: 'OK',
+                                        confirmButtonColor: "#101010"
                                     });
                                 }
                             });

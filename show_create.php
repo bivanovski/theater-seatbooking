@@ -211,7 +211,7 @@ if (!isset($_SESSION['firstname']) || !isset($_SESSION['lastname']) || $_SESSION
                 success: function (response) {
                     if (response.data.length > 0) {
                         var genreSelect = $("#validationCustom04");
-                        genreSelect.empty(); 
+                        genreSelect.empty();
 
                         $.each(response.data, function (index, genre) {
                             genreSelect.append(`<option value="${genre.id}">${genre.genre}</option>`);
@@ -258,7 +258,8 @@ if (!isset($_SESSION['firstname']) || !isset($_SESSION['lastname']) || $_SESSION
                                         title: 'Success!',
                                         text: 'Show created successfully!',
                                         icon: 'success',
-                                        confirmButtonText: 'OK'
+                                        confirmButtonText: 'OK',
+                                        confirmButtonColor: "#101010"
                                     }).then((result) => {
                                         if (result.isConfirmed) {
                                             window.location.href = 'shows.php';
@@ -270,7 +271,8 @@ if (!isset($_SESSION['firstname']) || !isset($_SESSION['lastname']) || $_SESSION
                                         title: 'Error!',
                                         text: 'Failed to create show. Please try again.',
                                         icon: 'error',
-                                        confirmButtonText: 'OK'
+                                        confirmButtonText: 'OK',
+                                        confirmButtonColor: "#101010"
                                     });
                                 }
                             });
