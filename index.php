@@ -7,7 +7,14 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Main Page</title>
+    <title>MNT</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon_package_v0.16/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon_package_v0.16/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon_package_v0.16/favicon-16x16.png">
+    <link rel="manifest" href="favicon_package_v0.16/site.webmanifest">
+    <link rel="mask-icon" href="favicon_package_v0.16/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
         integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
@@ -60,61 +67,64 @@ session_start();
     </section>
 
     <div class="container-fluid linear-bg">
-    <div class="row justify-content-center mt-5">
-        <div class="col-8" style="padding: 0px!important;">
-            <div class="row">
-                <!-- Description of Makedonski Naroden Teatar -->
-                <div class="col-md-12 text-center mb-5">
-                    <h2 class="mb-3">Makedonski Naroden Teatar (MNT)</h2>
-                    <p class="lead">
-                        Discover MNT, a renowned theater company dedicated to promoting cultural heritage and artistic expression. 
-                        With a history spanning decades, MNT has been at the forefront of producing innovative and thought-provoking performances that captivate audiences from all walks of life. 
-                        <br>Explore our upcoming shows below and experience the magic of live theater at MNT.
-                    </p>
-                </div>
-            </div>
-            <div class="row d-flex justify-content-between mb-3">
-                <h3>Our Shows</h3>
-                <!-- Dropdown Filter -->
-                <div class="dropdown">
-                    <!-- Dropdown Button -->
-                    <button class="btn btn-sm black-bg text-light dropdown-toggle" data-toggle="dropdown">
-                        <i class="fa-solid fa-arrow-up-wide-short mr-2"></i>Filter
-                    </button>
-                    <!-- Dropdown Menu -->
-                    <div class="dropdown-menu">
-                        <h6 class="dropdown-header">Genres</h6>
-                        <ul class="list-unstyled" id="genreList"></ul>
-                        <div class="dropdown-divider"></div>
-                        <h6 class="dropdown-header">Age Groups</h6>
-                        <ul class="list-unstyled">
-                            <li class="ml-2">
-                                <input type="checkbox" id="age18" class="mr-2 custom-checkbox" value="18+">
-                                <label for="age18"><strong>18+</strong></label>
-                            </li>
-                            <li class="ml-2">
-                                <input type="checkbox" id="age16" class="mr-2 custom-checkbox" value="16+">
-                                <label for="age16"><strong>16+</strong></label>
-                            </li>
-                            <li class="ml-2">
-                                <input type="checkbox" id="age12" class="mr-2 custom-checkbox" value="12+">
-                                <label for="age12"><strong>12+</strong></label>
-                            </li>
-                        </ul>
+        <div class="row justify-content-center mt-5">
+            <div class="col-8" style="padding: 0px!important;">
+                <div class="row">
+                    <!-- Description of Makedonski Naroden Teatar -->
+                    <div class="col-md-12 text-center mb-5">
+                        <h2 class="mb-3">Makedonski Naroden Teatar (MNT)</h2>
+                        <p class="lead">
+                            Discover MNT, a renowned theater company dedicated to promoting cultural heritage and
+                            artistic expression.
+                            With a history spanning decades, MNT has been at the forefront of producing innovative and
+                            thought-provoking performances that captivate audiences from all walks of life.
+                            <br>Explore our upcoming shows below and experience the magic of live theater at MNT.
+                        </p>
                     </div>
                 </div>
+                <div class="row d-flex justify-content-between mb-3">
+                    <h3>Our Shows</h3>
+                    <!-- Dropdown Filter -->
+                    <div class="dropdown">
+                        <!-- Dropdown Button -->
+                        <button class="btn btn-sm black-bg text-light dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa-solid fa-arrow-up-wide-short mr-2"></i>Filter
+                        </button>
+                        <!-- Dropdown Menu -->
+                        <div class="dropdown-menu">
+                            <h6 class="dropdown-header">Genres</h6>
+                            <ul class="list-unstyled" id="genreList"></ul>
+                            <div class="dropdown-divider"></div>
+                            <h6 class="dropdown-header">Age Groups</h6>
+                            <ul class="list-unstyled">
+                                <li class="ml-2">
+                                    <input type="checkbox" id="age18" class="mr-2 custom-checkbox" value="18+">
+                                    <label for="age18"><strong>18+</strong></label>
+                                </li>
+                                <li class="ml-2">
+                                    <input type="checkbox" id="age16" class="mr-2 custom-checkbox" value="16+">
+                                    <label for="age16"><strong>16+</strong></label>
+                                </li>
+                                <li class="ml-2">
+                                    <input type="checkbox" id="age12" class="mr-2 custom-checkbox" value="12+">
+                                    <label for="age12"><strong>12+</strong></label>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- Show Cards Section -->
+                <div class="row justify-content-start" id="showCards"></div>
             </div>
-            <!-- Show Cards Section -->
-            <div class="row justify-content-start" id="showCards"></div>
         </div>
-    </div>
 
-</div>
-<footer class="footer black-bg p-4 shadow-sm">
-    <div class="container">
-        <p class="text-center text-light" style="margin: 0px!important;">&copy; 2024 Code Crew. All rights reserved.</p>
     </div>
-</footer>
+    <footer class="footer black-bg p-4 shadow-sm">
+        <div class="container">
+            <p class="text-center text-light" style="margin: 0px!important;">&copy; 2024 Code Crew. All rights reserved.
+            </p>
+        </div>
+    </footer>
 
 
     <!-- jQuery library -->
@@ -131,7 +141,40 @@ session_start();
         $(document).ready(function () {
 
 
+            function fetchRepertoiresByShowId(showId) {
+                $.ajax({
+                    url: "Services/repertoire_get_by_show.php",
+                    type: "GET",
+                    dataType: "json",
+                    data: { show_id: showId },
+                    success: function (response) {
+                        if (response.success) {
 
+                            var repertoiresHtml = "";
+                            $.each(response.data, function (index, repertoire) {
+                                var dateTime = new Date(repertoire.date_time);
+
+                                var formattedDateTime = dateTime.toLocaleString("en-GB", {
+                                    year: "numeric",
+                                    month: "2-digit",
+                                    day: "2-digit",
+                                    hour: "2-digit",
+                                    minute: "2-digit",
+                                });
+
+                                repertoiresHtml += `<span class="badge black-bg text-light p-1 mr-1 mb-1">${formattedDateTime}</span>`;
+                            });
+                            repertoiresHtml += "</ul>";
+                            $(`#repertoires_${showId}`).html(repertoiresHtml);
+                        } else {
+                            console.error("Failed to fetch repertoires for show ID:", showId);
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("Error fetching repertoires for show ID:", showId, error);
+                    }
+                });
+            }
             function getShows() {
 
                 var selectedGenres = $("input[type=checkbox][id^=genre]:checked").map(function () {
@@ -165,7 +208,7 @@ session_start();
                             } else {
                                 $.each(response.data, function (index, show) {
                                     var cardHtml = `
-                                <div class="col-md-4 mb-5">
+                                <div class="col-lg-4 mb-5 col-12">
                                     <a href="show.php?id=${show.id}" class="card-link">
                                         <div class="card text-dark shadow-sm  show-card" data-show-id="${show.id}">
                                             <img src="${show.image}" class="card-img-top" alt="${show.name}">
@@ -173,13 +216,15 @@ session_start();
                                                 <h5 class="card-title accent-color">${show.name}</h5>
                                                 <div class="d-flex justify-content-between">
                                                     <p class="card-text">Genre: ${show.genre}</p>
-                                                    <p class="card-text primary-color age-label-card" >${show.age_group}</p>
+                                                    <p class="card-text age-label-card" >${show.age_group}</p>
                                                 </div>
+                                                <div id="repertoires_${show.id}" class=""></div>
                                             </div>
                                         </div>
                                     </a>
                                 </div>`;
                                     $("#showCards").append(cardHtml);
+                                    fetchRepertoiresByShowId(show.id);
                                 });
                             }
                         } else {
