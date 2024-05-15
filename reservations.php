@@ -63,7 +63,7 @@ if (!isset($_SESSION['firstname']) || !isset($_SESSION['lastname'])) {
         </nav>
     </header>
 
-    <div class="container-fluid">
+    <div class="container-fluid" id="main-container">
 
         <div class="row d-flex justify-content-center ">
             <div class="col-12 
@@ -82,8 +82,14 @@ if (!isset($_SESSION['firstname']) || !isset($_SESSION['lastname'])) {
 
             </div>
         </div>
+
     </div>
-   
+    <footer class="footer black-bg p-4 footer-pos shadow-sm mt-5">
+        <div class="container">
+            <p class="text-center text-light" style="margin: 0px!important;">&copy; 2024 Code Crew. All rights reserved.
+            </p>
+        </div>
+    </footer>
     <!-- jQuery library -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js"></script>
 
@@ -100,7 +106,11 @@ if (!isset($_SESSION['firstname']) || !isset($_SESSION['lastname'])) {
 
         $(document).ready(function () {
             var user_id = <?php echo $_SESSION['id']; ?>;
-
+            var mainContainer = $('#main-container');
+            function updateContainerMargin() {
+                var accordionHeight = $('#accordionExample').outerHeight();
+                mainContainer.css('margin-bottom', accordionHeight + 'px');
+            }
             fetchUserReservations();
 
             function fetchUserReservations() {
@@ -174,7 +184,11 @@ if (!isset($_SESSION['firstname']) || !isset($_SESSION['lastname'])) {
 
                     accordion.append(accordionItem);
                 });
+                updateContainerMargin();
             }
+            $(window).on('resize', function () {
+                updateContainerMargin();
+            });
 
         });
 
@@ -183,10 +197,5 @@ if (!isset($_SESSION['firstname']) || !isset($_SESSION['lastname'])) {
 
 
 </body>
-<footer class="footer black-bg p-4 footer-pos shadow-sm mt-5">
-        <div class="container">
-            <p class="text-center text-light" style="margin: 0px!important;">&copy; 2024 Code Crew. All rights reserved.
-            </p>
-        </div>
-    </footer>
+
 </html>
