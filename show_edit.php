@@ -112,12 +112,9 @@ if (!isset($_SESSION['firstname']) || !isset($_SESSION['lastname']) || $_SESSION
                                     <div class="form-row mb-3">
                                         <div class="col-md-3 mb-3">
                                             <label for="validationCustom04">*Genre</label>
-                                            <select class="custom-select" id="genre_id" required name="genre_id">
+                                            <select class="custom-select" id="validationCustom04" required
+                                                name="genre_id">
                                                 <option selected disabled value="">Choose...</option>
-                                                <option value="1">Comedy</option>
-                                                <option value="2">Romantic</option>
-
-
                                             </select>
                                             <div class="invalid-feedback">
                                                 Please select a valid genre.
@@ -224,6 +221,32 @@ if (!isset($_SESSION['firstname']) || !isset($_SESSION['lastname']) || $_SESSION
             });
         }
 
+        function populateGenres() {
+            $.ajax({
+                url: "Services/genre_get.php",
+                type: "GET",
+                dataType: "json",
+                success: function (response) {
+                    if (response.data.length > 0) {
+                        var genreSelect = $("#validationCustom04");
+                        genreSelect.empty();
+
+                        $.each(response.data, function (index, genre) {
+                            genreSelect.append(`<option value="${genre.id}">${genre.genre}</option>`);
+                        });
+                    } else {
+                        console.error("No genres found");
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error("Error fetching genres:", error);
+                }
+            });
+        }
+
+        $(document).ready(function () {
+            populateGenres();
+        });
         (function () {
             'use strict';
             window.addEventListener('load', function () {

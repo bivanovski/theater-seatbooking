@@ -30,12 +30,12 @@ session_start();
     </style>
 </head>
 
-<body>
+<body >
 
 <header>
         <nav class="navbar navbar-expand navbar-dark custom-navbar fixed-top shadow-sm">
             <a class="navbar-brand" href="#">
-                <img src="images/logo2.png" alt="Logo" width="70" height="70" class="d-inline-block align-top">
+                <img src="images/logo2.png" alt="Logo" width="70" height="70" class="d-inline-block align-top logo">
                  <span class="MNT-text">MNT</span>
             </a>
 
@@ -55,7 +55,7 @@ session_start();
                                 <p class="mr-2 my-2 my-sm-0 mt-3 text-light">
                                     <?php echo $_SESSION['firstname']; ?><i class="fa-regular fa-user ml-1"></i>
                                 </p>
-                                <a class="btn nav-btn" href="logout.php" role="button">Log out</a>
+                                <a class="btn nav-btn logout-btn" href="logout.php" role="button">Log out</a>
                             </div>
                     <?php endif; ?>
                 </div>
@@ -67,13 +67,14 @@ session_start();
            
 
         </div>
-    </section>
-    <footer class="footer black-bg p-4 shadow-sm mt-5">
+        <footer class="footer black-bg p-4 shadow-sm mt-5">
         <div class="container">
             <p class="text-center text-light" style="margin: 0px!important;">&copy; 2024 Code Crew. All rights reserved.
             </p>
         </div>
     </footer>
+    </section>
+   
 
     <!-- jQuery library -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js"></script>
@@ -102,12 +103,11 @@ session_start();
                         $("#show-details-container").html(`
                     
                         <div class="row d-flex justify-content-center">
-                <div class="col-10 shadow-sm mt-5">
+                <div class="col-lg-10 col-12 shadow-sm mt-5">
                     <div class="row p-5">
-                        <div class="col-lg-6 d-flex justify-content-center">
+                        <div class="col-lg-6 d-flex justify-content-center ">
                             <img src="${showData.image}"
-                                alt="Theater Background" class="img-fluid shadow-sm h-75">
-
+                                alt="Theater Background" class="img-fluid shadow-sm p-0 show-image">
                         </div>
                         <div class="col-lg-6">
                             <div class="d-flex justify-content-between mt-3">
