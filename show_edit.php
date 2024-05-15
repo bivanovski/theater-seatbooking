@@ -122,8 +122,13 @@ if (!isset($_SESSION['firstname']) || !isset($_SESSION['lastname']) || $_SESSION
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label for="validationCustom05">*Age Group</label>
-                                            <input type="text" class="form-control" id="age_group" required
+                                            <select class="custom-select" id="validationCustom05" required
                                                 name="age_group">
+                                                <option selected disabled value="">Choose...</option>
+                                                <option value="18+">18+</option>
+                                                <option value="16+">16+</option>
+                                                <option value="12+">12+</option>
+                                            </select>
                                             <div class="invalid-feedback">
                                                 This field is required.
                                             </div>

@@ -176,9 +176,10 @@ input[type="checkbox"]:checked {
   padding: 10px;
 }
 .footer-pos {
-  position: absolute;
+  position: fixed;
   bottom: 0;
   width: 100%;
+  
 }
 
 /* Media query for mobile phones */
