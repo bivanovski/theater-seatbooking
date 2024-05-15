@@ -53,7 +53,7 @@
    
             <div class="container-fluid text-dark">
                 <div class="row justify-content-center mt-5 mb-5">
-                    <div class="col-4">
+                    <div class="col-lg-4 col-10">
                         <img class="img-fluid w-25 mx-auto d-block mb-3" src="images/logo2.png" alt="">
                         <div class="p-4 shadow-sm">
 
