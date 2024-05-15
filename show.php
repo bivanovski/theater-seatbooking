@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 ?>
 <!DOCTYPE html>
@@ -42,21 +42,21 @@ session_start();
 
             <div class="collapse navbar-collapse" id="navbarNav">
                 <?php if (isset($_SESSION['firstname'])): ?>
-                    <a class="mr-2 my-2 my-sm-0 mt-3 text-light text-decoration-none" href="reservations.php"><i
-                            class="fa-regular fa-calendar-check mr-2"></i>My Reservations</a>
+                        <a class="mr-2 my-2 my-sm-0 mt-3 text-light text-decoration-none" href="reservations.php"><i
+                                class="fa-regular fa-calendar-check mr-2"></i>My Reservations</a>
                 <?php endif; ?>
 
                 <div class="ml-auto">
                     <?php if (!isset($_SESSION['firstname'])): ?>
-                        <a class="btn nav-btn mr-2" href="register.php">Register</a>
-                        <a class="btn nav-btn" href="login.php">Log in</a>
+                            <a class="btn nav-btn mr-2" href="register.php">Register</a>
+                            <a class="btn nav-btn" href="login.php">Log in</a>
                     <?php else: ?>
-                        <div class="d-flex justify-content-center align-items-center">
-                            <p class="mr-2 my-2 my-sm-0 mt-3 text-light">
-                                <?php echo $_SESSION['firstname']; ?><i class="fa-regular fa-user ml-1"></i>
-                            </p>
-                            <a class="btn nav-btn" href="logout.php" role="button">Log out</a>
-                        </div>
+                            <div class="d-flex justify-content-center align-items-center">
+                                <p class="mr-2 my-2 my-sm-0 mt-3 text-light">
+                                    <?php echo $_SESSION['firstname']; ?><i class="fa-regular fa-user ml-1"></i>
+                                </p>
+                                <a class="btn nav-btn" href="logout.php" role="button">Log out</a>
+                            </div>
                     <?php endif; ?>
                 </div>
             </div>
@@ -125,7 +125,7 @@ session_start();
 
                         </div>
                  
-                    <h4 class="p-3 px-5 font-weight-bold">Poduction Crew</h4>
+                    <h4 class="p-3 px-5 font-weight-bold">Production Crew</h4>
                     <div class="row px-5">
 
                         <div class="col-md-6">
