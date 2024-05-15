@@ -8,6 +8,13 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Show details</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon_package_v0.16/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon_package_v0.16/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon_package_v0.16/favicon-16x16.png">
+    <link rel="manifest" href="favicon_package_v0.16/site.webmanifest">
+    <link rel="mask-icon" href="favicon_package_v0.16/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
         integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
@@ -55,7 +62,7 @@ session_start();
             </div>
         </nav>
     </header>
-    <section class="theater-background vh-50">
+    <section class="theater-background">
         <div class="container-fluid" id="show-details-container">
            
 
@@ -97,9 +104,9 @@ session_start();
                         <div class="row d-flex justify-content-center">
                 <div class="col-10 shadow-sm mt-5">
                     <div class="row p-5">
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 d-flex justify-content-center">
                             <img src="${showData.image}"
-                                alt="Theater Background" class="img-fluid w-100 shadow-sm">
+                                alt="Theater Background" class="img-fluid shadow-sm h-75">
 
                         </div>
                         <div class="col-lg-6">
