@@ -8,21 +8,21 @@
   font-style: normal;
 }
 .general {
-    color: white;
-    background-color: #43aa8b;
-    cursor: pointer;
+  color: white;
+  background-color: #43aa8b;
+  cursor: pointer;
 }
 
 .vip1 {
-    color: white;
-    background-color: #277da1;
-    cursor: pointer;
+  color: white;
+  background-color: #277da1;
+  cursor: pointer;
 }
 
 .vip2 {
-    color: white;
-    background-color: #f8961e;
-    cursor: pointer;
+  color: white;
+  background-color: #f8961e;
+  cursor: pointer;
 }
 .sc-right-container {
   margin-left: 75px;
@@ -105,7 +105,7 @@
   color: #4b4949;
 }
 
-/* .sc-seat.sc-seat-available:hover {
+.sc-seat.sc-seat-available:hover {
   cursor: pointer;
   opacity: 0.7;
 }
@@ -113,7 +113,7 @@
 .sc-seat.sc-seat-selected {
   cursor: pointer;
   opacity: 0.7;
-} */
+}
 
 .sc-seat.sc-seat-reserved,
 .sc-seat-reserved {
@@ -132,7 +132,7 @@
 .sc-legend {
   list-style-type: none;
   margin: 0;
-  margin-top:20px;
+  margin-top: 20px;
   padding: 0;
 }
 
@@ -175,7 +175,7 @@
 .sc-cart-title {
   font-weight: bold;
   margin: 0;
-  display:none;
+  display: none;
 }
 
 .sc-cart-table td {
@@ -298,18 +298,67 @@
     transparent 6px
   );
 }
-/* Adjustments for smaller devices */
+@media (max-width: 1600px) {
+  .sc-main-container {
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .sc-map {
+    order: 2;
+    width: 100%;
+  }
+
+  .sc-right-container {
+    order: 3;
+    margin-left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 30px;
+  }
+  .sc-legend {
+    padding: 20px;
+  }
+}
+
 @media (max-width: 768px) {
   .sc-main-container {
     flex-direction: column;
+    padding: 10px;
   }
-  
+
+  .sc-map {
+    order: 2;
+    width: 100%;
+    font-size: 6px;
+  }
+
   .sc-right-container {
+    order: 3;
     margin-left: 0;
+    width: 100%;
+    display: block;
+    padding: 30px;
   }
-  
-  .sc-map-inner-container {
-    align-items: center;
-    justify-content: center;
+
+  .sc-seat {
+    height: 15px;
+    width: 15px;
+    margin: 2px;
+  }
+
+  .sc-spacer {
+    height: 15px;
+    width: 15px;
+  }
+
+  .sc-seat-indexer {
+    height: 15px;
+    width: 15px;
+    margin: 2px;
+  }
+  #seat-cart-div{
+    display: block!important;
   }
 }

@@ -32,7 +32,7 @@ session_start();
     <header>
         <nav class="navbar navbar-expand navbar-dark custom-navbar fixed-top shadow-sm">
             <a class="navbar-brand" href="#">
-                <img src="images/logo2.png" alt="Logo" width="70" height="70" class="d-inline-block align-top">
+                <img src="images/logo2.png" alt="Logo" width="70" height="70" class="d-inline-block align-top logo">
                 <span class="MNT-text">MNT</span>
             </a>
 
@@ -52,7 +52,7 @@ session_start();
                             <p class="mr-2 my-2 my-sm-0 mt-3 text-light">
                                 <?php echo $_SESSION['firstname']; ?><i class="fa-regular fa-user ml-1"></i>
                             </p>
-                            <a class="btn nav-btn" href="logout.php" role="button">Log out</a>
+                            <a class="btn nav-btn logout-btn" href="logout.php" role="button">Log out</a>
                         </div>
                     <?php endif; ?>
                 </div>
@@ -60,10 +60,9 @@ session_start();
         </nav>
     </header>
 
-    <section class="theater-background vh-50
-    ">
+    <section>
         <img src="https://images.ctfassets.net/6pezt69ih962/1O40LqsEvLqXzhEluBRbzH/df5c7bc9f6f151c28d9fc484bb13451b/DL_house.jpeg"
-            alt="Theater Background" class="img-fluid w-100" style="height:75vh;">
+            alt="Theater Background" class="img-fluid w-100 theater-background">
     </section>
 
     <div class="container-fluid linear-bg">

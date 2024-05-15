@@ -8,6 +8,11 @@
     align-items: center; 
   align-items: center;
 }
+ /* Default style for theater background */
+ .theater-background {
+  height: 75vh; /* Default height */
+}
+
 .swal-btn{
   background-color: var(--black); 
   color: #fff; 
@@ -39,6 +44,7 @@
 body {
   font-family: "Abel", sans-serif;
   margin-top: 80px;
+  
 }
 .linear-bg {
   background: linear-gradient(
@@ -174,3 +180,26 @@ input[type="checkbox"]:checked {
   bottom: 0;
   width: 100%;
 }
+
+/* Media query for mobile phones */
+@media only screen and (max-width: 768px) {
+  .theater-background {
+      height: 45vh; /* Height for mobile phones */
+  }
+  .MNT-text{
+    display: none;
+  }
+  .logo{
+    width: 35px;
+    height: 35px;
+  }
+  .logout-btn{
+    font-size: 12px;
+  }
+}
+@media (min-width: 992px) {
+  .show-image {
+    height: 500px;
+  }
+}
+

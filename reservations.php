@@ -37,7 +37,7 @@ if (!isset($_SESSION['firstname']) || !isset($_SESSION['lastname'])) {
     <header>
         <nav class="navbar navbar-expand navbar-dark custom-navbar fixed-top shadow-sm">
             <a class="navbar-brand" href="#">
-                <img src="images/logo2.png" alt="Logo" width="70" height="70" class="d-inline-block align-top">
+                <img src="images/logo2.png" alt="Logo" width="70" height="70" class="d-inline-block align-top logo">
             </a>
 
             <div class="collapse navbar-collapse" id="navbarNav">
@@ -55,7 +55,7 @@ if (!isset($_SESSION['firstname']) || !isset($_SESSION['lastname'])) {
                             <p class="mr-2 my-2 my-sm-0 mt-3 text-light">
                                 <?php echo $_SESSION['firstname']; ?><i class="fa-regular fa-user ml-1"></i>
                             </p>
-                            <a class="btn nav-btn" href="logout.php" role="button">Log out</a>
+                            <a class="btn nav-btn logout-btn" href="logout.php" role="button">Log out</a>
                         </div>
                     <?php endif; ?>
                 </div>
@@ -66,7 +66,7 @@ if (!isset($_SESSION['firstname']) || !isset($_SESSION['lastname'])) {
     <div class="container-fluid">
 
         <div class="row d-flex justify-content-center ">
-            <div class="col-10 
+            <div class="col-12 
              shadow-sm p-5">
                 <div class="row d-flex justify-content-center mb-2">
                     <h2>My Reservations<i class="fa-solid fa-ticket ml-2 accent-color"></i></h2>
@@ -83,12 +83,7 @@ if (!isset($_SESSION['firstname']) || !isset($_SESSION['lastname'])) {
             </div>
         </div>
     </div>
-    <footer class="footer black-bg p-4 footer-pos shadow-sm mt-5">
-        <div class="container">
-            <p class="text-center text-light" style="margin: 0px!important;">&copy; 2024 Code Crew. All rights reserved.
-            </p>
-        </div>
-    </footer>
+   
     <!-- jQuery library -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js"></script>
 
@@ -188,5 +183,10 @@ if (!isset($_SESSION['firstname']) || !isset($_SESSION['lastname'])) {
 
 
 </body>
-
+<footer class="footer black-bg p-4 footer-pos shadow-sm mt-5">
+        <div class="container">
+            <p class="text-center text-light" style="margin: 0px!important;">&copy; 2024 Code Crew. All rights reserved.
+            </p>
+        </div>
+    </footer>
 </html>

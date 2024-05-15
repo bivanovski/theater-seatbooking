@@ -66,28 +66,28 @@ session_start();
     <div class="container-fluid">
 
         <div class="row d-flex justify-content-center p-5">
-            <div class="col-10 shadow-sm p-3">
+            <div class="col-lg-10 shadow-sm p-3 mb-2">
                 <div class="row d-flex justify-content-center p-3">
                     <h2 id="show_title">
                         Title Of The Show - <span class="accent-color" id="show_details_placeholder">Date Time</span>
                     </h2>
                 </div>
-                <div class="row d-flex justify-content-center">
-                    <div class="col-3 p-4">
-                        <!-- <img id="show_image" src="" alt="" class="img-fluid mb-3"> -->
-                        <h3 class="text-dark">
+                <div class="row reserve-text d-flex justify-content-center">
+                    <div class="col-10">
+                        <h3 class="text-dark text-center">
                             Reserve a Ticket
                         </h3>
-                        <p>Attention! The tickets you reserved must be paid for at least 30 minutes before the start
+                        <p class="text-dark text-center">Attention! The tickets you reserved must be paid for at least
+                            30 minutes before the start
                             of the show or else your reservation will not be valid.</p>
-                        <p>You can only reserve up to 4 tickets for a single repertoire.</p>
-
+                        <p class="text-dark text-center">You can only reserve up to 4 tickets for a single repertoire.
+                        </p>
                     </div>
 
-
-                    <div id="container" class="text-dark col-9 d-flex justify-content-center"></div>
                 </div>
-
+            </div>
+            <div class="row d-flex justify-content-center" id="seat-cart-div">
+                <div id="container" class="text-dark col-9 d-flex justify-content-center"></div>
             </div>
         </div>
 
