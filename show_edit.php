@@ -113,8 +113,8 @@ if (!isset($_SESSION['firstname']) || !isset($_SESSION['lastname']) || $_SESSION
                                         <div class="col-md-3 mb-3">
                                             <label for="validationCustom04">*Genre</label>
                                             <select class="custom-select" id="validationCustom04" required
-                                                name="genre_id">
-                                                <option selected disabled value="">Choose...</option>
+                                                name="genre_id" id="genre">
+                                                <!-- <option selected disabled value="">Choose...</option> -->
                                             </select>
                                             <div class="invalid-feedback">
                                                 Please select a valid genre.
@@ -123,7 +123,7 @@ if (!isset($_SESSION['firstname']) || !isset($_SESSION['lastname']) || $_SESSION
                                         <div class="col-md-3 mb-3">
                                             <label for="validationCustom05">*Age Group</label>
                                             <select class="custom-select" id="validationCustom05" required
-                                                name="age_group">
+                                                name="age_group" id="age_group">
                                                 <option selected disabled value="">Choose...</option>
                                                 <option value="18+">18+</option>
                                                 <option value="16+">16+</option>
@@ -203,11 +203,44 @@ if (!isset($_SESSION['firstname']) || !isset($_SESSION['lastname']) || $_SESSION
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"
         integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+"
         crossorigin="anonymous"></script>
-
-    <script src="js/admin.js"></script>
     <script>
         $(document).ready(function () {
             var showId = <?php echo $_GET['id']; ?>;
+            var selectedGenre;
+            function getShow(showId) {
+                $.ajax({
+                    url: "Services/show_details.php",
+                    method: "GET",
+                    data: { show_id: showId },
+                    dataType: "json",
+                    success: function (response) {
+                        if (response.success) {
+                            $("#show_id").val(response.data.id);
+                            $("#name").val(response.data.name);
+                            $("#hall_number").val(response.data.hall_number);
+                            $("#description").val(response.data.description);
+                            $("#genre_id").val(response.data.genre_id);
+                            $("#age_group").val(response.data.age_group);
+                            $("#director").val(response.data.director);
+                            $("#assistant_director").val(response.data.assistant_director);
+                            $("#costume_designer").val(response.data.costum_designer);
+                            $("#stage_manager").val(response.data.stage_manager);
+                            $("#set_designer").val(response.data.set_designer);
+                            $("#image").val(response.data.image);
+
+                            populateGenres(response.data.genre_id);
+                            $("#validationCustom05").val(response.data.age_group);
+                        } else {
+                            // Handle error
+                            console.error("Failed to load show details:", response.message);
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        // Handle error
+                        console.error("Error loading show details:", error);
+                    },
+                });
+            }
             getShow(showId);
         });
         function isValidImageUrl(url) {
@@ -226,7 +259,7 @@ if (!isset($_SESSION['firstname']) || !isset($_SESSION['lastname']) || $_SESSION
             });
         }
 
-        function populateGenres() {
+        function populateGenres(selectedGenreId) {
             $.ajax({
                 url: "Services/genre_get.php",
                 type: "GET",
@@ -237,7 +270,8 @@ if (!isset($_SESSION['firstname']) || !isset($_SESSION['lastname']) || $_SESSION
                         genreSelect.empty();
 
                         $.each(response.data, function (index, genre) {
-                            genreSelect.append(`<option value="${genre.id}">${genre.genre}</option>`);
+                            var selected = genre.id == selectedGenreId ? 'selected' : '';
+                            genreSelect.append(`<option value="${genre.id}" ${selected}>${genre.genre}</option>`);
                         });
                     } else {
                         console.error("No genres found");
@@ -249,9 +283,10 @@ if (!isset($_SESSION['firstname']) || !isset($_SESSION['lastname']) || $_SESSION
             });
         }
 
-        $(document).ready(function () {
-            populateGenres();
-        });
+
+        // $(document).ready(function () {
+        //     populateGenres();
+        // });
         (function () {
             'use strict';
             window.addEventListener('load', function () {
