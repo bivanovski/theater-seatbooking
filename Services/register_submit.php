@@ -23,6 +23,7 @@ try {
     // If execution reaches here, no exception occurred, so registration was successful
     $_SESSION['firstname'] = $user->getFirstName();
     $_SESSION['lastname'] = $user->getLastName();
+    $_SESSION['id'] = $user->getId();
     $response = [
         'success' => true,
         'message' => 'User registered successfully'

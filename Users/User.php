@@ -111,6 +111,7 @@ class User
         ];
 
         $statement->execute($data);
+        $this->id = $connection->lastInsertId();
 
         $connectionObj->destroy();
     }

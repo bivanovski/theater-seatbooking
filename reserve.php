@@ -106,6 +106,7 @@ session_start();
     <script>
         $(document).ready(function () {
             var user_id = <?php echo isset($_SESSION['id']) ? $_SESSION['id'] : 'null'; ?>;
+            console.log(user_id)
             var repertoire_id = <?php echo $_GET['id'] ?>;
             var reservedSeats = [];
             var userReservationsCount;
