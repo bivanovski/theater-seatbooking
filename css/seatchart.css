@@ -298,31 +298,8 @@
     transparent 6px
   );
 }
-@media (max-width: 1600px) {
-  .sc-main-container {
-    flex-direction: column;
-    padding: 10px;
-  }
 
-  .sc-map {
-    order: 2;
-    width: 100%;
-  }
-
-  .sc-right-container {
-    order: 3;
-    margin-left: 0;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    padding: 30px;
-  }
-  .sc-legend {
-    padding: 20px;
-  }
-}
-
-@media (max-width: 768px) {
+@media (max-width: 1000px) {
   .sc-main-container {
     flex-direction: column;
     padding: 10px;
