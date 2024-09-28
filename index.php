@@ -74,7 +74,7 @@ session_start();
                         <h2 class="mb-3">Makedonski Naroden Teatar (MNT)</h2>
                         <p class="lead">
                             Discover MNT, a renowned theater company dedicated to promoting cultural heritage and
-                            artistic expression.
+                            artistic expression in Skopje.
                             With a history spanning decades, MNT has been at the forefront of producing innovative and
                             thought-provoking performances that captivate audiences from all walks of life.
                             <br>Explore our upcoming shows below and experience the magic of live theater at MNT.
